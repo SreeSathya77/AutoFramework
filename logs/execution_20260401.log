@@ -1,0 +1,12 @@
+2026-04-01 17:42:02,674 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-01 17:42:02,674 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-01 17:42:03,461 - INFO - Login attempt at 2026-04-01 17:42:03 for user: superadmin_qm@yopmail.com
+2026-04-01 17:42:06,539 - INFO - Login button clicked.
+2026-04-01 17:45:53,079 - INFO - Test Session Started.
+2026-04-01 17:45:53,626 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-01 17:45:53,626 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-01 17:45:54,561 - INFO - Login attempt at 2026-04-01 17:45:54 for user: superadmin_qm@yopmail.com
+2026-04-01 17:45:57,141 - INFO - Login button clicked.
+2026-04-01 17:45:58,127 - INFO - Executing test_user_authentication...
+2026-04-01 17:46:08,152 - ERROR - Login SUCCESS verification FAILED at 2026-04-01 17:45:58
+2026-04-01 17:46:08,294 - INFO - Screenshot captured: D:\QA_QM_BOS_REG\screenshots\Login_Failure_174608.png

@@ -1,0 +1,13 @@
+default:
+  browser: "chromium"
+  headless: false
+  timeout: 30000
+  screenshot_on_failure: true
+
+environments:
+  qa:
+    base_url: "http://operator-qa.qmaastech.com/"
+  dev:
+    base_url: "http://operator-dev.qmaastech.com/"
+  prod:
+    base_url: "http://operator.qmaastech.com/"

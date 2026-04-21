@@ -1,0 +1,26 @@
+2026-04-02 15:52:10,714 - INFO - Test Session Started.
+2026-04-02 15:52:11,434 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-02 15:52:11,434 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-02 15:52:12,308 - INFO - Login attempt at 2026-04-02 15:52:12 for user: superadmin_qm@yopmail.com
+2026-04-02 15:52:14,878 - INFO - Login button clicked.
+2026-04-02 15:52:15,927 - INFO - Executing test_user_authentication...
+2026-04-02 15:52:25,961 - ERROR - Login SUCCESS verification FAILED at 2026-04-02 15:52:15
+2026-04-02 15:52:26,108 - INFO - Screenshot captured: D:\QA_QM_BOS_REG\screenshots\Login_Failure_155225.png
+2026-04-02 16:18:34,919 - INFO - Test Session Started.
+2026-04-02 16:18:35,488 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-02 16:18:35,488 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-02 16:18:37,804 - INFO - Login attempt at 2026-04-02 16:18:37 for user: superadmin_qm@yopmail.com
+2026-04-02 16:18:39,463 - INFO - Clicking Login button...
+2026-04-02 16:18:41,046 - INFO - Executing test_user_authentication...
+2026-04-02 16:18:51,086 - ERROR - Login verification FAILED at 2026-04-02 16:18:41. Dashboard not reached.
+2026-04-02 16:18:51,241 - INFO - Screenshot captured: D:\QA_QM_BOS_REG\screenshots\Login_Failure_State_161851.png
+2026-04-02 16:55:11,827 - INFO - Test Session Started.
+2026-04-02 16:55:11,832 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-02 16:55:11,834 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-02 16:55:14,120 - INFO - Login attempt at 2026-04-02 16:55:14 for user: superadmin_qm@yopmail.com
+2026-04-02 16:55:15,787 - INFO - Clicking Login button...
+2026-04-02 16:55:16,523 - INFO - Executing test_user_authentication...
+2026-04-02 16:55:17,484 - INFO - Login SUCCESS verified (Dashboard reached) at 2026-04-02 16:55:16
+2026-04-02 16:55:17,905 - INFO - Screenshot captured: D:\QA_QM_BOS_REG\screenshots\Login_Success_Dashboard_165517.png
+2026-04-02 16:55:17,906 - INFO - Success screenshot saved to: D:\QA_QM_BOS_REG\screenshots\Login_Success_Dashboard_165517.png
+2026-04-02 16:55:17,906 - INFO - Test case test_user_authentication completed successfully.

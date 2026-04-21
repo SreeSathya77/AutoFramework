@@ -1,0 +1,1825 @@
+2026-04-15 11:59:24,086 - INFO - Test Session Started.
+2026-04-15 11:59:24,088 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 11:59:24,091 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 11:59:27,279 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 11:59:28,942 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 11:59:28,943 - INFO - 
+================================================================================
+2026-04-15 11:59:28,943 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 11:59:28,944 - INFO - ================================================================================
+2026-04-15 11:59:28,986 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 11:59:29,221 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 11:59:29,255 - INFO - Total DIV elements on page: 20
+2026-04-15 11:59:29,646 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 11:59:29,734 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 11:59:29,810 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 11:59:29,888 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 11:59:29,953 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 11:59:30,000 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 11:59:30,068 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 11:59:30,143 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 11:59:30,203 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 11:59:30,234 - INFO - 
+================================================================================
+
+2026-04-15 11:59:30,798 - INFO - Login button clicked.
+2026-04-15 11:59:30,849 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 11:59:31,850 - INFO - Screenshot captured: reports\RUN_20260415_115915\screenshots\03_Popup_Immediate_1_115930.png
+2026-04-15 11:59:31,850 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 11:59:31,850 - INFO - 
+================================================================================
+2026-04-15 11:59:31,853 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 11:59:31,855 - INFO - ================================================================================
+2026-04-15 11:59:31,883 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 11:59:31,898 - INFO -   Visibility Status: True
+2026-04-15 11:59:31,901 - INFO -   PASSED: Pop-up is visible
+2026-04-15 11:59:31,902 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 11:59:31,917 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 11:59:31,917 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 11:59:31,919 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 11:59:31,919 - INFO -   PASSED: No known typos detected
+2026-04-15 11:59:31,919 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 11:59:31,933 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 11:59:31,933 - INFO -   PASSED: 'success' class is present
+2026-04-15 11:59:31,934 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 11:59:32,004 - INFO -   ID: Not set
+2026-04-15 11:59:32,007 - INFO -   Data-TestID: Not set
+2026-04-15 11:59:32,009 - INFO -   Role: Not set
+2026-04-15 11:59:32,010 - INFO -   ARIA Label: Not set
+2026-04-15 11:59:32,011 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 11:59:32,024 - INFO -   X: 1230, Y: 20
+2026-04-15 11:59:32,025 - INFO -   Width: 250, Height: 43.5
+2026-04-15 11:59:32,027 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 11:59:32,027 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 11:59:32,178 - ERROR - Validation error: TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'.
+    at eval (eval at evaluate (:226:30), <anonymous>:1:8)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+2026-04-15 11:59:32,189 - WARNING -   WARNING: Could not check computed styles - element may have disappeared
+2026-04-15 11:59:32,191 - INFO - 
+================================================================================
+2026-04-15 11:59:32,192 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 11:59:32,192 - INFO - ================================================================================
+2026-04-15 11:59:32,193 - INFO -   Visibility: PASSED
+2026-04-15 11:59:32,193 - INFO -   Text Match: PASSED
+2026-04-15 11:59:32,194 - INFO -   Typo Check: PASSED
+2026-04-15 11:59:32,198 - INFO -   CSS Classes: Present
+2026-04-15 11:59:32,198 - INFO -   Position & Size: Valid
+2026-04-15 11:59:32,199 - INFO -   Computed Styles: Valid
+2026-04-15 11:59:32,199 - INFO - ================================================================================
+
+2026-04-15 11:59:32,200 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 11:59:34,051 - INFO - Screenshot captured: reports\RUN_20260415_115915\screenshots\03_Popup_Immediate_2_115932.png
+2026-04-15 11:59:34,052 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 11:59:34,052 - INFO - 
+================================================================================
+2026-04-15 11:59:34,053 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 11:59:34,053 - INFO - ================================================================================
+2026-04-15 11:59:34,087 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 11:59:34,913 - INFO - Screenshot captured: reports\RUN_20260415_115915\screenshots\03_Popup_Immediate_3_115934.png
+2026-04-15 11:59:34,916 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 11:59:34,916 - INFO - 
+================================================================================
+2026-04-15 11:59:34,917 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 11:59:34,917 - INFO - ================================================================================
+2026-04-15 11:59:34,954 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 11:59:35,103 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 11:59:35,112 - INFO - 
+================================================================================
+2026-04-15 11:59:35,121 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 11:59:35,129 - INFO - ================================================================================
+2026-04-15 11:59:35,169 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 11:59:35,572 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 11:59:35,648 - INFO - Total DIV elements on page: 28
+2026-04-15 11:59:35,985 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 11:59:36,185 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 11:59:36,337 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 11:59:36,449 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 11:59:36,550 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 11:59:36,664 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 11:59:36,831 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 11:59:36,968 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 11:59:37,189 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 11:59:37,322 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 11:59:37,594 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 11:59:37,731 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 11:59:37,756 - INFO - 
+================================================================================
+
+2026-04-15 11:59:38,399 - INFO - Screenshot captured: reports\RUN_20260415_115915\screenshots\02_Just_After_Login_Click_115937.png
+2026-04-15 11:59:40,096 - INFO - Starting Onboarding Flow Test
+2026-04-15 11:59:40,097 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 11:59:40,097 - INFO - Clicking Workbench icon...
+2026-04-15 11:59:40,760 - INFO - Workbench menu expanded.
+2026-04-15 11:59:40,761 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 11:59:41,360 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 11:59:41,364 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 11:59:42,708 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 11:59:43,215 - INFO - Screenshot captured: reports\RUN_20260415_115915\screenshots\02_Onboard_Customer_Landing_115942.png
+2026-04-15 11:59:43,216 - INFO - Filling Onboarding details for United States...
+2026-04-15 11:59:45,200 - INFO - Filled First Name: FtaFVYdfwqmIbMeMtpcDuTFyUJMa
+2026-04-15 11:59:46,601 - INFO - Filled Last Name: DTgoxbexTWMGWQhxKDHHZXhaY
+2026-04-15 11:59:47,736 - INFO - Checked: Use Same for Billing
+2026-04-15 11:59:48,883 - INFO - Checked: Use Same for Shipping
+2026-04-15 11:59:50,005 - INFO - Checked: Primary Address
+2026-04-15 11:59:54,583 - INFO - Filled Address: 123 Automation Way
+2026-04-15 11:59:56,072 - INFO - Filled Zip Code: 12345
+2026-04-15 11:59:57,999 - INFO - Filled Unique Phone Number: 9024362883
+2026-04-15 11:59:59,373 - INFO - Filled Email: auto_ftafvydfwqmibmemtpcdutfyujma@test.com
+2026-04-15 12:00:00,815 - INFO - Filled Confirm Email: auto_ftafvydfwqmibmemtpcdutfyujma@test.com
+2026-04-15 12:00:00,817 - INFO - Clicking 'Save & Next'...
+2026-04-15 12:00:02,505 - INFO - Successfully verified Step 1 completion.
+2026-04-15 12:00:02,550 - INFO - Retrieved Temporary Account ID: 1000002141
+2026-04-15 12:00:02,551 - INFO - Step 1 Success. ID: 1000002141
+2026-04-15 12:00:02,551 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 12:00:03,937 - INFO - Filled Plate Number 1: QA5415GP
+2026-04-15 12:00:10,088 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 12:00:23,168 - INFO - Vehicle 1 added.
+2026-04-15 12:00:24,498 - INFO - Filled Plate Number 2: QA1199GP
+2026-04-15 12:00:30,567 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 12:00:43,574 - INFO - Vehicle 2 added.
+2026-04-15 12:00:44,135 - INFO - Step 2 complete successfully.
+2026-04-15 12:00:44,136 - INFO - Starting Step 3: Payment Information...
+2026-04-15 12:00:44,136 - INFO - Ensuring 'Save and Pay' tab is active...
+2026-04-15 12:00:46,463 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 12:00:48,567 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 12:00:50,542 - INFO - Filled Cardholder Name: OpDiFtYGNnJdjGUqePEDCFOHSmqcu
+2026-04-15 12:00:52,000 - INFO - Filled Card Number: 5593285053992273
+2026-04-15 12:00:53,399 - INFO - Filled Expiry Date: 04/28
+2026-04-15 12:00:54,905 - INFO - Filled CVV: 149
+2026-04-15 12:00:54,906 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 12:00:55,473 - INFO - Card added successfully.
+2026-04-15 12:00:56,494 - INFO - Selecting the Credit Card from the list...
+2026-04-15 12:00:57,577 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 12:00:57,577 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 12:00:58,144 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 12:01:13,168 - ERROR - Payment Step Error: Timeout 15000ms exceeded.
+2026-04-15 12:28:10,211 - INFO - Test Session Started.
+2026-04-15 12:28:10,213 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 12:28:10,214 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 12:28:12,789 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 12:28:14,443 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 12:28:14,444 - INFO - 
+================================================================================
+2026-04-15 12:28:14,446 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 12:28:14,447 - INFO - ================================================================================
+2026-04-15 12:28:14,484 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 12:28:14,696 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 12:28:14,729 - INFO - Total DIV elements on page: 20
+2026-04-15 12:28:15,148 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 12:28:15,261 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 12:28:15,327 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 12:28:15,388 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 12:28:15,472 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 12:28:15,524 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 12:28:15,592 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 12:28:15,666 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 12:28:15,733 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 12:28:15,767 - INFO - 
+================================================================================
+
+2026-04-15 12:28:16,316 - INFO - Login button clicked.
+2026-04-15 12:28:16,319 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 12:28:16,869 - INFO - Screenshot captured: reports\RUN_20260415_122807\screenshots\03_Popup_Immediate_1_122816.png
+2026-04-15 12:28:16,869 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 12:28:16,869 - INFO - 
+================================================================================
+2026-04-15 12:28:16,869 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 12:28:16,869 - INFO - ================================================================================
+2026-04-15 12:28:16,906 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 12:28:16,942 - INFO -   Visibility Status: True
+2026-04-15 12:28:16,943 - INFO -   PASSED: Pop-up is visible
+2026-04-15 12:28:16,943 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 12:28:16,968 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 12:28:16,969 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 12:28:16,970 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 12:28:16,970 - INFO -   PASSED: No known typos detected
+2026-04-15 12:28:16,971 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 12:28:16,992 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 12:28:16,993 - INFO -   PASSED: 'success' class is present
+2026-04-15 12:28:16,993 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 12:28:17,083 - INFO -   ID: Not set
+2026-04-15 12:28:17,088 - INFO -   Data-TestID: Not set
+2026-04-15 12:28:17,088 - INFO -   Role: Not set
+2026-04-15 12:28:17,088 - INFO -   ARIA Label: Not set
+2026-04-15 12:28:17,090 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 12:28:17,104 - INFO -   X: 1230, Y: 20
+2026-04-15 12:28:17,104 - INFO -   Width: 250, Height: 43.5
+2026-04-15 12:28:17,104 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 12:28:17,104 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 12:28:17,136 - INFO -   Display: block
+2026-04-15 12:28:17,136 - INFO -   Opacity: 1
+2026-04-15 12:28:17,136 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 12:28:17,136 - INFO - 
+================================================================================
+2026-04-15 12:28:17,136 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 12:28:17,136 - INFO - ================================================================================
+2026-04-15 12:28:17,136 - INFO -   Visibility: PASSED
+2026-04-15 12:28:17,136 - INFO -   Text Match: PASSED
+2026-04-15 12:28:17,136 - INFO -   Typo Check: PASSED
+2026-04-15 12:28:17,136 - INFO -   CSS Classes: Present
+2026-04-15 12:28:17,143 - INFO -   Position & Size: Valid
+2026-04-15 12:28:17,143 - INFO -   Computed Styles: Valid
+2026-04-15 12:28:17,143 - INFO - ================================================================================
+
+2026-04-15 12:28:17,143 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 12:28:17,593 - INFO - Screenshot captured: reports\RUN_20260415_122807\screenshots\03_Popup_Immediate_2_122817.png
+2026-04-15 12:28:17,593 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 12:28:17,594 - INFO - 
+================================================================================
+2026-04-15 12:28:17,594 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 12:28:17,594 - INFO - ================================================================================
+2026-04-15 12:28:17,616 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 12:28:18,756 - INFO - Screenshot captured: reports\RUN_20260415_122807\screenshots\03_Popup_Immediate_3_122817.png
+2026-04-15 12:28:18,757 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 12:28:18,758 - INFO - 
+================================================================================
+2026-04-15 12:28:18,758 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 12:28:18,760 - INFO - ================================================================================
+2026-04-15 12:28:18,789 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 12:28:18,912 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 12:28:18,913 - INFO - 
+================================================================================
+2026-04-15 12:28:18,914 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 12:28:18,914 - INFO - ================================================================================
+2026-04-15 12:28:18,935 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 12:28:19,212 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 12:28:19,255 - INFO - Total DIV elements on page: 28
+2026-04-15 12:28:19,447 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 12:28:19,547 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 12:28:19,716 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 12:28:19,809 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 12:28:19,905 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 12:28:20,006 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 12:28:20,096 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 12:28:20,191 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 12:28:20,296 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 12:28:20,401 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 12:28:20,505 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 12:28:20,618 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 12:28:20,643 - INFO - 
+================================================================================
+
+2026-04-15 12:28:21,067 - INFO - Screenshot captured: reports\RUN_20260415_122807\screenshots\02_Just_After_Login_Click_122820.png
+2026-04-15 12:28:21,310 - INFO - Starting Onboarding Flow Test
+2026-04-15 12:28:21,311 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 12:28:21,312 - INFO - Clicking Workbench icon...
+2026-04-15 12:28:21,915 - INFO - Workbench menu expanded.
+2026-04-15 12:28:21,915 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 12:28:22,468 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 12:28:22,469 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 12:28:23,422 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 12:28:23,749 - INFO - Screenshot captured: reports\RUN_20260415_122807\screenshots\02_Onboard_Customer_Landing_122823.png
+2026-04-15 12:28:23,750 - INFO - Filling Onboarding details for United States...
+2026-04-15 12:28:25,635 - INFO - Filled First Name: KafVTXbHgDvGeCpyrPptBSHJhctSlkslfNBSABqCGhNPOcLKc
+2026-04-15 12:28:27,038 - INFO - Filled Last Name: VtgbsDZCnwGVweUUuZNERbpzABrEbGucYSjTEMMphZKfOP
+2026-04-15 12:28:28,184 - INFO - Checked: Use Same for Billing
+2026-04-15 12:28:29,280 - INFO - Checked: Use Same for Shipping
+2026-04-15 12:28:30,384 - INFO - Checked: Primary Address
+2026-04-15 12:28:34,848 - INFO - Filled Address: 123 Automation Way
+2026-04-15 12:28:36,217 - INFO - Filled Zip Code: 12345
+2026-04-15 12:28:38,059 - INFO - Filled Unique Phone Number: 7032062802
+2026-04-15 12:28:39,419 - INFO - Filled Email: auto_kafvtxbhgdvgecpyrpptbshjhctslkslfnbsabqcghnpoclkc@test.com
+2026-04-15 12:28:40,758 - INFO - Filled Confirm Email: auto_kafvtxbhgdvgecpyrpptbshjhctslkslfnbsabqcghnpoclkc@test.com
+2026-04-15 12:28:40,758 - INFO - Clicking 'Save & Next'...
+2026-04-15 12:28:42,367 - INFO - Successfully verified Step 1 completion.
+2026-04-15 12:28:42,424 - INFO - Retrieved Temporary Account ID: 1000002142
+2026-04-15 12:28:42,424 - INFO - Step 1 Success. ID: 1000002142
+2026-04-15 12:28:42,429 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 12:28:43,839 - INFO - Filled Plate Number 1: QA5439GP
+2026-04-15 12:28:49,871 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 12:29:02,989 - INFO - Vehicle 1 added.
+2026-04-15 12:29:04,305 - INFO - Filled Plate Number 2: QA8758GP
+2026-04-15 12:29:10,374 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 12:29:23,347 - INFO - Vehicle 2 added.
+2026-04-15 12:29:23,909 - INFO - Step 2 complete successfully.
+2026-04-15 12:29:23,909 - INFO - Starting Step 3: Payment Information...
+2026-04-15 12:29:23,910 - INFO - Ensuring 'Save and Pay' tab is active...
+2026-04-15 12:29:26,250 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 12:29:27,835 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 12:29:29,888 - INFO - Filled Cardholder Name: xafScrUCVMluJQHnensemKRqEyPcqhSMMhQWtfpeqfg
+2026-04-15 12:29:31,309 - INFO - Filled Card Number: 4798634943921162
+2026-04-15 12:29:32,707 - INFO - Filled Expiry Date: 04/28
+2026-04-15 12:29:34,138 - INFO - Filled CVV: 629
+2026-04-15 12:29:34,140 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 12:29:34,767 - INFO - Card added successfully.
+2026-04-15 12:29:35,788 - INFO - Selecting the Credit Card from the list...
+2026-04-15 12:29:36,362 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 12:29:36,365 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 12:29:37,488 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 12:29:52,530 - WARNING - Initial modal wait timed out, attempting one more forced click on Preview and Pay...
+2026-04-15 12:30:23,071 - ERROR - Payment Step Error: Timeout 30000ms exceeded.
+2026-04-15 13:12:36,039 - INFO - Test Session Started.
+2026-04-15 13:12:36,040 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 13:12:36,041 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 13:12:38,633 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 13:12:40,321 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 13:12:40,321 - INFO - 
+================================================================================
+2026-04-15 13:12:40,321 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 13:12:40,321 - INFO - ================================================================================
+2026-04-15 13:12:40,321 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 13:12:40,532 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 13:12:40,558 - INFO - Total DIV elements on page: 20
+2026-04-15 13:12:40,995 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 13:12:41,080 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 13:12:41,139 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 13:12:41,212 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 13:12:41,310 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 13:12:41,368 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 13:12:41,440 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 13:12:41,525 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 13:12:41,618 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 13:12:41,683 - INFO - 
+================================================================================
+
+2026-04-15 13:12:42,241 - INFO - Login button clicked.
+2026-04-15 13:12:42,246 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 13:12:42,778 - INFO - Screenshot captured: reports\RUN_20260415_131233\screenshots\03_Popup_Immediate_1_131242.png
+2026-04-15 13:12:42,778 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 13:12:42,778 - INFO - 
+================================================================================
+2026-04-15 13:12:42,778 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 13:12:42,778 - INFO - ================================================================================
+2026-04-15 13:12:42,809 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 13:12:42,829 - INFO -   Visibility Status: True
+2026-04-15 13:12:42,829 - INFO -   PASSED: Pop-up is visible
+2026-04-15 13:12:42,829 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 13:12:42,845 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 13:12:42,845 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 13:12:42,845 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 13:12:42,856 - INFO -   PASSED: No known typos detected
+2026-04-15 13:12:42,856 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 13:12:42,877 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 13:12:42,877 - INFO -   PASSED: 'success' class is present
+2026-04-15 13:12:42,878 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 13:12:42,948 - INFO -   ID: Not set
+2026-04-15 13:12:42,950 - INFO -   Data-TestID: Not set
+2026-04-15 13:12:42,950 - INFO -   Role: Not set
+2026-04-15 13:12:42,951 - INFO -   ARIA Label: Not set
+2026-04-15 13:12:42,951 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 13:12:42,965 - INFO -   X: 1230, Y: 20
+2026-04-15 13:12:42,967 - INFO -   Width: 250, Height: 43.5
+2026-04-15 13:12:42,967 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 13:12:42,968 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 13:12:42,994 - INFO -   Display: block
+2026-04-15 13:12:42,994 - INFO -   Opacity: 1
+2026-04-15 13:12:42,995 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 13:12:42,997 - INFO - 
+================================================================================
+2026-04-15 13:12:42,997 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 13:12:42,998 - INFO - ================================================================================
+2026-04-15 13:12:42,998 - INFO -   Visibility: PASSED
+2026-04-15 13:12:42,998 - INFO -   Text Match: PASSED
+2026-04-15 13:12:42,999 - INFO -   Typo Check: PASSED
+2026-04-15 13:12:42,999 - INFO -   CSS Classes: Present
+2026-04-15 13:12:42,999 - INFO -   Position & Size: Valid
+2026-04-15 13:12:43,000 - INFO -   Computed Styles: Valid
+2026-04-15 13:12:43,000 - INFO - ================================================================================
+
+2026-04-15 13:12:43,000 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 13:12:43,327 - INFO - Screenshot captured: reports\RUN_20260415_131233\screenshots\03_Popup_Immediate_2_131243.png
+2026-04-15 13:12:43,328 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 13:12:43,329 - INFO - 
+================================================================================
+2026-04-15 13:12:43,329 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 13:12:43,330 - INFO - ================================================================================
+2026-04-15 13:12:43,392 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 13:12:44,886 - INFO - Screenshot captured: reports\RUN_20260415_131233\screenshots\03_Popup_Immediate_3_131243.png
+2026-04-15 13:12:44,888 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 13:12:44,889 - INFO - 
+================================================================================
+2026-04-15 13:12:44,890 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 13:12:44,890 - INFO - ================================================================================
+2026-04-15 13:12:44,914 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 13:12:45,049 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 13:12:45,050 - INFO - 
+================================================================================
+2026-04-15 13:12:45,050 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 13:12:45,051 - INFO - ================================================================================
+2026-04-15 13:12:45,086 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 13:12:45,451 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 13:12:45,506 - INFO - Total DIV elements on page: 28
+2026-04-15 13:12:45,724 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 13:12:45,831 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 13:12:45,986 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 13:12:46,089 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 13:12:46,183 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 13:12:46,273 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 13:12:46,367 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 13:12:46,465 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 13:12:46,571 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 13:12:46,710 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 13:12:46,825 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 13:12:46,939 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 13:12:46,965 - INFO - 
+================================================================================
+
+2026-04-15 13:12:47,601 - INFO - Screenshot captured: reports\RUN_20260415_131233\screenshots\02_Just_After_Login_Click_131246.png
+2026-04-15 13:12:47,878 - INFO - Starting Onboarding Flow Test
+2026-04-15 13:12:47,879 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 13:12:47,879 - INFO - Clicking Workbench icon...
+2026-04-15 13:12:48,464 - INFO - Workbench menu expanded.
+2026-04-15 13:12:48,465 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 13:12:49,023 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 13:12:49,023 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 13:12:50,347 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 13:12:50,692 - INFO - Screenshot captured: reports\RUN_20260415_131233\screenshots\02_Onboard_Customer_Landing_131250.png
+2026-04-15 13:12:50,693 - INFO - Filling Onboarding details for United States...
+2026-04-15 13:12:52,574 - INFO - Filled First Name: QcxXvvVzynuy
+2026-04-15 13:12:54,000 - INFO - Filled Last Name: YKZYJSNewZrwXuMmoEkMTOHapINmyiulweaZ
+2026-04-15 13:12:55,119 - INFO - Checked: Use Same for Billing
+2026-04-15 13:12:56,217 - INFO - Checked: Use Same for Shipping
+2026-04-15 13:12:57,282 - INFO - Checked: Primary Address
+2026-04-15 13:13:01,799 - INFO - Filled Address: 123 Automation Way
+2026-04-15 13:13:03,120 - INFO - Filled Zip Code: 12345
+2026-04-15 13:13:05,089 - INFO - Filled Unique Phone Number: 9694971980
+2026-04-15 13:13:06,473 - INFO - Filled Email: auto_qcxxvvvzynuy@test.com
+2026-04-15 13:13:07,866 - INFO - Filled Confirm Email: auto_qcxxvvvzynuy@test.com
+2026-04-15 13:13:07,867 - INFO - Clicking 'Save & Next'...
+2026-04-15 13:13:09,499 - INFO - Successfully verified Step 1 completion.
+2026-04-15 13:13:09,539 - INFO - Retrieved Temporary Account ID: 1000002143
+2026-04-15 13:13:09,540 - INFO - Step 1 Success. ID: 1000002143
+2026-04-15 13:13:09,540 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 13:13:10,888 - INFO - Filled Plate Number 1: QA5735GP
+2026-04-15 13:13:16,951 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 13:13:30,035 - INFO - Vehicle 1 added.
+2026-04-15 13:13:31,384 - INFO - Filled Plate Number 2: QA4353GP
+2026-04-15 13:13:37,464 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 13:13:50,536 - INFO - Vehicle 2 added.
+2026-04-15 13:13:51,120 - INFO - Step 2 complete successfully.
+2026-04-15 13:13:51,120 - INFO - Starting Step 3: Payment Information...
+2026-04-15 13:13:53,486 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 13:13:55,064 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 13:13:57,020 - INFO - Filled Cardholder Name: DNuSxOmzkXyJUWSuwPcyZeCEwWbzTbnsQ
+2026-04-15 13:13:58,423 - INFO - Filled Card Number: 4628724406240249
+2026-04-15 13:13:59,854 - INFO - Filled Expiry Date: 04/28
+2026-04-15 13:14:01,341 - INFO - Filled CVV: 155
+2026-04-15 13:14:01,342 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 13:14:03,006 - INFO - Selecting the Credit Card from the list...
+2026-04-15 13:14:05,159 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 13:14:06,189 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 13:14:07,325 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 13:14:22,343 - ERROR - Payment Step Error: Timeout 15000ms exceeded.
+2026-04-15 15:40:14,192 - INFO - Test Session Started.
+2026-04-15 15:40:14,195 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 15:40:14,197 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 15:40:16,789 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 15:40:18,429 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 15:40:18,429 - INFO - 
+================================================================================
+2026-04-15 15:40:18,430 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 15:40:18,430 - INFO - ================================================================================
+2026-04-15 15:40:18,461 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:40:18,682 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:40:18,713 - INFO - Total DIV elements on page: 20
+2026-04-15 15:40:19,120 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 15:40:19,220 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:40:19,289 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:40:19,347 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:40:19,440 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 15:40:19,494 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 15:40:19,555 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 15:40:19,635 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 15:40:19,708 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 15:40:19,737 - INFO - 
+================================================================================
+
+2026-04-15 15:40:20,295 - INFO - Login button clicked.
+2026-04-15 15:40:20,297 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 15:40:20,932 - INFO - Screenshot captured: reports\RUN_20260415_154011\screenshots\03_Popup_Immediate_1_154020.png
+2026-04-15 15:40:20,932 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 15:40:20,935 - INFO - 
+================================================================================
+2026-04-15 15:40:20,936 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:40:20,936 - INFO - ================================================================================
+2026-04-15 15:40:20,963 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 15:40:20,977 - INFO -   Visibility Status: True
+2026-04-15 15:40:20,977 - INFO -   PASSED: Pop-up is visible
+2026-04-15 15:40:20,977 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 15:40:20,991 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 15:40:20,991 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 15:40:21,005 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 15:40:21,005 - INFO -   PASSED: No known typos detected
+2026-04-15 15:40:21,006 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 15:40:21,023 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 15:40:21,024 - INFO -   PASSED: 'success' class is present
+2026-04-15 15:40:21,024 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 15:40:21,096 - INFO -   ID: Not set
+2026-04-15 15:40:21,096 - INFO -   Data-TestID: Not set
+2026-04-15 15:40:21,097 - INFO -   Role: Not set
+2026-04-15 15:40:21,097 - INFO -   ARIA Label: Not set
+2026-04-15 15:40:21,097 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 15:40:21,113 - INFO -   X: 1230, Y: 20
+2026-04-15 15:40:21,113 - INFO -   Width: 250, Height: 43.5
+2026-04-15 15:40:21,115 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 15:40:21,115 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 15:40:21,149 - INFO -   Display: block
+2026-04-15 15:40:21,150 - INFO -   Opacity: 1
+2026-04-15 15:40:21,152 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 15:40:21,152 - INFO - 
+================================================================================
+2026-04-15 15:40:21,153 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 15:40:21,153 - INFO - ================================================================================
+2026-04-15 15:40:21,154 - INFO -   Visibility: PASSED
+2026-04-15 15:40:21,154 - INFO -   Text Match: PASSED
+2026-04-15 15:40:21,155 - INFO -   Typo Check: PASSED
+2026-04-15 15:40:21,155 - INFO -   CSS Classes: Present
+2026-04-15 15:40:21,157 - INFO -   Position & Size: Valid
+2026-04-15 15:40:21,158 - INFO -   Computed Styles: Valid
+2026-04-15 15:40:21,159 - INFO - ================================================================================
+
+2026-04-15 15:40:21,160 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 15:40:21,561 - INFO - Screenshot captured: reports\RUN_20260415_154011\screenshots\03_Popup_Immediate_2_154021.png
+2026-04-15 15:40:21,562 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 15:40:21,562 - INFO - 
+================================================================================
+2026-04-15 15:40:21,563 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:40:21,564 - INFO - ================================================================================
+2026-04-15 15:40:21,582 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:40:22,770 - INFO - Screenshot captured: reports\RUN_20260415_154011\screenshots\03_Popup_Immediate_3_154021.png
+2026-04-15 15:40:22,772 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 15:40:22,772 - INFO - 
+================================================================================
+2026-04-15 15:40:22,773 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:40:22,775 - INFO - ================================================================================
+2026-04-15 15:40:22,801 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:40:22,919 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 15:40:22,921 - INFO - 
+================================================================================
+2026-04-15 15:40:22,921 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 15:40:22,921 - INFO - ================================================================================
+2026-04-15 15:40:22,942 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:40:23,175 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:40:23,217 - INFO - Total DIV elements on page: 28
+2026-04-15 15:40:23,402 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 15:40:23,507 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:40:23,666 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:40:23,761 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 15:40:23,846 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 15:40:23,933 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 15:40:24,011 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 15:40:24,099 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 15:40:24,202 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 15:40:24,309 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 15:40:24,411 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 15:40:24,518 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 15:40:24,537 - INFO - 
+================================================================================
+
+2026-04-15 15:40:24,947 - INFO - Screenshot captured: reports\RUN_20260415_154011\screenshots\02_Just_After_Login_Click_154024.png
+2026-04-15 15:40:25,240 - INFO - Starting Onboarding Flow Test
+2026-04-15 15:40:25,242 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 15:40:25,242 - INFO - Clicking Workbench icon...
+2026-04-15 15:40:25,834 - INFO - Workbench menu expanded.
+2026-04-15 15:40:25,835 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 15:40:26,383 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 15:40:26,384 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 15:40:27,423 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 15:40:27,757 - INFO - Screenshot captured: reports\RUN_20260415_154011\screenshots\02_Onboard_Customer_Landing_154027.png
+2026-04-15 15:40:27,758 - INFO - Filling Step 1 for United States...
+2026-04-15 15:40:29,428 - INFO - Filled First Name: lsyOuUBa
+2026-04-15 15:40:30,567 - INFO - Filled Last Name: YFFPnoyU
+2026-04-15 15:40:34,325 - INFO - Filled Address: 123 Automation Way
+2026-04-15 15:40:35,468 - INFO - Filled Zip Code: 12345
+2026-04-15 15:40:37,197 - INFO - Filled Phone: 8830618091
+2026-04-15 15:40:38,336 - INFO - Filled Email: auto_lsyouuba@test.com
+2026-04-15 15:40:39,488 - INFO - Filled Confirm Email: auto_lsyouuba@test.com
+2026-04-15 15:43:17,471 - INFO - Test Session Started.
+2026-04-15 15:43:17,471 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 15:43:17,471 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 15:43:19,957 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 15:43:21,585 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 15:43:21,585 - INFO - 
+================================================================================
+2026-04-15 15:43:21,586 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 15:43:21,586 - INFO - ================================================================================
+2026-04-15 15:43:21,604 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:43:21,837 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:43:21,863 - INFO - Total DIV elements on page: 20
+2026-04-15 15:43:22,208 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 15:43:22,312 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:43:22,372 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:43:22,423 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:43:22,523 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 15:43:22,581 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 15:43:22,630 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 15:43:22,684 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 15:43:22,746 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 15:43:22,780 - INFO - 
+================================================================================
+
+2026-04-15 15:43:23,330 - INFO - Login button clicked.
+2026-04-15 15:43:23,332 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 15:43:23,826 - INFO - Screenshot captured: reports\RUN_20260415_154315\screenshots\03_Popup_Immediate_1_154323.png
+2026-04-15 15:43:23,827 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 15:43:23,828 - INFO - 
+================================================================================
+2026-04-15 15:43:23,828 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:43:23,829 - INFO - ================================================================================
+2026-04-15 15:43:23,850 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 15:43:23,879 - INFO -   Visibility Status: True
+2026-04-15 15:43:23,880 - INFO -   PASSED: Pop-up is visible
+2026-04-15 15:43:23,881 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 15:43:23,901 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 15:43:23,902 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 15:43:23,903 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 15:43:23,903 - INFO -   PASSED: No known typos detected
+2026-04-15 15:43:23,903 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 15:43:23,926 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 15:43:23,927 - INFO -   PASSED: 'success' class is present
+2026-04-15 15:43:23,927 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 15:43:23,994 - INFO -   ID: Not set
+2026-04-15 15:43:23,994 - INFO -   Data-TestID: Not set
+2026-04-15 15:43:23,995 - INFO -   Role: Not set
+2026-04-15 15:43:23,995 - INFO -   ARIA Label: Not set
+2026-04-15 15:43:23,995 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 15:43:24,008 - INFO -   X: 1230, Y: 20
+2026-04-15 15:43:24,009 - INFO -   Width: 250, Height: 43.5
+2026-04-15 15:43:24,009 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 15:43:24,009 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 15:43:24,038 - INFO -   Display: block
+2026-04-15 15:43:24,040 - INFO -   Opacity: 1
+2026-04-15 15:43:24,040 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 15:43:24,041 - INFO - 
+================================================================================
+2026-04-15 15:43:24,041 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 15:43:24,042 - INFO - ================================================================================
+2026-04-15 15:43:24,042 - INFO -   Visibility: PASSED
+2026-04-15 15:43:24,042 - INFO -   Text Match: PASSED
+2026-04-15 15:43:24,042 - INFO -   Typo Check: PASSED
+2026-04-15 15:43:24,042 - INFO -   CSS Classes: Present
+2026-04-15 15:43:24,043 - INFO -   Position & Size: Valid
+2026-04-15 15:43:24,043 - INFO -   Computed Styles: Valid
+2026-04-15 15:43:24,043 - INFO - ================================================================================
+
+2026-04-15 15:43:24,044 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 15:43:24,417 - INFO - Screenshot captured: reports\RUN_20260415_154315\screenshots\03_Popup_Immediate_2_154324.png
+2026-04-15 15:43:24,417 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 15:43:24,418 - INFO - 
+================================================================================
+2026-04-15 15:43:24,418 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:43:24,418 - INFO - ================================================================================
+2026-04-15 15:43:24,481 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:43:25,905 - INFO - Screenshot captured: reports\RUN_20260415_154315\screenshots\03_Popup_Immediate_3_154324.png
+2026-04-15 15:43:25,906 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 15:43:25,907 - INFO - 
+================================================================================
+2026-04-15 15:43:25,908 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:43:25,908 - INFO - ================================================================================
+2026-04-15 15:43:25,938 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:43:26,057 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 15:43:26,058 - INFO - 
+================================================================================
+2026-04-15 15:43:26,059 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 15:43:26,059 - INFO - ================================================================================
+2026-04-15 15:43:26,081 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:43:26,335 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:43:26,374 - INFO - Total DIV elements on page: 28
+2026-04-15 15:43:26,562 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 15:43:26,653 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:43:26,787 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:43:26,889 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 15:43:26,983 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 15:43:27,064 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 15:43:27,156 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 15:43:27,243 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 15:43:27,351 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 15:43:27,453 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 15:43:27,552 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 15:43:27,670 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 15:43:27,698 - INFO - 
+================================================================================
+
+2026-04-15 15:43:28,045 - INFO - Screenshot captured: reports\RUN_20260415_154315\screenshots\02_Just_After_Login_Click_154327.png
+2026-04-15 15:43:28,308 - INFO - Starting Onboarding Flow Test
+2026-04-15 15:43:28,310 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 15:43:28,312 - INFO - Clicking Workbench icon...
+2026-04-15 15:43:28,928 - INFO - Workbench menu expanded.
+2026-04-15 15:43:28,928 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 15:43:29,474 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 15:43:29,474 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 15:43:30,615 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 15:43:30,928 - INFO - Screenshot captured: reports\RUN_20260415_154315\screenshots\02_Onboard_Customer_Landing_154330.png
+2026-04-15 15:43:30,929 - INFO - Filling Step 1 for United States...
+2026-04-15 15:43:32,583 - INFO - Filled First Name: cPDRflDz
+2026-04-15 15:43:33,764 - INFO - Filled Last Name: qedNLBPo
+2026-04-15 15:43:34,918 - INFO - Checked: Same for Billing
+2026-04-15 15:43:36,088 - INFO - Checked: Same for Shipping
+2026-04-15 15:43:37,244 - INFO - Checked: Primary Address
+2026-04-15 15:43:40,952 - INFO - Filled Address: 123 Automation Way
+2026-04-15 15:43:42,118 - INFO - Filled Zip Code: 12345
+2026-04-15 15:43:43,807 - INFO - Filled Phone: 8323059338
+2026-04-15 15:43:44,933 - INFO - Filled Email: auto_cpdrfldz@test.com
+2026-04-15 15:43:46,104 - INFO - Filled Confirm Email: auto_cpdrfldz@test.com
+2026-04-15 15:47:22,757 - INFO - Test Session Started.
+2026-04-15 15:47:22,759 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 15:47:22,759 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 15:47:25,152 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 15:47:26,790 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 15:47:26,792 - INFO - 
+================================================================================
+2026-04-15 15:47:26,793 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 15:47:26,795 - INFO - ================================================================================
+2026-04-15 15:47:26,836 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:47:27,084 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:47:27,121 - INFO - Total DIV elements on page: 20
+2026-04-15 15:47:27,435 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 15:47:27,570 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:47:27,642 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:47:27,672 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:47:27,753 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 15:47:27,791 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 15:47:27,831 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 15:47:27,870 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 15:47:27,920 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 15:47:27,951 - INFO - 
+================================================================================
+
+2026-04-15 15:47:28,484 - INFO - Login button clicked.
+2026-04-15 15:47:28,486 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 15:47:29,017 - INFO - Screenshot captured: reports\RUN_20260415_154720\screenshots\03_Popup_Immediate_1_154728.png
+2026-04-15 15:47:29,018 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 15:47:29,018 - INFO - 
+================================================================================
+2026-04-15 15:47:29,019 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:47:29,019 - INFO - ================================================================================
+2026-04-15 15:47:29,046 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 15:47:29,069 - INFO -   Visibility Status: True
+2026-04-15 15:47:29,070 - INFO -   PASSED: Pop-up is visible
+2026-04-15 15:47:29,072 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 15:47:29,099 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 15:47:29,099 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 15:47:29,099 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 15:47:29,104 - INFO -   PASSED: No known typos detected
+2026-04-15 15:47:29,104 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 15:47:29,133 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 15:47:29,133 - INFO -   PASSED: 'success' class is present
+2026-04-15 15:47:29,135 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 15:47:29,214 - INFO -   ID: Not set
+2026-04-15 15:47:29,214 - INFO -   Data-TestID: Not set
+2026-04-15 15:47:29,214 - INFO -   Role: Not set
+2026-04-15 15:47:29,214 - INFO -   ARIA Label: Not set
+2026-04-15 15:47:29,214 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 15:47:29,233 - INFO -   X: 1230, Y: 20
+2026-04-15 15:47:29,235 - INFO -   Width: 250, Height: 43.5
+2026-04-15 15:47:29,235 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 15:47:29,235 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 15:47:29,264 - INFO -   Display: block
+2026-04-15 15:47:29,264 - INFO -   Opacity: 1
+2026-04-15 15:47:29,264 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 15:47:29,264 - INFO - 
+================================================================================
+2026-04-15 15:47:29,264 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 15:47:29,264 - INFO - ================================================================================
+2026-04-15 15:47:29,264 - INFO -   Visibility: PASSED
+2026-04-15 15:47:29,264 - INFO -   Text Match: PASSED
+2026-04-15 15:47:29,264 - INFO -   Typo Check: PASSED
+2026-04-15 15:47:29,264 - INFO -   CSS Classes: Present
+2026-04-15 15:47:29,264 - INFO -   Position & Size: Valid
+2026-04-15 15:47:29,264 - INFO -   Computed Styles: Valid
+2026-04-15 15:47:29,264 - INFO - ================================================================================
+
+2026-04-15 15:47:29,264 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 15:47:29,618 - INFO - Screenshot captured: reports\RUN_20260415_154720\screenshots\03_Popup_Immediate_2_154729.png
+2026-04-15 15:47:29,618 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 15:47:29,619 - INFO - 
+================================================================================
+2026-04-15 15:47:29,620 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:47:29,620 - INFO - ================================================================================
+2026-04-15 15:47:29,685 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:47:31,090 - INFO - Screenshot captured: reports\RUN_20260415_154720\screenshots\03_Popup_Immediate_3_154729.png
+2026-04-15 15:47:31,091 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 15:47:31,093 - INFO - 
+================================================================================
+2026-04-15 15:47:31,093 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:47:31,093 - INFO - ================================================================================
+2026-04-15 15:47:31,120 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:47:31,248 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 15:47:31,249 - INFO - 
+================================================================================
+2026-04-15 15:47:31,250 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 15:47:31,250 - INFO - ================================================================================
+2026-04-15 15:47:31,284 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:47:31,553 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:47:31,592 - INFO - Total DIV elements on page: 28
+2026-04-15 15:47:31,772 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 15:47:31,876 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:47:32,028 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:47:32,140 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 15:47:32,235 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 15:47:32,338 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 15:47:32,447 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 15:47:32,540 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 15:47:32,651 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 15:47:32,757 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 15:47:32,862 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 15:47:32,971 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 15:47:32,990 - INFO - 
+================================================================================
+
+2026-04-15 15:47:33,384 - INFO - Screenshot captured: reports\RUN_20260415_154720\screenshots\02_Just_After_Login_Click_154732.png
+2026-04-15 15:47:33,662 - INFO - Starting Onboarding Flow Test
+2026-04-15 15:47:33,664 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 15:47:33,665 - INFO - Clicking Workbench icon...
+2026-04-15 15:47:34,249 - INFO - Workbench menu expanded.
+2026-04-15 15:47:34,250 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 15:47:34,812 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 15:47:34,814 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 15:47:36,230 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 15:47:36,623 - INFO - Screenshot captured: reports\RUN_20260415_154720\screenshots\02_Onboard_Customer_Landing_154736.png
+2026-04-15 15:47:36,623 - INFO - Filling Step 1 for United States...
+2026-04-15 15:47:38,347 - INFO - Filled First Name: GUXhPIDS
+2026-04-15 15:47:39,547 - INFO - Filled Last Name: lohuWjAr
+2026-04-15 15:47:40,706 - INFO - Checked: Same Billing
+2026-04-15 15:47:41,832 - INFO - Checked: Same Shipping
+2026-04-15 15:47:42,952 - INFO - Checked: Primary Address
+2026-04-15 15:47:46,722 - INFO - Filled Address: 123 Automation Way
+2026-04-15 15:47:47,888 - INFO - Filled Zip: 12345
+2026-04-15 15:47:49,570 - INFO - Filled Phone: 8986183173
+2026-04-15 15:47:50,719 - INFO - Filled Email: auto_guxhpids@test.com
+2026-04-15 15:47:51,859 - INFO - Filled Confirm Email: auto_guxhpids@test.com
+2026-04-15 15:50:07,621 - INFO - Test Session Started.
+2026-04-15 15:50:07,622 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 15:50:07,623 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 15:50:09,998 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 15:50:11,645 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 15:50:11,646 - INFO - 
+================================================================================
+2026-04-15 15:50:11,646 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 15:50:11,648 - INFO - ================================================================================
+2026-04-15 15:50:11,672 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:50:11,916 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:50:11,948 - INFO - Total DIV elements on page: 20
+2026-04-15 15:50:12,308 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 15:50:12,426 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:50:12,490 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:50:12,541 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:50:12,639 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 15:50:12,688 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 15:50:12,745 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 15:50:12,818 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 15:50:12,884 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 15:50:12,910 - INFO - 
+================================================================================
+
+2026-04-15 15:50:13,462 - INFO - Login button clicked.
+2026-04-15 15:50:13,464 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 15:50:13,980 - INFO - Screenshot captured: reports\RUN_20260415_155005\screenshots\03_Popup_Immediate_1_155013.png
+2026-04-15 15:50:13,982 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 15:50:13,982 - INFO - 
+================================================================================
+2026-04-15 15:50:13,982 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:50:13,985 - INFO - ================================================================================
+2026-04-15 15:50:14,013 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 15:50:14,032 - INFO -   Visibility Status: True
+2026-04-15 15:50:14,032 - INFO -   PASSED: Pop-up is visible
+2026-04-15 15:50:14,034 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 15:50:14,053 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 15:50:14,055 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 15:50:14,056 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 15:50:14,056 - INFO -   PASSED: No known typos detected
+2026-04-15 15:50:14,056 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 15:50:14,073 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 15:50:14,074 - INFO -   PASSED: 'success' class is present
+2026-04-15 15:50:14,074 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 15:50:14,144 - INFO -   ID: Not set
+2026-04-15 15:50:14,144 - INFO -   Data-TestID: Not set
+2026-04-15 15:50:14,145 - INFO -   Role: Not set
+2026-04-15 15:50:14,145 - INFO -   ARIA Label: Not set
+2026-04-15 15:50:14,145 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 15:50:14,155 - INFO -   X: 1230, Y: 20
+2026-04-15 15:50:14,156 - INFO -   Width: 250, Height: 43.5
+2026-04-15 15:50:14,157 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 15:50:14,157 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 15:50:14,179 - INFO -   Display: block
+2026-04-15 15:50:14,179 - INFO -   Opacity: 1
+2026-04-15 15:50:14,180 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 15:50:14,180 - INFO - 
+================================================================================
+2026-04-15 15:50:14,181 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 15:50:14,181 - INFO - ================================================================================
+2026-04-15 15:50:14,181 - INFO -   Visibility: PASSED
+2026-04-15 15:50:14,182 - INFO -   Text Match: PASSED
+2026-04-15 15:50:14,182 - INFO -   Typo Check: PASSED
+2026-04-15 15:50:14,182 - INFO -   CSS Classes: Present
+2026-04-15 15:50:14,184 - INFO -   Position & Size: Valid
+2026-04-15 15:50:14,184 - INFO -   Computed Styles: Valid
+2026-04-15 15:50:14,184 - INFO - ================================================================================
+
+2026-04-15 15:50:14,184 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 15:50:14,509 - INFO - Screenshot captured: reports\RUN_20260415_155005\screenshots\03_Popup_Immediate_2_155014.png
+2026-04-15 15:50:14,510 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 15:50:14,510 - INFO - 
+================================================================================
+2026-04-15 15:50:14,511 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:50:14,512 - INFO - ================================================================================
+2026-04-15 15:50:14,579 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:50:16,024 - INFO - Screenshot captured: reports\RUN_20260415_155005\screenshots\03_Popup_Immediate_3_155014.png
+2026-04-15 15:50:16,025 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 15:50:16,025 - INFO - 
+================================================================================
+2026-04-15 15:50:16,026 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:50:16,026 - INFO - ================================================================================
+2026-04-15 15:50:16,050 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:50:16,174 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 15:50:16,174 - INFO - 
+================================================================================
+2026-04-15 15:50:16,175 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 15:50:16,176 - INFO - ================================================================================
+2026-04-15 15:50:16,209 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:50:16,479 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:50:16,514 - INFO - Total DIV elements on page: 28
+2026-04-15 15:50:16,697 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 15:50:16,798 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:50:16,932 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:50:17,031 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 15:50:17,114 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 15:50:17,202 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 15:50:17,287 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 15:50:17,375 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 15:50:17,483 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 15:50:17,583 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 15:50:17,680 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 15:50:17,790 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 15:50:17,811 - INFO - 
+================================================================================
+
+2026-04-15 15:50:18,150 - INFO - Screenshot captured: reports\RUN_20260415_155005\screenshots\02_Just_After_Login_Click_155017.png
+2026-04-15 15:50:18,360 - INFO - Starting Onboarding Flow Test
+2026-04-15 15:50:18,360 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 15:50:18,360 - INFO - Clicking Workbench icon...
+2026-04-15 15:50:18,956 - INFO - Workbench menu expanded.
+2026-04-15 15:50:18,956 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 15:50:19,508 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 15:50:19,509 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 15:50:20,406 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 15:50:20,703 - INFO - Screenshot captured: reports\RUN_20260415_155005\screenshots\02_Onboard_Customer_Landing_155020.png
+2026-04-15 15:50:20,703 - INFO - Filling Step 1 for United States...
+2026-04-15 15:50:22,378 - INFO - Filled First Name: MkTnhemH
+2026-04-15 15:50:23,631 - INFO - Filled Last Name: wugeZFDb
+2026-04-15 15:50:24,768 - INFO - Checked: Same Billing
+2026-04-15 15:50:25,875 - INFO - Checked: Same Shipping
+2026-04-15 15:50:27,017 - INFO - Checked: Primary Address
+2026-04-15 15:50:30,753 - INFO - Filled Address: 123 Automation Way
+2026-04-15 15:50:31,928 - INFO - Filled Zip: 12345
+2026-04-15 15:50:33,600 - INFO - Filled Phone: 8980076039
+2026-04-15 15:50:34,741 - INFO - Filled Email: auto_mktnhemh@test.com
+2026-04-15 15:50:35,895 - INFO - Filled Confirm Email: auto_mktnhemh@test.com
+2026-04-15 15:53:02,837 - INFO - Test Session Started.
+2026-04-15 15:53:02,837 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 15:53:02,839 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 15:53:05,496 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 15:53:07,141 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 15:53:07,142 - INFO - 
+================================================================================
+2026-04-15 15:53:07,143 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 15:53:07,143 - INFO - ================================================================================
+2026-04-15 15:53:07,163 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:53:07,367 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:53:07,400 - INFO - Total DIV elements on page: 20
+2026-04-15 15:53:07,801 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 15:53:07,888 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:53:07,955 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:53:08,009 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 15:53:08,102 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 15:53:08,158 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 15:53:08,223 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 15:53:08,289 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 15:53:08,352 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 15:53:08,386 - INFO - 
+================================================================================
+
+2026-04-15 15:53:08,938 - INFO - Login button clicked.
+2026-04-15 15:53:08,939 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 15:53:09,475 - INFO - Screenshot captured: reports\RUN_20260415_155300\screenshots\03_Popup_Immediate_1_155308.png
+2026-04-15 15:53:09,476 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 15:53:09,477 - INFO - 
+================================================================================
+2026-04-15 15:53:09,477 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:53:09,477 - INFO - ================================================================================
+2026-04-15 15:53:09,500 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 15:53:09,521 - INFO -   Visibility Status: True
+2026-04-15 15:53:09,522 - INFO -   PASSED: Pop-up is visible
+2026-04-15 15:53:09,524 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 15:53:09,546 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 15:53:09,547 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 15:53:09,548 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 15:53:09,548 - INFO -   PASSED: No known typos detected
+2026-04-15 15:53:09,548 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 15:53:09,569 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 15:53:09,570 - INFO -   PASSED: 'success' class is present
+2026-04-15 15:53:09,571 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 15:53:09,654 - INFO -   ID: Not set
+2026-04-15 15:53:09,654 - INFO -   Data-TestID: Not set
+2026-04-15 15:53:09,655 - INFO -   Role: Not set
+2026-04-15 15:53:09,655 - INFO -   ARIA Label: Not set
+2026-04-15 15:53:09,656 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 15:53:09,675 - INFO -   X: 1230, Y: 20
+2026-04-15 15:53:09,676 - INFO -   Width: 250, Height: 43.5
+2026-04-15 15:53:09,676 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 15:53:09,678 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 15:53:09,705 - INFO -   Display: block
+2026-04-15 15:53:09,705 - INFO -   Opacity: 1
+2026-04-15 15:53:09,705 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 15:53:09,705 - INFO - 
+================================================================================
+2026-04-15 15:53:09,705 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 15:53:09,705 - INFO - ================================================================================
+2026-04-15 15:53:09,705 - INFO -   Visibility: PASSED
+2026-04-15 15:53:09,705 - INFO -   Text Match: PASSED
+2026-04-15 15:53:09,705 - INFO -   Typo Check: PASSED
+2026-04-15 15:53:09,705 - INFO -   CSS Classes: Present
+2026-04-15 15:53:09,705 - INFO -   Position & Size: Valid
+2026-04-15 15:53:09,705 - INFO -   Computed Styles: Valid
+2026-04-15 15:53:09,705 - INFO - ================================================================================
+
+2026-04-15 15:53:09,705 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 15:53:10,085 - INFO - Screenshot captured: reports\RUN_20260415_155300\screenshots\03_Popup_Immediate_2_155309.png
+2026-04-15 15:53:10,086 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 15:53:10,086 - INFO - 
+================================================================================
+2026-04-15 15:53:10,087 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:53:10,087 - INFO - ================================================================================
+2026-04-15 15:53:10,113 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:53:11,510 - INFO - Screenshot captured: reports\RUN_20260415_155300\screenshots\03_Popup_Immediate_3_155310.png
+2026-04-15 15:53:11,511 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 15:53:11,512 - INFO - 
+================================================================================
+2026-04-15 15:53:11,513 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 15:53:11,514 - INFO - ================================================================================
+2026-04-15 15:53:11,540 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 15:53:11,676 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 15:53:11,677 - INFO - 
+================================================================================
+2026-04-15 15:53:11,678 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 15:53:11,678 - INFO - ================================================================================
+2026-04-15 15:53:11,701 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 15:53:11,955 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 15:53:11,999 - INFO - Total DIV elements on page: 28
+2026-04-15 15:53:12,184 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 15:53:12,292 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:53:12,451 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 15:53:12,537 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 15:53:12,635 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 15:53:12,721 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 15:53:12,814 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 15:53:12,902 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 15:53:13,005 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 15:53:13,105 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 15:53:13,209 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 15:53:13,319 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 15:53:13,338 - INFO - 
+================================================================================
+
+2026-04-15 15:53:13,701 - INFO - Screenshot captured: reports\RUN_20260415_155300\screenshots\02_Just_After_Login_Click_155313.png
+2026-04-15 15:53:13,967 - INFO - Starting Onboarding Flow Test
+2026-04-15 15:53:13,968 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 15:53:13,969 - INFO - Clicking Workbench icon...
+2026-04-15 15:53:14,556 - INFO - Workbench menu expanded.
+2026-04-15 15:53:14,556 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 15:53:15,104 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 15:53:15,104 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 15:53:16,034 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 15:53:16,343 - INFO - Screenshot captured: reports\RUN_20260415_155300\screenshots\02_Onboard_Customer_Landing_155316.png
+2026-04-15 15:53:16,344 - INFO - Filling Onboarding details for United States...
+2026-04-15 15:53:18,250 - INFO - Filled First Name: laPBpBcijneSaBVWJUKkXGvGifCjjBLpfiskAgXtj
+2026-04-15 15:53:19,682 - INFO - Filled Last Name: NHuaoqtVLSfKbfTUAWfespMUGt
+2026-04-15 15:53:20,801 - INFO - Checked: Use Same for Billing
+2026-04-15 15:53:21,931 - INFO - Checked: Use Same for Shipping
+2026-04-15 15:53:23,106 - INFO - Checked: Primary Address
+2026-04-15 15:53:27,566 - INFO - Filled Address: 123 Automation Way
+2026-04-15 15:53:28,937 - INFO - Filled Zip Code: 12345
+2026-04-15 15:53:30,820 - INFO - Filled Unique Phone Number: 9505135450
+2026-04-15 15:53:32,148 - INFO - Filled Email: auto_lapbpbcijnesabvwjukkxgvgifcjjblpfiskagxtj@test.com
+2026-04-15 15:53:33,501 - INFO - Filled Confirm Email: auto_lapbpbcijnesabvwjukkxgvgifcjjblpfiskagxtj@test.com
+2026-04-15 15:53:33,502 - INFO - Clicking 'Save & Next'...
+2026-04-15 15:53:35,133 - INFO - Successfully verified Step 1 completion.
+2026-04-15 15:53:35,176 - INFO - Retrieved Temporary Account ID: 1000002148
+2026-04-15 15:53:35,176 - INFO - Step 1 Success. ID: 1000002148
+2026-04-15 15:53:35,177 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 15:53:36,521 - INFO - Filled Plate Number 1: QA3803GP
+2026-04-15 15:53:42,599 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 15:53:55,688 - INFO - Vehicle 1 added.
+2026-04-15 15:53:56,983 - INFO - Filled Plate Number 2: QA9880GP
+2026-04-15 15:54:03,050 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 15:54:16,230 - INFO - Vehicle 2 added.
+2026-04-15 15:54:16,847 - INFO - Step 2 complete successfully.
+2026-04-15 15:54:16,847 - INFO - Starting Step 3: Payment Information...
+2026-04-15 15:54:16,847 - INFO - Ensuring 'Save and Pay' tab is active...
+2026-04-15 15:54:19,264 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 15:54:21,530 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 15:54:23,719 - INFO - Filled Cardholder Name: ygjTJBIZqHvJTckXiXG
+2026-04-15 15:54:25,369 - INFO - Filled Card Number: 1711403107373842
+2026-04-15 15:54:26,954 - INFO - Filled Expiry Date: 04/28
+2026-04-15 15:54:28,671 - INFO - Filled CVV: 559
+2026-04-15 15:54:28,671 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 15:54:29,351 - INFO - Card added successfully.
+2026-04-15 15:54:30,384 - INFO - Selecting the Credit Card from the list...
+2026-04-15 15:54:31,543 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 15:54:31,543 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 15:54:32,224 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 15:54:47,259 - ERROR - Payment Step Error: Timeout 15000ms exceeded.
+2026-04-15 16:24:41,603 - INFO - Test Session Started.
+2026-04-15 16:24:41,605 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 16:24:41,606 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 16:24:44,030 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 16:24:45,717 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 16:24:45,718 - INFO - 
+================================================================================
+2026-04-15 16:24:45,720 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 16:24:45,720 - INFO - ================================================================================
+2026-04-15 16:24:45,742 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 16:24:46,000 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 16:24:46,043 - INFO - Total DIV elements on page: 20
+2026-04-15 16:24:46,485 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 16:24:46,669 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 16:24:46,733 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 16:24:46,793 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 16:24:46,879 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 16:24:46,942 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 16:24:47,011 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 16:24:47,072 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 16:24:47,136 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 16:24:47,167 - INFO - 
+================================================================================
+
+2026-04-15 16:24:47,708 - INFO - Login button clicked.
+2026-04-15 16:24:47,712 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 16:24:48,322 - INFO - Screenshot captured: reports\RUN_20260415_162439\screenshots\03_Popup_Immediate_1_162447.png
+2026-04-15 16:24:48,323 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 16:24:48,324 - INFO - 
+================================================================================
+2026-04-15 16:24:48,324 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 16:24:48,325 - INFO - ================================================================================
+2026-04-15 16:24:48,352 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 16:24:48,372 - INFO -   Visibility Status: True
+2026-04-15 16:24:48,373 - INFO -   PASSED: Pop-up is visible
+2026-04-15 16:24:48,373 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 16:24:48,396 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 16:24:48,397 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 16:24:48,398 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 16:24:48,399 - INFO -   PASSED: No known typos detected
+2026-04-15 16:24:48,400 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 16:24:48,419 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 16:24:48,419 - INFO -   PASSED: 'success' class is present
+2026-04-15 16:24:48,420 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 16:24:48,498 - INFO -   ID: Not set
+2026-04-15 16:24:48,498 - INFO -   Data-TestID: Not set
+2026-04-15 16:24:48,498 - INFO -   Role: Not set
+2026-04-15 16:24:48,499 - INFO -   ARIA Label: Not set
+2026-04-15 16:24:48,499 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 16:24:48,513 - INFO -   X: 1230, Y: 20
+2026-04-15 16:24:48,514 - INFO -   Width: 250, Height: 43.5
+2026-04-15 16:24:48,514 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 16:24:48,514 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 16:24:48,542 - INFO -   Display: block
+2026-04-15 16:24:48,543 - INFO -   Opacity: 1
+2026-04-15 16:24:48,544 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 16:24:48,546 - INFO - 
+================================================================================
+2026-04-15 16:24:48,546 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 16:24:48,546 - INFO - ================================================================================
+2026-04-15 16:24:48,547 - INFO -   Visibility: PASSED
+2026-04-15 16:24:48,547 - INFO -   Text Match: PASSED
+2026-04-15 16:24:48,548 - INFO -   Typo Check: PASSED
+2026-04-15 16:24:48,548 - INFO -   CSS Classes: Present
+2026-04-15 16:24:48,548 - INFO -   Position & Size: Valid
+2026-04-15 16:24:48,550 - INFO -   Computed Styles: Valid
+2026-04-15 16:24:48,550 - INFO - ================================================================================
+
+2026-04-15 16:24:48,551 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 16:24:48,990 - INFO - Screenshot captured: reports\RUN_20260415_162439\screenshots\03_Popup_Immediate_2_162448.png
+2026-04-15 16:24:48,991 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 16:24:48,991 - INFO - 
+================================================================================
+2026-04-15 16:24:48,992 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 16:24:48,992 - INFO - ================================================================================
+2026-04-15 16:24:49,015 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 16:24:50,184 - INFO - Screenshot captured: reports\RUN_20260415_162439\screenshots\03_Popup_Immediate_3_162449.png
+2026-04-15 16:24:50,185 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 16:24:50,185 - INFO - 
+================================================================================
+2026-04-15 16:24:50,186 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 16:24:50,186 - INFO - ================================================================================
+2026-04-15 16:24:50,206 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 16:24:50,336 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 16:24:50,337 - INFO - 
+================================================================================
+2026-04-15 16:24:50,337 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 16:24:50,338 - INFO - ================================================================================
+2026-04-15 16:24:50,357 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 16:24:50,614 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 16:24:50,661 - INFO - Total DIV elements on page: 28
+2026-04-15 16:24:50,861 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 16:24:50,953 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 16:24:51,100 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 16:24:51,189 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 16:24:51,286 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 16:24:51,381 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 16:24:51,467 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 16:24:51,550 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 16:24:51,651 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 16:24:51,751 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 16:24:51,852 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 16:24:51,966 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 16:24:51,986 - INFO - 
+================================================================================
+
+2026-04-15 16:24:52,327 - INFO - Screenshot captured: reports\RUN_20260415_162439\screenshots\02_Just_After_Login_Click_162451.png
+2026-04-15 16:24:52,589 - INFO - Starting Onboarding Flow Test
+2026-04-15 16:24:52,590 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 16:24:52,590 - INFO - Clicking Workbench icon...
+2026-04-15 16:24:53,196 - INFO - Workbench menu expanded.
+2026-04-15 16:24:53,196 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 16:24:53,742 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 16:24:53,742 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 16:24:54,562 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 16:24:54,876 - INFO - Screenshot captured: reports\RUN_20260415_162439\screenshots\02_Onboard_Customer_Landing_162454.png
+2026-04-15 16:24:54,877 - INFO - Filling Onboarding details for United States...
+2026-04-15 16:24:56,760 - INFO - Filled First Name: dBjtANjtPPlpbpKQmOvPfUTMxwQmSzRqDQajoKNQLK
+2026-04-15 16:24:58,172 - INFO - Filled Last Name: iCcqauENFoUWenpznIGZriFuGeuahzClpbple
+2026-04-15 16:24:59,289 - INFO - Checked: Use Same for Billing
+2026-04-15 16:25:00,424 - INFO - Checked: Use Same for Shipping
+2026-04-15 16:25:01,536 - INFO - Checked: Primary Address
+2026-04-15 16:25:06,120 - INFO - Filled Address: 123 Automation Way
+2026-04-15 16:25:07,471 - INFO - Filled Zip Code: 12345
+2026-04-15 16:25:09,353 - INFO - Filled Unique Phone Number: 8615042908
+2026-04-15 16:25:10,705 - INFO - Filled Email: auto_dbjtanjtpplpbpkqmovpfutmxwqmszrqdqajoknqlk@test.com
+2026-04-15 16:25:12,159 - INFO - Filled Confirm Email: auto_dbjtanjtpplpbpkqmovpfutmxwqmszrqdqajoknqlk@test.com
+2026-04-15 16:25:12,159 - INFO - Clicking 'Save & Next'...
+2026-04-15 16:25:13,782 - INFO - Successfully verified Step 1 completion.
+2026-04-15 16:25:13,816 - INFO - Retrieved Temporary Account ID: 1000002150
+2026-04-15 16:25:13,816 - INFO - Step 1 Success. ID: 1000002150
+2026-04-15 16:25:13,817 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 16:25:15,148 - INFO - Filled Plate Number 1: QA9095GP
+2026-04-15 16:25:21,200 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 16:25:34,321 - INFO - Vehicle 1 added.
+2026-04-15 16:25:35,657 - INFO - Filled Plate Number 2: QA9350GP
+2026-04-15 16:25:41,700 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 16:25:54,824 - INFO - Vehicle 2 added.
+2026-04-15 16:25:55,388 - INFO - Step 2 complete successfully.
+2026-04-15 16:25:55,389 - INFO - Starting Step 3: Payment Information...
+2026-04-15 16:25:55,390 - INFO - Ensuring 'Save and Pay' tab is active...
+2026-04-15 16:25:57,648 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 16:25:59,800 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 16:26:01,688 - INFO - Filled Cardholder Name: cfftvpYflJfHlfBcMvqqxCJbOYVkGuhNeYGWdbxBqj
+2026-04-15 16:26:03,134 - INFO - Filled Card Number: 9223208907734390
+2026-04-15 16:26:04,547 - INFO - Filled Expiry Date: 04/28
+2026-04-15 16:26:05,966 - INFO - Filled CVV: 877
+2026-04-15 16:26:05,967 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 16:26:06,524 - INFO - Card added successfully.
+2026-04-15 16:26:07,543 - INFO - Selecting the Credit Card from the list...
+2026-04-15 16:26:08,631 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 16:26:08,631 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 16:26:09,756 - INFO - Waiting for Payment Summary card...
+2026-04-15 16:26:09,851 - INFO - Clicking 'PAY' button on the Summary Page...
+2026-04-15 16:26:10,390 - INFO - ✅ Step 3 (Payment & Summary) complete.
+2026-04-15 16:26:10,391 - INFO - Starting Final Confirmation Modal...
+2026-04-15 16:26:10,391 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 16:26:10,435 - INFO - Clicking the final 'Pay' button inside the Confirmation Modal...
+2026-04-15 16:26:13,085 - INFO - ✅ Account onboarding completed successfully.
+2026-04-15 16:26:13,086 - INFO - Test completed successfully.
+2026-04-15 17:03:57,179 - INFO - Test Session Started.
+2026-04-15 17:03:57,180 - INFO - Navigating to Login Page: http://operator-qa.qmaastech.com/
+2026-04-15 17:03:57,180 - INFO - Navigating to: http://operator-qa.qmaastech.com/
+2026-04-15 17:03:59,316 - INFO - Attempting login for user: superadmin_qm@yopmail.com
+2026-04-15 17:04:00,985 - INFO - Logging DOM elements BEFORE login click...
+2026-04-15 17:04:00,986 - INFO - 
+================================================================================
+2026-04-15 17:04:00,986 - INFO - DOM SNAPSHOT AT STAGE: Before_Login
+2026-04-15 17:04:00,986 - INFO - ================================================================================
+2026-04-15 17:04:01,004 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 17:04:01,232 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 17:04:01,260 - INFO - Total DIV elements on page: 20
+2026-04-15 17:04:01,618 - INFO -   Visible DIV 1: class='hero-pills' id='no-id' text='bolt
+Real-time
+smart_toy
+AI-driven
+hub
+Multi-agenc'
+2026-04-15 17:04:01,733 - INFO -   Visible DIV 2: class='auth-panel' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 17:04:01,795 - INFO -   Visible DIV 3: class='auth-card' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 17:04:01,855 - INFO -   Visible DIV 4: class='auth-step' id='no-id' text='Welcome Back
+
+Sign in to your account to continue
+'
+2026-04-15 17:04:02,000 - INFO -   Visible DIV 5: class='field-wrap' id='no-id' text='Email ID / Username *
+person'
+2026-04-15 17:04:02,108 - INFO -   Visible DIV 6: class='input-shell' id='no-id' text='person'
+2026-04-15 17:04:02,177 - INFO -   Visible DIV 7: class='field-wrap' id='no-id' text='Password *
+lock
+visibility_off'
+2026-04-15 17:04:02,247 - INFO -   Visible DIV 8: class='input-shell' id='no-id' text='lock
+visibility_off'
+2026-04-15 17:04:02,309 - INFO -   Visible DIV 9: class='auth-bottom-links' id='no-id' text='New user?  Access Account
+
+Forgot password?'
+2026-04-15 17:04:02,336 - INFO - 
+================================================================================
+
+2026-04-15 17:04:02,883 - INFO - Login button clicked.
+2026-04-15 17:04:02,887 - INFO - Taking rapid screenshots and validating pop-up...
+2026-04-15 17:04:03,421 - INFO - Screenshot captured: reports\RUN_20260415_170354\screenshots\03_Popup_Immediate_1_170402.png
+2026-04-15 17:04:03,421 - INFO - Screenshot 1 captured - Attempting validation...
+2026-04-15 17:04:03,422 - INFO - 
+================================================================================
+2026-04-15 17:04:03,422 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 17:04:03,423 - INFO - ================================================================================
+2026-04-15 17:04:03,449 - INFO - 
+[VALIDATION 1] Checking Pop-up Visibility...
+2026-04-15 17:04:03,472 - INFO -   Visibility Status: True
+2026-04-15 17:04:03,472 - INFO -   PASSED: Pop-up is visible
+2026-04-15 17:04:03,472 - INFO - 
+[VALIDATION 2] Extracting and Validating Text Content...
+2026-04-15 17:04:03,499 - INFO -   Extracted Text: 'Login Successful'
+2026-04-15 17:04:03,499 - INFO -   PASSED: Text matches exactly: 'Login Successful'
+2026-04-15 17:04:03,499 - INFO - 
+[VALIDATION 3] Checking for Typos...
+2026-04-15 17:04:03,499 - INFO -   PASSED: No known typos detected
+2026-04-15 17:04:03,499 - INFO - 
+[VALIDATION 4] Extracting CSS Classes and Attributes...
+2026-04-15 17:04:03,515 - INFO -   CSS Classes: snackbar success-snackbar
+2026-04-15 17:04:03,515 - INFO -   PASSED: 'success' class is present
+2026-04-15 17:04:03,515 - INFO - 
+[VALIDATION 5] Checking Element Properties...
+2026-04-15 17:04:03,601 - INFO -   ID: Not set
+2026-04-15 17:04:03,602 - INFO -   Data-TestID: Not set
+2026-04-15 17:04:03,602 - INFO -   Role: Not set
+2026-04-15 17:04:03,603 - INFO -   ARIA Label: Not set
+2026-04-15 17:04:03,603 - INFO - 
+[VALIDATION 6] Checking Position and Size...
+2026-04-15 17:04:03,613 - INFO -   X: 1230, Y: 20
+2026-04-15 17:04:03,613 - INFO -   Width: 250, Height: 43.5
+2026-04-15 17:04:03,613 - INFO -   PASSED: Element has valid dimensions
+2026-04-15 17:04:03,613 - INFO - 
+[VALIDATION 7] Checking Computed Styles...
+2026-04-15 17:04:03,648 - INFO -   Display: block
+2026-04-15 17:04:03,648 - INFO -   Opacity: 1
+2026-04-15 17:04:03,648 - INFO -   PASSED: Element is displayed with proper opacity
+2026-04-15 17:04:03,648 - INFO - 
+================================================================================
+2026-04-15 17:04:03,648 - INFO - POP-UP VALIDATION SUMMARY
+2026-04-15 17:04:03,648 - INFO - ================================================================================
+2026-04-15 17:04:03,648 - INFO -   Visibility: PASSED
+2026-04-15 17:04:03,648 - INFO -   Text Match: PASSED
+2026-04-15 17:04:03,648 - INFO -   Typo Check: PASSED
+2026-04-15 17:04:03,648 - INFO -   CSS Classes: Present
+2026-04-15 17:04:03,648 - INFO -   Position & Size: Valid
+2026-04-15 17:04:03,648 - INFO -   Computed Styles: Valid
+2026-04-15 17:04:03,648 - INFO - ================================================================================
+
+2026-04-15 17:04:03,648 - INFO - ✓ ALL VALIDATIONS PASSED - Pop-up is working correctly!
+2026-04-15 17:04:04,056 - INFO - Screenshot captured: reports\RUN_20260415_170354\screenshots\03_Popup_Immediate_2_170403.png
+2026-04-15 17:04:04,059 - INFO - Screenshot 2 captured - Attempting validation...
+2026-04-15 17:04:04,060 - INFO - 
+================================================================================
+2026-04-15 17:04:04,060 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 17:04:04,060 - INFO - ================================================================================
+2026-04-15 17:04:04,081 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 17:04:05,291 - INFO - Screenshot captured: reports\RUN_20260415_170354\screenshots\03_Popup_Immediate_3_170404.png
+2026-04-15 17:04:05,291 - INFO - Screenshot 3 captured - Attempting validation...
+2026-04-15 17:04:05,293 - INFO - 
+================================================================================
+2026-04-15 17:04:05,293 - INFO - STARTING COMPREHENSIVE POP-UP VALIDATION
+2026-04-15 17:04:05,294 - INFO - ================================================================================
+2026-04-15 17:04:05,321 - ERROR - VALIDATION FAILED: Pop-up element not found!
+2026-04-15 17:04:05,446 - INFO - Logging DOM elements AFTER login click (pop-up should appear here)...
+2026-04-15 17:04:05,446 - INFO - 
+================================================================================
+2026-04-15 17:04:05,447 - INFO - DOM SNAPSHOT AT STAGE: After_Login_Click
+2026-04-15 17:04:05,447 - INFO - ================================================================================
+2026-04-15 17:04:05,467 - INFO - 
+Searching for pop-up elements in page content...
+2026-04-15 17:04:05,705 - WARNING - ⚠ No known pop-up selectors found. Checking all visible divs...
+2026-04-15 17:04:05,755 - INFO - Total DIV elements on page: 28
+2026-04-15 17:04:05,932 - INFO -   Visible DIV 1: class='header-right' id='no-id' text='English
+French
+Spanish
+Quantum Toll Authority
+supe'
+2026-04-15 17:04:06,027 - INFO -   Visible DIV 2: class='nav-user' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 17:04:06,193 - INFO -   Visible DIV 3: class='nav-user-info' id='no-id' text='Quantum Toll Authority
+superadmin_qm@yopmail.com'
+2026-04-15 17:04:06,291 - INFO -   Visible DIV 4: class='uname' id='no-id' text='Quantum Toll Authority'
+2026-04-15 17:04:06,389 - INFO -   Visible DIV 5: class='urole' id='no-id' text='superadmin_qm@yopmail.com'
+2026-04-15 17:04:06,483 - INFO -   Visible DIV 6: class='main-container' id='no-id' text='dashboard_2
+group
+decimal_increase
+admin_panel_set'
+2026-04-15 17:04:06,576 - INFO -   Visible DIV 7: class='inner' id='no-id' text='dashboard_2'
+2026-04-15 17:04:06,669 - INFO -   Visible DIV 8: class='inner' id='no-id' text='group'
+2026-04-15 17:04:06,790 - INFO -   Visible DIV 9: class='inner' id='no-id' text='decimal_increase'
+2026-04-15 17:04:06,893 - INFO -   Visible DIV 10: class='inner' id='no-id' text='admin_panel_settings'
+2026-04-15 17:04:07,009 - INFO -   Visible DIV 11: class='inner' id='no-id' text='nest_doorbell_visitor'
+2026-04-15 17:04:07,116 - INFO -   Visible DIV 12: class='inner' id='no-id' text='key_visualizer'
+2026-04-15 17:04:07,140 - INFO - 
+================================================================================
+
+2026-04-15 17:04:07,579 - INFO - Screenshot captured: reports\RUN_20260415_170354\screenshots\02_Just_After_Login_Click_170407.png
+2026-04-15 17:04:07,866 - INFO - Starting Onboarding Flow Test
+2026-04-15 17:04:07,867 - INFO - Starting navigation to Onboard Customer page...
+2026-04-15 17:04:07,867 - INFO - Clicking Workbench icon...
+2026-04-15 17:04:08,451 - INFO - Workbench menu expanded.
+2026-04-15 17:04:08,452 - INFO - Clicking 'Manage Accounts' sub-menu...
+2026-04-15 17:04:09,010 - INFO - 'Manage Accounts' submenu expanded.
+2026-04-15 17:04:09,011 - INFO - Clicking 'Onboard a Customer' link...
+2026-04-15 17:04:09,939 - INFO - Successfully navigated to Onboard Customer page.
+2026-04-15 17:04:10,263 - INFO - Screenshot captured: reports\RUN_20260415_170354\screenshots\02_Onboard_Customer_Landing_170409.png
+2026-04-15 17:04:10,263 - INFO - Filling Onboarding details for United States...
+2026-04-15 17:04:12,141 - INFO - Filled First Name: EWkVsvTZREToRlEeLOKcMmYjJ
+2026-04-15 17:04:13,620 - INFO - Filled Last Name: QzzLwHAQBVB
+2026-04-15 17:04:14,795 - INFO - Checked: Use Same for Billing
+2026-04-15 17:04:15,897 - INFO - Checked: Use Same for Shipping
+2026-04-15 17:04:17,003 - INFO - Checked: Primary Address
+2026-04-15 17:04:21,488 - INFO - Filled Address: 123 Automation Way
+2026-04-15 17:04:22,886 - INFO - Filled Zip Code: 12345
+2026-04-15 17:04:24,800 - INFO - Filled Unique Phone Number: 9207756638
+2026-04-15 17:04:26,155 - INFO - Filled Email: auto_ewkvsvtzretorleelokcmmyjj@test.com
+2026-04-15 17:04:27,632 - INFO - Filled Confirm Email: auto_ewkvsvtzretorleelokcmmyjj@test.com
+2026-04-15 17:04:27,632 - INFO - Clicking 'Save & Next'...
+2026-04-15 17:04:29,302 - INFO - Successfully verified Step 1 completion.
+2026-04-15 17:04:29,335 - INFO - Retrieved Temporary Account ID: 1000002151
+2026-04-15 17:04:29,336 - INFO - Step 1 Success. ID: 1000002151
+2026-04-15 17:04:29,337 - INFO - Starting Step 2: Adding 2 Vehicle(s)...
+2026-04-15 17:04:30,688 - INFO - Filled Plate Number 1: QA3180GP
+2026-04-15 17:04:36,752 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 17:04:49,768 - INFO - Vehicle 1 added.
+2026-04-15 17:04:51,156 - INFO - Filled Plate Number 2: QA4895GP
+2026-04-15 17:04:57,269 - INFO - Filled Plate Start Date: 2026-04-15
+2026-04-15 17:05:10,347 - INFO - Vehicle 2 added.
+2026-04-15 17:05:10,893 - INFO - Step 2 complete successfully.
+2026-04-15 17:05:10,894 - INFO - Starting Step 3: Payment Information...
+2026-04-15 17:05:10,894 - INFO - Ensuring 'Save and Pay' tab is active...
+2026-04-15 17:05:13,247 - INFO - Selecting 'Credit Card' from Payment Method dropdown...
+2026-04-15 17:05:15,367 - INFO - Opening 'Add Payment Method' modal...
+2026-04-15 17:05:17,353 - INFO - Filled Cardholder Name: aunihexKcYzhRTLkBuBhMgBwVaVRa
+2026-04-15 17:05:18,772 - INFO - Filled Card Number: 9136416476507413
+2026-04-15 17:05:20,234 - INFO - Filled Expiry Date: 04/28
+2026-04-15 17:05:21,721 - INFO - Filled CVV: 043
+2026-04-15 17:05:21,724 - INFO - Clicking 'Add Card' submit button...
+2026-04-15 17:05:22,338 - INFO - Card added successfully.
+2026-04-15 17:05:23,352 - INFO - Selecting the Credit Card from the list...
+2026-04-15 17:05:24,431 - INFO - ✅ Selected the Credit Card radio button.
+2026-04-15 17:05:24,431 - INFO - Clicking 'Preview and Pay'...
+2026-04-15 17:05:25,547 - INFO - Waiting for Payment Summary card...
+2026-04-15 17:05:25,626 - INFO - Clicking 'PAY' button on the Summary Page...
+2026-04-15 17:05:26,160 - INFO - ✅ Step 3 (Payment & Summary) complete.
+2026-04-15 17:05:26,162 - INFO - Starting Final Confirmation Modal...
+2026-04-15 17:05:26,163 - INFO - Waiting for Payment Confirmation modal...
+2026-04-15 17:05:26,213 - INFO - Clicking the final 'Pay' button inside the Confirmation Modal...
+2026-04-15 17:05:28,914 - INFO - ✅ Account onboarding completed successfully.
+2026-04-15 17:05:28,915 - INFO - Finalizing process: Clicking 'Account Summary' button...
+2026-04-15 17:05:29,537 - INFO - ✅ Navigating to Account Summary page.
+2026-04-15 17:05:29,539 - INFO - Test completed successfully.

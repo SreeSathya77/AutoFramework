@@ -1,0 +1,21 @@
+PROJECT REBUILD LOG: QA QM BOS Regression Framework
+--------------------------------------------------
+Goal: Rebuild a stable, maintainable test automation framework from scratch using Python, Pytest, and Playwright after a previous version was corrupted.
+
+CHRONOLOGICAL STEPS TAKEN:
+
+[... Steps 1-11 same as before ...]
+
+12. STEP 9: SUCCESSFUL EXECUTION & POP-UP IDENTIFICATION (2026-04-07)
+    - Action: Ran 'pytest tests/ui/test_login.py -v -s'.
+    - Result: TEST PASSED.
+    - Milestone: Successfully captured and validated the "Login Successful" pop-up despite its fast disappearance.
+    - Element Identified:
+      - Selector: 'div.snackbar.success-snackbar'
+      - Text: "Login Successful"
+    - Asset Verification: Verified that screenshots and videos are correctly stored in session-specific 'reports/RUN_YYYYMMDD_HHMMSS/' folders.
+
+--------------------------------------------------
+CURRENT STATUS: Priority 1 (Critical) Complete. Ready for Priority 2.
+--------------------------------------------------
+Next Planned Task: Requirement 1.1 - User Logout Verification.
