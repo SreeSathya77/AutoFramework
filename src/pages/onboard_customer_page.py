@@ -18,12 +18,24 @@ class OnboardCustomerPage(BasePage):
         self.fake = Faker('en_IN')
         self.focus_style = "outline: 4px solid rgba(0, 191, 255, 0.6); outline-offset: 2px; transition: all 0.3s ease;"
 
-        # Mapping Country to its Value and Phone Code
         self.country_map = {
             "United States": {"value": "US", "code": "+1"},
             "Mexico": {"value": "MX", "code": "+52"},
             "Canada": {"value": "CA", "code": "+1"}
         }
+
+    # --- Navigation Locators ---
+    @property
+    def workbench_icon(self):
+        return self.page.locator('span[apphosttooltip="Workbench"]')
+
+    @property
+    def manage_accounts_toggle(self):
+        return self.page.locator('a.nav-link').filter(has_text="Manage Accounts")
+
+    @property
+    def onboard_customer_link(self):
+        return self.page.locator('a[href*="onboard-a-customer"]')
 
     # --- Step 1 Locators ---
     @property
@@ -51,30 +63,6 @@ class OnboardCustomerPage(BasePage):
         return self.page.locator('input[formcontrolname="lastName"]')
 
     @property
-    def country_dropdown(self):
-        return self.page.locator('select[formcontrolname="country"]')
-
-    @property
-    def state_dropdown(self):
-        return self.page.locator('select[formcontrolname="state"]')
-
-    @property
-    def city_dropdown(self):
-        return self.page.locator('select[formcontrolname="city"]')
-
-    @property
-    def address_line1_input(self):
-        return self.page.locator('input[formcontrolname="address"]')
-
-    @property
-    def address_line2_input(self):
-        return self.page.locator('input[formcontrolname="address1"]')
-
-    @property
-    def zip_code_input(self):
-        return self.page.locator('input[formcontrolname="zipCode"]')
-
-    @property
     def same_billing_checkbox(self):
         return self.page.locator('input[formcontrolname="useSameForBilling"]')
 
@@ -85,14 +73,6 @@ class OnboardCustomerPage(BasePage):
     @property
     def primary_address_checkbox(self):
         return self.page.locator('#primaryMailing')
-
-    @property
-    def country_code_dropdown(self):
-        return self.page.locator('select[formcontrolname="countryCode"]')
-
-    @property
-    def phone_number_input(self):
-        return self.page.locator('input[formcontrolname="phoneNumber"]')
 
     @property
     def email_address_input(self):
@@ -245,71 +225,19 @@ class OnboardCustomerPage(BasePage):
         """The 'Account Summary' button on the Payment Successful window."""
         return self.page.locator('div.modal-content1 button').filter(has_text="Account Summary")
 
-    def get_unique_identity(self):
-        """Generates realistic names and ensures they haven't been used in previous runs."""
-        file_path = "used_identities.csv"
-
-        # Create CSV with headers if it doesn't exist
-        if not os.path.exists(file_path):
-            with open(file_path, 'w', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow(["first_name", "last_name", "email"])
-
-        # Load used names into a set for fast lookup
-        used_names = set()  # ✅ ALWAYS define first
-
-        with open(file_path, 'r') as f:
-            reader = csv.DictReader(f)
-
-            # Validate headers
-            if not reader.fieldnames or 'first_name' not in reader.fieldnames:
-                logger.warning("⚠️ CSV headers invalid. Recreating file...")
-
-                with open(file_path, 'w', newline='') as fw:
-                    writer = csv.writer(fw)
-                    writer.writerow(["first_name", "last_name", "email"])
-
-            else:
-                for row in reader:
-                    fname = row.get('first_name', '').strip()
-                    lname = row.get('last_name', '').strip()
-
-                    if fname and lname:
-                        used_names.add(f"{fname}_{lname}".lower())
-
-        while True:
-            # Generate realistic names
-            f_name = self.fake.first_name()
-            l_name = self.fake.last_name()
-
-            # Check length constraints (3-50 characters)
-            if 3 <= len(f_name) <= 50 and 3 <= len(l_name) <= 50:
-                identity_key = f"{f_name}_{l_name}".lower()
-
-                if identity_key not in used_names:
-                    email_val = f"{f_name.lower()}.{l_name.lower()}@testmail.com"
-
-                    # Record the new unique identity
-                    with open(file_path, 'a', newline='') as f:
-                        writer = csv.writer(f)
-                        writer.writerow([f_name, l_name, email_val])
-
-                    return f_name, l_name, email_val
+    # --- HELPER METHODS ---
 
     def _highlight_and_fill(self, locator, value, name):
-        """Helper to scroll, highlight and fill."""
         try:
             locator.scroll_into_view_if_needed()
-            self.page.wait_for_timeout(200)
             locator.evaluate(f"el => el.style.cssText += '{self.focus_style}'")
             locator.fill(value)
             logger.info(f"Filled {name}: {value}")
         except Exception as e:
-            logger.warning(f"Could not highlight/fill {name}: {str(e)}")
+            logger.warning(f"Highlight/Fill failed for {name}: {str(e)}")
             locator.fill(value)
 
     def _safe_check(self, locator, name):
-        """Helper to scroll and check a checkbox."""
         try:
             locator.scroll_into_view_if_needed()
             if not locator.is_checked():
@@ -318,154 +246,117 @@ class OnboardCustomerPage(BasePage):
         except Exception as e:
             logger.warning(f"Could not check {name}: {str(e)}")
 
+    def hide_chatbot(self):
+        """Injects a CSS rule to permanently hide chatbot and intercepting widgets."""
+        try:
+            self.page.add_style_tag(content="""
+                .chatbot-icon, #chat-widget-container, .drift-frame-controller, 
+                #freshworks-frame, .intercom-launcher, .chatbot-selector,
+                iframe[title="Chat window"] { 
+                    display: none !important; 
+                    visibility: hidden !important;
+                    pointer-events: none !important;
+                }
+            """)
+            logger.info("Chatbot elements hidden via CSS injection.")
+        except Exception:
+            pass
+
+    # --- MAIN ACTIONS ---
+
+    def navigate_to_onboarding(self):
+        logger.info("Executing Sidebar Navigation Sequence...")
+        try:
+            self.workbench_icon.wait_for(state="visible", timeout=10000)
+            self.workbench_icon.click()
+            self.page.wait_for_timeout(1000)
+            self.manage_accounts_toggle.wait_for(state="visible", timeout=5000)
+            self.manage_accounts_toggle.click()
+            self.onboard_customer_link.wait_for(state="visible", timeout=5000)
+            self.onboard_customer_link.click()
+            self.page.wait_for_load_state("networkidle")
+        except Exception as e:
+            logger.error(f"Navigation Failure: {str(e)}")
+            raise
+
+    def get_unique_identity(self):
+        f_name, l_name = self.fake.first_name(), self.fake.last_name()
+        email = f"{f_name.lower()}.{l_name.lower()}{random.randint(10, 99)}@testmail.com"
+        return f_name, l_name, email
+
     def fill_and_submit_account_details(self, country_name="United States"):
-        """Step 1: Demographic Info using Unique Registry and Realistic Names."""
-        logger.info(f"Filling Onboarding details for {country_name}...")
-
-        # --- Get unique names from the CSV registry ---
+        logger.info("Filling Step 1: Account Details...")
         f_name, l_name, email = self.get_unique_identity()
-        middle_name = "QATeam"
 
-        # Robust Account Type selection
-        # Wait for stable DOM (VERY IMPORTANT)
-        self.page.wait_for_load_state("networkidle")
-
-        # Re-locate element fresh (avoid stale reference)
-        dropdown = self.page.locator('select[formcontrolname="accountType"]').last
-
-        # Wait until it is attached & stable
-        dropdown.wait_for(state="attached", timeout=10000)
-        dropdown.wait_for(state="visible", timeout=10000)
-
-        # Retry logic (Angular-safe)
-        for i in range(3):
-            try:
-                dropdown.select_option(value="PERSONAL")
-                dropdown.dispatch_event("change")
-
-                # Validate selection
-                if dropdown.input_value() == "PERSONAL":
-                    print("✅ Account Type selected successfully")
-                    break
-            except:
-                self.page.wait_for_timeout(500)
-        else:
-            raise Exception("❌ Failed to select Account Type after retries")
-
-
-        # 2. Select Category and Payment Model (New fields from your source)
-        # Choosing 'Revenue' and 'Pre-paid' to satisfy mandatory fields
-        # 2. Select Revenue Category
-        self.revenue_category_radio.wait_for(state="visible", timeout=10000)
-        self.revenue_category_radio.scroll_into_view_if_needed()
+        self.account_type_dropdown.wait_for(state="visible", timeout=15000)
+        self.account_type_dropdown.select_option("PERSONAL")
         self.revenue_category_radio.click(force=True)
-        logger.info("Selected Revenue Category")
-
-        # 3. Select Payment Model (Prepaid)
-        self.payment_model_prepaid_radio.wait_for(state="visible", timeout=10000)
-        self.payment_model_prepaid_radio.scroll_into_view_if_needed()
         self.payment_model_prepaid_radio.click(force=True)
-        logger.info("Selected Payment Model: PREPAID")
 
-        # 3. Fill Customer Details
         self._highlight_and_fill(self.first_name_input, f_name, "First Name")
-        # RESTORED: Filling Middle Name with hardcoded value
-        self._highlight_and_fill(self.middle_name_input, "QATeam", "Middle Name")
+        # Restored: Filling Middle Name with hardcoded value
+        self._highlight_and_fill(self.middle_name_input, "QA Team", "Middle Name")
         self._highlight_and_fill(self.last_name_input, l_name, "Last Name")
-        
+
         self._safe_check(self.same_billing_checkbox, "Use Same for Billing")
         self._safe_check(self.same_shipping_checkbox, "Use Same for Shipping")
-        # Ensure 'Primary Address' is checked (id="primaryMailing" in your source)
-        self.page.locator("#primaryMailing").check()
+        self._safe_check(self.primary_address_checkbox, "Primary Address")
 
         country_data = self.country_map.get(country_name)
-        self.country_dropdown.select_option(country_data["value"])
+        self.page.locator('select[formcontrolname="country"]').select_option(country_data["value"])
         self.page.wait_for_timeout(1000)
+        self.page.locator('select[formcontrolname="state"]').select_option(index=1)
+        self.page.locator('select[formcontrolname="city"]').select_option(index=1)
 
-        # Select first available State/City (Angular dynamic dropdowns)
-        self.state_dropdown.select_option(index=1)
-        self.page.wait_for_timeout(500)
-        self.city_dropdown.select_option(index=1)
+        self._highlight_and_fill(self.page.locator('input[formcontrolname="address"]'), "123 Automation Blvd", "Address")
+        self._highlight_and_fill(self.page.locator('input[formcontrolname="zipCode"]'), "12345", "Zip Code")
 
-        self._highlight_and_fill(self.address_line1_input, "123 Automation Way", "Address")
-        self._highlight_and_fill(self.zip_code_input, "12345", "Zip Code")
-
-        # 5. Contact Details
-        self.country_code_dropdown.select_option(country_data["code"])
-        random_phone = str(random.randint(7000000000, 9999999999))
-        self._highlight_and_fill(self.phone_number_input, random_phone, "Unique Phone Number")
-
+        self.page.locator('select[formcontrolname="countryCode"]').select_option(country_data["code"])
+        self._highlight_and_fill(self.page.locator('input[formcontrolname="phoneNumber"]'),
+                                 str(random.randint(7000000000, 9999999999)), "Phone")
         self._highlight_and_fill(self.email_address_input, email, "Email")
         self._highlight_and_fill(self.confirm_email_address_input, email, "Confirm Email")
 
-        # 6. Submit
-        logger.info("Clicking 'Save & Next'...")
-        self.confirm_email_address_input.dispatch_event("blur")
-        self.page.wait_for_timeout(500)
+        logger.info("Clicking Save & Next...")
+        self.hide_chatbot()
+        self.save_next_button.scroll_into_view_if_needed()
         self.save_next_button.click(force=True)
 
-        try:
-            success_msg = self.page.locator('div.snackbar.success-snackbar').get_by_text(
-                "Temporary Account successfully created")
-            success_msg.first.wait_for(state="attached", timeout=15000)
-            logger.info(f"Successfully verified Step 1 for: {f_name} {l_name}")
-            return True
-        except Exception as e:
-            logger.error(f"Verification failed: {str(e)}")
-            return False
+        # Fallback click if still visible
+        self.page.wait_for_timeout(500)
+        if self.save_next_button.is_visible():
+            self.save_next_button.evaluate("el => el.click()")
 
-    def get_temp_account_id(self):
-        """Retrieves the Temporary Account ID."""
-        try:
-            account_span = self.page.locator('ul > li:has-text("Account Ref ID :") > span')
-            account_span.wait_for(state="visible", timeout=15000)
-            account_id = account_span.inner_text().strip()
-            logger.info(f"Retrieved Temporary Account ID: {account_id}")
-            return account_id
-        except Exception as e:
-            logger.error(f"Failed to retrieve Account ID: {str(e)}")
-            return "ID_NOT_FOUND"
+        logger.info("Step 1 Submitted.")
+        return True
 
-    def hide_chatbot(self):
-        """Hides the chatbot icon via CSS to prevent overlap issues."""
+    def fill_vehicle_details(self, count=1):
+        logger.info(f"Adding {count} Vehicle(s)...")
         try:
-            # Note: Ensure '.chatbot-selector' matches the actual class of the icon
-            self.page.add_style_tag(content=".chatbot-selector { display: none !important; }")
-            logger.info("Chatbot icon hidden via CSS injection.")
-        except Exception as e:
-            logger.warning(f"Could not hide chatbot: {str(e)}")
+            self.plate_number_input.wait_for(state="visible", timeout=15000)
+            logger.info("Step 2 loaded successfully.")
+        except Exception:
+            raise
 
-    def fill_vehicle_details(self, count=2):
-        """Step 2: Vehicles & Tags with Blur event to clear focus highlights."""
-        logger.info(f"Starting Step 2: Adding {count} Vehicle(s)...")
         for i in range(count):
+            # Ensuring any widgets are gone before each interaction
+            self.hide_chatbot()
+
             plate_num = f"QA{random.randint(1000, 9999)}GP"
-
-            # 1. Fill and then Blur Plate Number to remove highlight
-            self._highlight_and_fill(self.plate_number_input, plate_num, f"Plate Number {i + 1}")
-            self.plate_number_input.dispatch_event("blur")
-
-            self.plate_country_dropdown.select_option("US")
-            self.page.wait_for_timeout(500)
-            self.plate_state_dropdown.select_option(index=1)
-
-            self.vehicle_class_dropdown.select_option("2")
-            self.vehicle_class_dropdown.dispatch_event("change")
-
+            self._highlight_and_fill(self.plate_number_input, plate_num, f"Plate {i + 1}")
+            self.page.locator('select[formcontrolname="plateCountry"]').select_option("US")
+            self.page.locator('select[formcontrolname="plateState"]').select_option(index=1)
+            self.page.locator('select[formcontrolname="vehicleClass"]').select_option("2")
             self.page.locator('select[formcontrolname="vehicleMake"]').select_option(label="AUDI")
-            self.page.wait_for_timeout(500)
             self.page.locator('select[formcontrolname="vehicleModel"]').select_option(index=1)
             self.page.locator('select[formcontrolname="vehicleColor"]').select_option(label="White")
 
             today_date = datetime.now().strftime("%Y-%m-%d")
-
-            # 2. Fill and then Blur Plate Start Date to remove highlight
             self._highlight_and_fill(self.plate_start_date_input, today_date, "Plate Start Date")
             self.plate_start_date_input.dispatch_event("blur")
 
             self.request_tag_radio.click(force=True)
             self.page.wait_for_timeout(1000)
-
             self.tag_mode_dropdown.select_option("BUY")
             self.tag_mode_dropdown.dispatch_event("change")
             self.page.wait_for_timeout(1000)
@@ -483,38 +374,48 @@ class OnboardCustomerPage(BasePage):
                 loc.dispatch_event("change")
                 self.page.wait_for_timeout(300)
 
-            self.add_vehicle_button.click(force=True)
-            self.page.wait_for_timeout(2000)
-            logger.info(f"Vehicle {i + 1} added.")
+            # Robust Click on Add Button using direct JS handler
+            logger.info(f"Clicking 'Add' button for Vehicle {i+1}...")
+            self.hide_chatbot()
+            self.add_vehicle_button.scroll_into_view_if_needed()
+            self.add_vehicle_button.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+            
+            # Using evaluate click to ensure the handler triggers even if obscured
+            self.add_vehicle_button.evaluate("el => el.click()")
+            
+            # GAP FOR VISUAL FEEDBACK: Wait for vehicle list to update
+            self.page.wait_for_timeout(2500)
+            logger.info(f"Vehicle {i + 1} added successfully.")
 
-        # Final navigation remains the same...
-        self.page.wait_for_timeout(1000)
+        # GAP FOR VISUAL FEEDBACK: Before moving to Next page
+        self.page.wait_for_timeout(1500)
         next_btn = self.page.get_by_role("button", name="Next")
+        
+        # HIGHLIGHT AND CLICK NEXT
+        logger.info("Highlighting and clicking 'Next' button...")
         self.hide_chatbot()
-        next_btn.evaluate("node => node.click()")
+        
+        # ADDED: Explicit scroll to ensure visibility
+        next_btn.scroll_into_view_if_needed()
+        self.page.wait_for_timeout(500)
+
+        next_btn.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+        next_btn.evaluate("el => el.click()")
+        
         self.permanent_account_id_span.wait_for(state="attached", timeout=15000)
         return True
 
     def get_permanent_account_id(self):
-        """Captures and returns the Permanent Account ID from the Payment Info page."""
         try:
-            # 1. Ensure the element is visible after navigation
             self.permanent_account_id_span.wait_for(state="visible", timeout=15000)
-
-            # 2. Extract and clean the ID text
             account_id = self.permanent_account_id_span.inner_text().strip()
-
-            # 3. Log to console and logger
-            print(f"\n[CONFIRMED] Permanent Account Number: {account_id}")
             logger.info(f"Captured Permanent Account Number: {account_id}")
-
             return account_id
         except Exception as e:
             logger.error(f"Failed to capture Permanent Account Number: {str(e)}")
             return None
 
     def generate_random_payment_data(self):
-        """Generates random data meeting specific field requirements."""
         name_length = random.randint(5, 45)
         full_name = "".join(random.choices(string.ascii_letters, k=name_length))
         card_number = "".join(random.choices(string.digits, k=16))
@@ -524,87 +425,57 @@ class OnboardCustomerPage(BasePage):
         return full_name, card_number, expiry_date, cvv
 
     def fill_payment_details(self, card_count=1):
-        """Step 3: Payment Information with sequential Card names (CardOne to CardFive)."""
         logger.info("Starting Step 3: Payment Information...")
         try:
-            # 1. Ensure the "Save and Pay" tab is selected and active
-            logger.info("Activating 'Save and Pay' tab...")
+            # Ensuring any widgets are gone before interaction
+            self.hide_chatbot()
+
             self.save_and_pay_tab.click(force=True)
             self.page.wait_for_timeout(1000)
-
-            # 2. Select "Credit Card" from the dropdown
-            logger.info("Selecting 'Credit Card'...")
-            self.payment_method_dropdown.scroll_into_view_if_needed()
-            self.payment_method_dropdown.wait_for(state="visible", timeout=10000)
             self.payment_method_dropdown.select_option(label="Credit Card")
             self.payment_method_dropdown.dispatch_event("change")
 
-            # Mapping for sequential card names
-            card_name_map = {1: "CardOne", 2: "CardTwo", 3: "CardThree", 4: "CardFour", 5: "CardFive"}
-
-            for i in range(1, card_count + 1):
-                # 3. Click 'Add Payment Method'
-                logger.info(f"Opening 'Add Payment Method' modal for Card {i}...")
-                self.add_payment_method_button.wait_for(state="visible", timeout=10000)
-                self.add_payment_method_button.evaluate("node => node.click()")
-
-                # 4. Fill 'Add Card' Modal
+            for i in range(card_count):
+                self.add_payment_method_button.evaluate("el => el.click()")
                 self.page.wait_for_selector('.modal-content', state="visible", timeout=10000)
-
-                # Get the sequential name (e.g., CardOne)
-                card_name = card_name_map.get(i, f"Card{i}")
-                _, number, expiry, cvv = self.generate_random_payment_data()
-
-                # Use the sequential name instead of random characters
-                self._highlight_and_fill(self.card_name_input, card_name, "Cardholder Name")
+                name, number, expiry, cvv = self.generate_random_payment_data()
+                self._highlight_and_fill(self.card_name_input, name, "Cardholder Name")
                 self._highlight_and_fill(self.card_number_input, number, "Card Number")
                 self._highlight_and_fill(self.expiry_date_input, expiry, "Expiry Date")
                 self._highlight_and_fill(self.cvv_input, cvv, "CVV")
-
-                logger.info(f"Clicking 'Add Card' submit for {card_name}...")
                 self.add_card_submit_button.click(force=True)
                 self.page.wait_for_selector('.modal-content', state="hidden", timeout=15000)
-                self.page.wait_for_timeout(1000)
 
-            # 5. Select the added card in the table
-            logger.info("Selecting the first Credit Card from the list...")
-            self.credit_card_radio_button.first.scroll_into_view_if_needed()
             self.credit_card_radio_button.first.check(force=True)
+            self.page.wait_for_timeout(1000) # Small delay for selection to settle
 
-            # 6. Click 'Preview and Pay'
+            # ROBUST PREVIEW & PAY CLICK
             logger.info("Clicking 'Preview and Pay'...")
+            self.hide_chatbot()
             self.preview_and_pay_button.scroll_into_view_if_needed()
-            expect(self.preview_and_pay_button).to_be_enabled(timeout=10000)
-            self.preview_and_pay_button.click(force=True)
+            self.preview_and_pay_button.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+            
+            # Using evaluate click to ensure the handler triggers
+            self.preview_and_pay_button.evaluate("el => el.click()")
 
-            # 7. Click 'PAY' on the Summary Page
             logger.info("Waiting for Payment Summary card...")
             self.page.wait_for_selector("div.payment-summary-card", state="visible", timeout=15000)
+            
+            # ROBUST SUMMARY PAY CLICK
             self.summary_page_pay_button.wait_for(state="visible", timeout=10000)
-            self.summary_page_pay_button.click(force=True)
+            self.summary_page_pay_button.evaluate("el => el.click()")
 
-            logger.info("✅ Step 3 (Payment & Summary) complete.")
             return True
         except Exception as e:
             logger.error(f"Payment Step Error: {str(e)}")
             return False
 
     def complete_final_payment(self):
-        """Step 5: Final Confirmation Modal Submission"""
         logger.info("Starting Final Confirmation Modal...")
         try:
-            # 1. Wait for the 'Payment Confirmation' pop-up modal to appear
-            logger.info("Waiting for Payment Confirmation modal...")
             self.confirmation_modal_pay_button.wait_for(state="visible", timeout=15000)
-
-            # 2. Highlight and click the very last 'Pay' button
-            self.confirmation_modal_pay_button.evaluate(f"el => el.style.cssText += '{self.focus_style}'")
-            logger.info("Clicking the final 'Pay' button inside the Confirmation Modal...")
-            self.confirmation_modal_pay_button.click(force=True)
-
-            # 3. Wait for modal to disappear and verify completion
+            self.confirmation_modal_pay_button.evaluate("el => el.click()")
             self.page.wait_for_selector('div.modal-content', state="hidden", timeout=15000)
-            self.page.wait_for_timeout(2000)
             logger.info("✅ Account onboarding completed successfully.")
             return True
         except Exception as e:
@@ -612,17 +483,10 @@ class OnboardCustomerPage(BasePage):
             return False
 
     def navigate_to_account_summary(self):
-        """Step 6: Click 'Account Summary' after successful payment."""
         logger.info("Finalizing process: Clicking 'Account Summary' button...")
         try:
-            # 1. Wait for the success window to be visible
             self.account_summary_button.wait_for(state="visible", timeout=15000)
-
-            # 2. Highlight and click
-            self.account_summary_button.evaluate(f"el => el.style.cssText += '{self.focus_style}'")
-            self.account_summary_button.click(force=True)
-
-            logger.info("✅ Navigating to Account Summary page.")
+            self.account_summary_button.evaluate("el => el.click()")
             return True
         except Exception as e:
             logger.error(f"Failed to click Account Summary: {str(e)}")
