@@ -1,0 +1,32 @@
+# --- Python & Environment ---
+.venv/
+venv/
+env/
+bin/
+lib/
+include/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Playwright & Test Artifacts ---
+test-results/
+reports/
+screenshots/
+videos/
+.pytest_cache/
+.playwright-screenshots/
+
+# --- Logs & Temp Files ---
+*.log
+logs/
+temp/
+tmp/
+.DS_Store
+Thumbs.db
+
+# --- IDE Settings ---
+.idea/
+.vscode/
+*.swp
