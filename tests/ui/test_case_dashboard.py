@@ -9,9 +9,8 @@ from src.pages.login_page import LoginPage
 from src.pages.account_page import AccountPage
 from src.pages.case_page import CasePage
 from src.pages.dashboard_page import DashboardPage
-from utils.logger import get_logger
-
-logger = get_logger(__name__)
+from utils.logger import Logger
+logger = Logger.get_logger()
 
 
 @pytest.fixture

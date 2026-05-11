@@ -7,9 +7,8 @@ import os
 from datetime import datetime
 from playwright.sync_api import Page, expect
 from faker import Faker
-from utils.logger import get_logger
-
-logger = get_logger(__name__)
+from utils.logger import Logger
+logger = Logger.get_logger()
 
 
 class AccountPage:

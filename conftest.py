@@ -5,8 +5,8 @@ import base64
 import os
 from playwright.sync_api import Page, BrowserContext
 from pytest_html import extras
-from utils.config_loader import config_loader
-from utils.logger import Logger
+from src.utils.config_loader import config_loader
+from src.utils.logger import Logger
 from src.pages.login_page import LoginPage
 from src.pages.workbench_page import WorkbenchPage
 from src.pages.onboard_customer_page import OnboardCustomerPage

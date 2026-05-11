@@ -6,7 +6,6 @@ from playwright.sync_api import Page, expect
 from faker import Faker
 from .base_page import BasePage
 from utils.logger import Logger
-
 logger = Logger.get_logger()
 
 class OnboardCustomerPage(BasePage):

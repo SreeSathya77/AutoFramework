@@ -1,8 +1,9 @@
 import pytest
-from utils.logger import Logger
-from src.pages.workbench_page import WorkbenchPage
 
+from src.pages.workbench_page import WorkbenchPage
+from utils.logger import Logger
 logger = Logger.get_logger()
+
 
 def test_navigate_to_onboard_customer(authenticated_page, session_run_folder):
     """

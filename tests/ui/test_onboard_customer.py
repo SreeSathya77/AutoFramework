@@ -11,34 +11,29 @@ def test_onboard_new_customer_full_flow(logged_in_page, workbench_page, onboard_
     workbench_page.navigate_to_onboard_customer()
 
     # 2. Step 1: Demographic Info
-    step1_success = onboard_customer_page.fill_and_submit_account_details()
-    assert step1_success, "Step 1: Demographic Info failed!"
+    # UPDATED: Capture the returned names and email here
+    f_name, l_name, email = onboard_customer_page.fill_and_submit_account_details()
 
-    account_id = onboard_customer_page.get_temp_account_id()
-    logger.info(f"Step 1 Success. ID: {account_id}")
+    # Simple check to ensure we got data back
+    assert f_name and l_name, "Step 1: Failed to generate customer names!"
 
     # 3. Step 2: Vehicles & Tags
-    # Note: Ensure count matches your test data requirements
     onboard_customer_page.fill_vehicle_details(count=2)
 
-    # NEW: Capture Permanent Account ID at the start of the Payment Info Page
+    # Capture Permanent Account ID
     permanent_id = onboard_customer_page.get_permanent_account_id()
     assert permanent_id is not None, "Permanent Account ID was not displayed!"
 
-    # Store in a shared dictionary or list if needed for later verification
-    # e.g., shared_data['permanent_id'] = permanent_id
-
-    # 4. Step 3: Payment Info (Card Selection & Summary Page 'PAY')
-    step3_success = onboard_customer_page.fill_payment_details()
+    # 4. Step 3: Payment Info
+    # UPDATED: Pass f_name and l_name into this method
+    step3_success = onboard_customer_page.fill_payment_details(f_name, l_name)
     assert step3_success, "Step 3: Payment details or Summary Card 'PAY' failed!"
 
     # 5. Step 4: Final Confirmation Modal
-    # This clicks 'Pay' inside the modal pop-up
     final_success = onboard_customer_page.complete_final_payment()
     assert final_success, "Step 4: Final Modal Confirmation failed!"
 
     # 6. Step 5: Post-Payment Navigation
-    # This clicks 'Account Summary' on the success screen source you provided
     summary_nav_success = onboard_customer_page.navigate_to_account_summary()
     assert summary_nav_success, "Step 5: Navigation to Account Summary failed!"
 

@@ -1,6 +1,5 @@
 import pytest
 from utils.logger import Logger
-
 logger = Logger.get_logger()
 
 def test_user_authentication(logged_in_page, login_page):

@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from playwright.sync_api import Page
-from utils.logger import Logger
+from src.utils.logger import Logger
 
 logger = Logger.get_logger()
 

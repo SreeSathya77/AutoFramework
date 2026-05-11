@@ -1,7 +1,5 @@
 from .base_page import BasePage
 from utils.logger import Logger
-import datetime
-
 logger = Logger.get_logger()
 
 class LoginPage(BasePage):

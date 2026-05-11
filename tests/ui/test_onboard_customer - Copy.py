@@ -1,6 +1,5 @@
 import pytest
 from utils.logger import Logger
-
 logger = Logger.get_logger()
 
 def test_onboard_new_customer_step1(logged_in_page, workbench_page, onboard_customer_page):

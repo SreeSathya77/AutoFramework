@@ -4,14 +4,14 @@ Handles dashboard operations including case dashboard stats
 """
 
 from playwright.sync_api import Page, expect
-from utils.logger import get_logger
-
-logger = get_logger(__name__)
+from utils.logger import Logger
+logger = Logger.get_logger()
 
 
 class DashboardPage:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, report_dir=None): # Added report_dir=None
         self.page = page
+        self.report_dir = report_dir
 
         # Dashboard selectors
         self.dashboard_menu = "text=Dashboard"  # Update with actual selector
