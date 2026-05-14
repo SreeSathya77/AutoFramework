@@ -13,11 +13,13 @@ from src.pages.onboard_customer_page import OnboardCustomerPage
 
 logger = Logger.get_logger()
 
+
 def pytest_addoption(parser):
     """Adds custom command line options to pytest."""
     parser.addoption(
         "--hold", action="store_true", default=False, help="Pause and keep browser open after test finishes"
     )
+
 
 @pytest.fixture(scope="session")
 def run_folder():
@@ -42,64 +44,71 @@ def browser_context_args(run_folder: str):
 
 @pytest.fixture(scope="session")
 def browser_type_launch_args():
-    """
-    Configures browser launch arguments.
-    By default, it runs in Headed mode with slow_mo.
-    """
+    """Forces Headed mode and slow_mo for visual review."""
     return {
         "slow_mo": 500,
-        "headless": False  # Keep as False for visual review
+        "headless": False
     }
 
 
-@pytest.fixture(scope="function")
-def login_page(page: Page, run_folder: str):
-    return LoginPage(page, report_dir=run_folder)
+# --- MODULE SCOPED FIXTURE: This is the fix for session persistence ---
 
-
-@pytest.fixture(scope="function")
-def workbench_page(page: Page, run_folder: str):
-    return WorkbenchPage(page, report_dir=run_folder)
-
-
-@pytest.fixture(scope="function")
-def onboard_customer_page(page: Page, run_folder: str):
-    return OnboardCustomerPage(page, report_dir=run_folder)
-
-
-@pytest.fixture(scope="function")
-def logged_in_page(page: Page, login_page: LoginPage, request):
+@pytest.fixture(scope="module")
+def shared_setup(browser, browser_context_args, run_folder, base_url, request):
     """
-    Performs login and optionally waits for Enter at the end of the test.
+    Creates ONE visible browser session for the entire test file.
+    Performs login once and shares the page objects.
     """
-    logger.info("Test Session Started.")
+    logger.info("🚀 Starting Shared Visible Session...")
+
+    # Initialize browser context and page
+    context = browser.new_context(**browser_context_args)
+    page = context.new_page()
+
+    # Perform Login
     creds = config_loader.get_credentials()
-    url = config_loader.get_base_url()
-    login_page.navigate_to_login(url)
+    login_page = LoginPage(page, report_dir=run_folder)
+    login_page.navigate_to_login(base_url)
     login_page.perform_login(creds["username"], creds["password"])
+    login_page.verify_login_success()
 
-    yield page
+    # Provide shared page and objects
+    from src.pages.case_page import CaseManagementPage
+    objs = {
+        "page": page,
+        "onboard": OnboardCustomerPage(page, report_dir=run_folder),
+        "case": CaseManagementPage(page, report_dir=run_folder),
+        "workbench": WorkbenchPage(page, report_dir=run_folder)
+    }
 
-    # Use the custom --hold flag from command line
+    yield objs
+
+    # Use the custom --hold flag at the very end of the module
     if request.config.getoption("--hold"):
-        print("\n" + "="*80)
-        print(">>> HOLD MODE ACTIVE: Test execution finished.")
-        print(">>> THE BROWSER IS KEPT OPEN FOR YOUR REVIEW.")
+        print("\n" + "=" * 80)
+        print(">>> HOLD MODE ACTIVE: All tests in this module finished.")
         print(">>> Press ENTER in this console to close the browser...")
-        print("="*80 + "\n")
+        print("=" * 80 + "\n")
         try:
             input()
         except EOFError:
             pass
 
+    context.close()
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
+    """Ensures screenshots are captured even in shared sessions."""
     outcome = yield
     report = outcome.get_result()
     report_extras = getattr(report, "extras", [])
 
     if report.when == "call" and report.failed:
-        page = item.funcargs.get("page")
+        # Try to retrieve page from shared_setup
+        setup = item.funcargs.get("shared_setup")
+        page = setup["page"] if setup else item.funcargs.get("page")
+
         if page:
             screenshot = page.screenshot(type="png")
             base64_img = base64.b64encode(screenshot).decode("utf-8")

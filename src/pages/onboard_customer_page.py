@@ -280,8 +280,16 @@ class OnboardCustomerPage(BasePage):
             raise
 
     def get_unique_identity(self):
-        f_name, l_name = self.fake.first_name(), self.fake.last_name()
-        email = f"{f_name.lower()}.{l_name.lower()}{random.randint(10, 99)}@testmail.com"
+        # Generate names and immediately strip any accidental leading/trailing whitespace
+        f_name = self.fake.first_name().strip()
+        l_name = self.fake.last_name().strip()
+
+        # .replace(" ", "") removes internal spaces (e.g., "Mary Ann" becomes "MaryAnn")
+        email_f_name = f_name.lower().replace(" ", "")
+        email_l_name = l_name.lower().replace(" ", "")
+
+        email = f"{email_f_name}.{email_l_name}{random.randint(10, 99)}@testmail.com"
+
         return f_name, l_name, email
 
     def fill_and_submit_account_details(self, country_name="United States"):
@@ -364,12 +372,20 @@ class OnboardCustomerPage(BasePage):
         for i in range(count):
             self.hide_chatbot()
 
-            # --- 1. Plate Number ---
-            plate_num = f"QA{random.randint(1000, 9999)}GP"
+            # --- 1. Plate Number (3 RANDOM chars, 4 digits, 3 RANDOM chars) ---
+            prefix = "".join(random.choices(string.ascii_uppercase, k=3))
+            middle = "".join(random.choices(string.digits, k=4))
+            suffix = "".join(random.choices(string.ascii_uppercase, k=3))
+
+            plate_num = f"{prefix}{middle}{suffix}"
+
+            # Log the generated plate so you can track it in the console
+            logger.info(f"🚗 Generated Unique Plate: {plate_num}")
+
             self.plate_number_input.evaluate(f"el => el.style.cssText += '{active_style}'")
             self._highlight_and_fill(self.plate_number_input, plate_num, f"Plate {i + 1}")
 
-            # Immediate Scrub
+            # Immediate Scrub (keeps the UI clean for the next step)
             self.plate_number_input.evaluate(
                 "el => { el.blur(); el.style.outline = 'none'; el.style.backgroundColor = ''; el.classList.remove('focused', 'active', 'ng-touched'); }")
             self.page.wait_for_timeout(300)
@@ -472,7 +488,7 @@ class OnboardCustomerPage(BasePage):
     def fill_payment_details(self, f_name, l_name, card_count=1):
         logger.info(f"Starting Step 3: Payment Information for {f_name} {l_name}...")
 
-        # Ensure there are no extra spaces and the names are captured correctly
+        # Ensure we use the names as-is for the card, but strip padding
         full_name_on_card = f"{f_name.strip()} {l_name.strip()}"
 
         try:

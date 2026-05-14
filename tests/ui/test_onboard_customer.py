@@ -1,8 +1,8 @@
 import pytest
 from utils.logger import Logger
+from utils.shared_data import SharedData  # Import the central mailbox
 
 logger = Logger.get_logger()
-
 
 def test_onboard_new_customer_full_flow(logged_in_page, workbench_page, onboard_customer_page):
     logger.info("Starting Onboarding Flow Test")
@@ -11,7 +11,6 @@ def test_onboard_new_customer_full_flow(logged_in_page, workbench_page, onboard_
     workbench_page.navigate_to_onboard_customer()
 
     # 2. Step 1: Demographic Info
-    # UPDATED: Capture the returned names and email here
     f_name, l_name, email = onboard_customer_page.fill_and_submit_account_details()
 
     # Simple check to ensure we got data back
@@ -24,8 +23,12 @@ def test_onboard_new_customer_full_flow(logged_in_page, workbench_page, onboard_
     permanent_id = onboard_customer_page.get_permanent_account_id()
     assert permanent_id is not None, "Permanent Account ID was not displayed!"
 
+    # --- UPDATED: Store the ID in shared_data.py ---
+    SharedData.account_id = permanent_id
+    logger.info(f"📌 Permanent Account ID {permanent_id} stored in SharedData.")
+    # ----------------------------------------------
+
     # 4. Step 3: Payment Info
-    # UPDATED: Pass f_name and l_name into this method
     step3_success = onboard_customer_page.fill_payment_details(f_name, l_name)
     assert step3_success, "Step 3: Payment details or Summary Card 'PAY' failed!"
 
