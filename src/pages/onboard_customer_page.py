@@ -126,7 +126,6 @@ class OnboardCustomerPage(BasePage):
 
     @property
     def request_tag_radio(self):
-        # Targets the radio button input specifically associated with the 'Request Tag' label
         return self.page.locator('div.form-check:has-text("Request Tag") input[type="radio"]')
 
     @property
@@ -155,7 +154,6 @@ class OnboardCustomerPage(BasePage):
 
     @property
     def add_vehicle_button(self):
-        # Targets the button by class and partial text to handle dynamic label changes
         return self.page.locator('button.qm-btn-primary-bordered').filter(has_text="Add")
 
     # --- Step 3 Locators (Payment Info) ---
@@ -200,7 +198,6 @@ class OnboardCustomerPage(BasePage):
 
     @property
     def credit_card_radio_button(self):
-        # Targets the radio button in the row containing 'Credit Card'
         return self.page.locator('tr').filter(has_text="Credit Card").locator('input[type="radio"]')
 
     @property
@@ -267,24 +264,47 @@ class OnboardCustomerPage(BasePage):
     def navigate_to_onboarding(self):
         logger.info("Executing Sidebar Navigation Sequence...")
         try:
+            self.hide_chatbot()
+            # 1. Ensure Workbench is open
             self.workbench_icon.wait_for(state="visible", timeout=10000)
-            self.workbench_icon.click()
+            self.workbench_icon.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+            self.workbench_icon.evaluate("el => el.click()")
             self.page.wait_for_timeout(1000)
+            self.workbench_icon.evaluate("el => el.style.outline = 'none'")
+
+            # 2. Expand Manage Accounts
             self.manage_accounts_toggle.wait_for(state="visible", timeout=5000)
-            self.manage_accounts_toggle.click()
+            self.manage_accounts_toggle.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+            self.manage_accounts_toggle.evaluate("el => el.click()")
+            self.page.wait_for_timeout(1000)
+            self.manage_accounts_toggle.evaluate("el => el.style.outline = 'none'")
+
+            # 3. Click Onboard a Customer
             self.onboard_customer_link.wait_for(state="visible", timeout=5000)
-            self.onboard_customer_link.click()
+            self.onboard_customer_link.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
+            self.onboard_customer_link.evaluate("el => el.click()")
             self.page.wait_for_load_state("networkidle")
+            self.onboard_customer_link.evaluate("el => el.style.outline = 'none'")
+
+            logger.info("Successfully navigated to Onboard Customer page.")
         except Exception as e:
             logger.error(f"Navigation Failure: {str(e)}")
             raise
 
     def get_unique_identity(self):
-        # Generate names and immediately strip any accidental leading/trailing whitespace
+        # Enforce minimum length condition constraint validation processing for First Name
         f_name = self.fake.first_name().strip()
-        l_name = self.fake.last_name().strip()
+        while len(f_name) < 3:
+            logger.warning(f"⚠️ Generated first name '{f_name}' is too short. Re-generating first name...")
+            f_name = self.fake.first_name().strip()
 
-        # .replace(" ", "") removes internal spaces (e.g., "Mary Ann" becomes "MaryAnn")
+        # Enforce minimum length condition constraint validation processing for Last Name
+        l_name = self.fake.last_name().strip()
+        while len(l_name) < 3:
+            logger.warning(f"⚠️ Generated last name '{l_name}' is too short. Re-generating last name...")
+            l_name = self.fake.last_name().strip()
+
+        # Remove internal spaces
         email_f_name = f_name.lower().replace(" ", "")
         email_l_name = l_name.lower().replace(" ", "")
 
@@ -302,7 +322,6 @@ class OnboardCustomerPage(BasePage):
         self.payment_model_prepaid_radio.click(force=True)
 
         self._highlight_and_fill(self.first_name_input, f_name, "First Name")
-        # Restored: Filling Middle Name with hardcoded value
         self._highlight_and_fill(self.middle_name_input, "QA Team", "Middle Name")
         self._highlight_and_fill(self.last_name_input, l_name, "Last Name")
 
@@ -310,57 +329,75 @@ class OnboardCustomerPage(BasePage):
         self._safe_check(self.same_shipping_checkbox, "Use Same for Shipping")
         self._safe_check(self.primary_address_checkbox, "Primary Address")
 
-        country_data = self.country_map.get(country_name)
-        self.page.locator('select[formcontrolname="country"]').select_option(country_data["value"])
-        self.page.wait_for_timeout(1000)
-        self.page.locator('select[formcontrolname="state"]').select_option(index=1)
-        self.page.locator('select[formcontrolname="city"]').select_option(index=1)
+        # --- RE-DESIGNED BACKEND API POPULATION SYNC CHECKPOINTS ---
+        country_dropdown = self.page.locator('select[formcontrolname="country"]')
+        logger.info("⏳ Waiting for backend API to populate country list options...")
+        country_dropdown.wait_for(state="visible", timeout=10000)
 
+        # Block script execution until child options count is greater than 1
+        self.page.wait_for_function(
+            "el => el.options.length > 1",
+            arg=country_dropdown.element_handle(),
+            timeout=15000
+        )
+
+        # 1. Select Country (Passes "US" to the field)
+        country_data = self.country_map.get(country_name)
+        logger.info(f"Selecting Country value: {country_data['value']}")
+        country_dropdown.select_option(country_data["value"])
+        country_dropdown.dispatch_event("change")
+        self.page.wait_for_timeout(1000)
+
+        # Synchronize and wait for State dropdown API values
+        state_dropdown = self.page.locator('select[formcontrolname="state"]')
+        state_dropdown.wait_for(state="visible", timeout=10000)
+        self.page.wait_for_function("el => el.options.length > 1", arg=state_dropdown.element_handle(), timeout=10000)
+        state_dropdown.select_option(index=1)
+        state_dropdown.dispatch_event("change")
+        self.page.wait_for_timeout(1000)
+
+        # Synchronize and wait for City dropdown API values
+        city_dropdown = self.page.locator('select[formcontrolname="city"]')
+        city_dropdown.wait_for(state="visible", timeout=10000)
+        self.page.wait_for_function("el => el.options.length > 1", arg=city_dropdown.element_handle(), timeout=10000)
+        city_dropdown.select_option(index=1)
+        city_dropdown.dispatch_event("change")
+
+        # Fill text inputs
         self._highlight_and_fill(self.page.locator('input[formcontrolname="address"]'), "123 Automation Blvd",
                                  "Address")
         self._highlight_and_fill(self.page.locator('input[formcontrolname="zipCode"]'), "12345", "Zip Code")
 
+        # 2. Select Country Phone Code (Passes "+1" to the dropdown selector field)
+        logger.info(f"Selecting Phone Country Code value: {country_data['code']}")
         self.page.locator('select[formcontrolname="countryCode"]').select_option(country_data["code"])
+
         self._highlight_and_fill(self.page.locator('input[formcontrolname="phoneNumber"]'),
                                  str(random.randint(7000000000, 9999999999)), "Phone")
         self._highlight_and_fill(self.email_address_input, email, "Email")
         self._highlight_and_fill(self.confirm_email_address_input, email, "Confirm Email")
 
         logger.info("Clicking Save & Next...")
-        # --- ENHANCED FINALIZATION ---
         logger.info("Finalizing Step 1: Disabling chatbot interference...")
 
-        # 1. First, hide and physically remove the chatbot from the DOM
-        # This prevents it from receiving any 'click' events entirely
         self.hide_chatbot()
         self.page.evaluate("""() => {
                     const chatbot = document.querySelector('app-chatbot, #chat-widget-container, .chatbot-selector');
                     if (chatbot) { chatbot.remove(); }
-
-                    // Also remove the Angular backdrop which often intercepts clicks
                     document.querySelectorAll('.cdk-overlay-backdrop').forEach(el => el.remove());
                 }""")
 
-        # 2. Scroll the button into view but away from the bottom corner
-        # (Where chatbots usually live)
         self.save_next_button.evaluate("el => el.scrollIntoView({block: 'center'})")
         self.page.wait_for_timeout(500)
 
-        # 3. Perform an Atomic JS Click
-        # This triggers the button handler without a physical mouse coordinate click
         logger.info("Triggering Atomic Click on Save & Next...")
         self.save_next_button.evaluate("el => el.click()")
 
-        logger.info("Step 1 Submitted - Navigation to Vehicles should be clean.")
-        # Change 'return True' to return the names and email
         logger.info("Step 1 Submitted successfully.")
         return f_name, l_name, email
 
     def fill_vehicle_details(self, count=1):
         logger.info(f"Adding {count} Vehicle(s)...")
-
-        # STYLE CONFIG: High-visibility focus (Sky Blue)
-        # Using !important to ensure it overrides the app's native focus colors
         active_style = "outline: 4px solid #00BFFF !important; outline-offset: 2px !important; background-color: rgba(0, 191, 255, 0.1) !important;"
 
         try:
@@ -372,25 +409,20 @@ class OnboardCustomerPage(BasePage):
         for i in range(count):
             self.hide_chatbot()
 
-            # --- 1. Plate Number (3 RANDOM chars, 4 digits, 3 RANDOM chars) ---
             prefix = "".join(random.choices(string.ascii_uppercase, k=3))
             middle = "".join(random.choices(string.digits, k=4))
             suffix = "".join(random.choices(string.ascii_uppercase, k=3))
-
             plate_num = f"{prefix}{middle}{suffix}"
 
-            # Log the generated plate so you can track it in the console
             logger.info(f"🚗 Generated Unique Plate: {plate_num}")
 
             self.plate_number_input.evaluate(f"el => el.style.cssText += '{active_style}'")
             self._highlight_and_fill(self.plate_number_input, plate_num, f"Plate {i + 1}")
 
-            # Immediate Scrub (keeps the UI clean for the next step)
             self.plate_number_input.evaluate(
                 "el => { el.blur(); el.style.outline = 'none'; el.style.backgroundColor = ''; el.classList.remove('focused', 'active', 'ng-touched'); }")
             self.page.wait_for_timeout(300)
 
-            # --- 2. Vehicle Attribute Dropdowns ---
             dropdowns = [
                 ('plateCountry', "US", "value"),
                 ('plateState', 1, "index"),
@@ -415,18 +447,15 @@ class OnboardCustomerPage(BasePage):
                 loc.evaluate("el => { el.blur(); el.style.outline = 'none'; el.style.backgroundColor = ''; }")
                 self.page.wait_for_timeout(200)
 
-            # --- 3. Plate Start Date ---
             today_date = datetime.now().strftime("%Y-%m-%d")
             self.plate_start_date_input.evaluate(f"el => el.style.cssText += '{active_style}'")
             self._highlight_and_fill(self.plate_start_date_input, today_date, "Plate Start Date")
 
-            # Close picker and scrub
             self.page.keyboard.press("Escape")
             self.plate_start_date_input.evaluate(
                 "el => { el.blur(); el.style.outline = 'none'; el.style.backgroundColor = ''; el.classList.remove('focused', 'active', 'ng-touched'); }")
             self.page.wait_for_timeout(300)
 
-            # --- 4. Tag Selections ---
             self.request_tag_radio.click(force=True)
             self.page.wait_for_timeout(500)
 
@@ -449,20 +478,13 @@ class OnboardCustomerPage(BasePage):
                 loc.evaluate("el => { el.blur(); el.style.outline = 'none'; el.style.backgroundColor = ''; }")
                 self.page.wait_for_timeout(200)
 
-            # --- 5. Add Button (Green Highlight) ---
             logger.info(f"Clicking 'Add' button for Vehicle {i + 1}...")
-            self.add_vehicle_button.evaluate("el => el.style.cssText += 'outline: 4px solid #28a745 !important;'")
-            self.add_vehicle_button.evaluate("el => el.click()")
+            self.scroll_focus_click(self.add_vehicle_button)
             self.page.wait_for_timeout(2500)
 
-        # --- 6. Next Button Transition (Gold Highlight) ---
         next_btn = self.page.get_by_role("button", name="Next")
-        next_btn.evaluate("el => el.scrollIntoView({block: 'center', behavior: 'smooth'})")
-        self.page.wait_for_timeout(800)
-
         logger.info("All vehicles added. Finalizing Step 2...")
-        next_btn.evaluate("el => el.style.cssText += 'outline: 4px solid #FFD700 !important;'")
-        next_btn.evaluate("el => el.click()")
+        self.scroll_focus_click(next_btn)
 
         self.permanent_account_id_span.wait_for(state="attached", timeout=15000)
         return True
@@ -478,7 +500,6 @@ class OnboardCustomerPage(BasePage):
             return None
 
     def generate_random_payment_data(self, cardholder_name="QA Tester"):
-        # Remove the random string generation for the name
         card_number = "".join(random.choices(string.digits, k=16))
         future_date = datetime.now() + timedelta(days=730)
         expiry_date = future_date.strftime("%m/%y")
@@ -487,8 +508,6 @@ class OnboardCustomerPage(BasePage):
 
     def fill_payment_details(self, f_name, l_name, card_count=1):
         logger.info(f"Starting Step 3: Payment Information for {f_name} {l_name}...")
-
-        # Ensure we use the names as-is for the card, but strip padding
         full_name_on_card = f"{f_name.strip()} {l_name.strip()}"
 
         try:
@@ -499,10 +518,10 @@ class OnboardCustomerPage(BasePage):
             self.payment_method_dropdown.dispatch_event("change")
 
             for i in range(card_count):
-                self.add_payment_method_button.evaluate("el => el.click()")
+                logger.info(f"Opening 'Add Payment Method' modal (Card {i + 1})...")
+                self.scroll_focus_click(self.add_payment_method_button)
                 self.page.wait_for_selector('.modal-content', state="visible", timeout=10000)
 
-                # Use the cleaned full_name_on_card variable
                 name, number, expiry, cvv = self.generate_random_payment_data(full_name_on_card)
 
                 self._highlight_and_fill(self.card_name_input, name, "Cardholder Name")
@@ -510,27 +529,21 @@ class OnboardCustomerPage(BasePage):
                 self._highlight_and_fill(self.expiry_date_input, expiry, "Expiry Date")
                 self._highlight_and_fill(self.cvv_input, cvv, "CVV")
 
-                self.add_card_submit_button.click(force=True)
+                self.scroll_focus_click(self.add_card_submit_button)
                 self.page.wait_for_selector('.modal-content', state="hidden", timeout=15000)
 
             self.credit_card_radio_button.first.check(force=True)
-            self.page.wait_for_timeout(1000)  # Small delay for selection to settle
+            self.page.wait_for_timeout(1000)
 
-            # ROBUST PREVIEW & PAY CLICK
             logger.info("Clicking 'Preview and Pay'...")
             self.hide_chatbot()
-            self.preview_and_pay_button.scroll_into_view_if_needed()
-            self.preview_and_pay_button.evaluate("el => el.style.cssText += 'outline: 4px solid red;'")
-
-            # Using evaluate click to ensure the handler triggers
-            self.preview_and_pay_button.evaluate("el => el.click()")
+            self.scroll_focus_click(self.preview_and_pay_button)
 
             logger.info("Waiting for Payment Summary card...")
             self.page.wait_for_selector("div.payment-summary-card", state="visible", timeout=15000)
 
-            # ROBUST SUMMARY PAY CLICK
-            self.summary_page_pay_button.wait_for(state="visible", timeout=10000)
-            self.summary_page_pay_button.evaluate("el => el.click()")
+            logger.info("Clicking 'PAY' on summary card...")
+            self.scroll_focus_click(self.summary_page_pay_button)
 
             return True
         except Exception as e:
@@ -541,7 +554,7 @@ class OnboardCustomerPage(BasePage):
         logger.info("Starting Final Confirmation Modal...")
         try:
             self.confirmation_modal_pay_button.wait_for(state="visible", timeout=15000)
-            self.confirmation_modal_pay_button.evaluate("el => el.click()")
+            self.scroll_focus_click(self.confirmation_modal_pay_button)
             self.page.wait_for_selector('div.modal-content', state="hidden", timeout=15000)
             logger.info("✅ Account onboarding completed successfully.")
             return True
@@ -553,7 +566,7 @@ class OnboardCustomerPage(BasePage):
         logger.info("Finalizing process: Clicking 'Account Summary' button...")
         try:
             self.account_summary_button.wait_for(state="visible", timeout=15000)
-            self.account_summary_button.evaluate("el => el.click()")
+            self.scroll_focus_click(self.account_summary_button)
             return True
         except Exception as e:
             logger.error(f"Failed to click Account Summary: {str(e)}")

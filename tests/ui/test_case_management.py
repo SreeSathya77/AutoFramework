@@ -1,97 +1,115 @@
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import Page
 from src.pages.login_page import LoginPage
 from src.pages.onboard_customer_page import OnboardCustomerPage
 from src.pages.case_page import CaseManagementPage
 from utils.shared_data import SharedData
 from utils.logger import Logger
 from src.pages.refund_auto_case_creation import execute_full_refund_automation
+from utils.config import LOGIN_CREDENTIALS
 
 logger = Logger.get_logger()
 
+
 @pytest.fixture(scope="module")
-def shared_setup(run_folder, base_url, request):
+def onboarded_account_id(shared_setup):
     """
-    STRICT VISIBLE SESSION: Maintains one browser for all scenarios in this file.
-    The browser only closes after the final scenario is completed.
+    Fixture to perform account onboarding and yield the captured account ID.
+    This ensures the refund flow has a valid account to work with.
     """
-    if not base_url:
-        pytest.fail("base_url is missing from pytest.ini")
-
-    playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(headless=False, slow_mo=500)
-    context = browser.new_context(viewport={"width": 1500, "height": 800})
-    page = context.new_page()
-
-    logger.info("🚀 Launching VISIBLE browser for shared session...")
-    login_page = LoginPage(page, report_dir=run_folder)
-    login_page.navigate_to_login(base_url)
-    login_page.perform_login("superadmin_qm@yopmail.com", "Superadmin@1234")
-    login_page.verify_login_success()
-
-    objs = {
-        "page": page,
-        "onboard": OnboardCustomerPage(page, report_dir=run_folder),
-        "case": CaseManagementPage(page, report_dir=run_folder),
-    }
-
-    yield objs
-
-    # --- UPDATED TEARDOWN SECTION ---
-    if request.config.getoption("--hold"):
-        print("\n" + "=" * 60)
-        print(">>> SCENARIOS FINISHED.")
-        print(">>> Browser held for review. (Application may timeout/logout)")
-        print(">>> Press ENTER in this console to terminate.")
-        print("=" * 60 + "\n")
-        try:
-            input()
-        except (EOFError, KeyboardInterrupt):
-            pass
-
-    # Use a try block to ignore errors if the browser already crashed/expired
-    try:
-        logger.info("Closing browser and stopping playwright...")
-        browser.close()
-        playwright.stop()
-    except Exception as e:
-        # This prevents the "Target closed" or "Session expired" errors
-        # from appearing in your final console summary.
-        pass
-
-def test_onboard_then_create_case(shared_setup):
-    """Scenario 1: Detailed Onboarding and Case Creation"""
     objs = shared_setup
+    page = objs["page"]
+    browser = objs["browser"]
     onboard = objs["onboard"]
     case_page = objs["case"]
 
     logger.info("Step 1: Starting Onboarding...")
     onboard.navigate_to_onboarding()
+    page.wait_for_load_state("networkidle")
 
-    # Full data capture logic
+    # Fill and submit details
     f_name, l_name, email = onboard.fill_and_submit_account_details("United States")
     onboard.fill_vehicle_details(count=1)
 
+    # Capture and SHARE the account ID
     captured_id = onboard.get_permanent_account_id()
-    assert captured_id is not None, "Failed to capture Account ID"
+    assert captured_id is not None, "Failed to capture Account ID during onboarding."
+
     SharedData.account_id = captured_id
     logger.info(f"Account {captured_id} saved to SharedData.")
 
+    # Complete Onboarding process
     onboard.fill_payment_details(f_name, l_name, card_count=1)
     onboard.complete_final_payment()
     onboard.navigate_to_account_summary()
 
-    # Case creation logic
-    logger.info(f"Step 2: Creating case for account: {SharedData.account_id}")
+    # --- STEP 2: CREATE CASE (Superadmin) ---
+    logger.info(f"Step 2: Creating case for account: {captured_id}")
     case_page.navigate_to_create_case()
-    case_page.fill_case_details(SharedData.account_id)
-    case_page.verify_case_and_navigate_to_dashboard(SharedData)
+    case_page.fill_case_details(captured_id)
+    assert case_page.verify_case_and_assign(SharedData), "Assignment failed."
 
-    logger.info("✅ Case Created. Ready for Scenario 2.")
+    # --- STEP 3 & 4: SORTER APPROVAL ---
+    logger.info("🔓 Step 4: Executing Sorter resolution context window validation...")
+    assert case_page.resolve_as_owner_context(browser, SharedData), "Sorter Resolution failed."
 
-def test_refund_auto_flow(shared_setup):
-    """Scenario 2: Refund Flow (Independent but shares browser)"""
+    # --- STEP 5: BOS CASE MANAGER APPROVAL ---
+    logger.info("👑 Step 5: Executing BOS Case Manager approval context window validation...")
+    assert case_page.resolve_as_manager_context(browser, SharedData), "Manager Approval failed."
+
+    # --- STEP 6: SUPERADMIN VERIFICATION (Direct Link Dropdown Value Verification) ---
+    logger.info("🔄 Step 6: Verifying final case resolution state as Superadmin...")
+    base_url = page.url.split('/operation-workbench')[0]
+    direct_case_url = f"{base_url}/operation-workbench/case-management/view-case?caseId={SharedData.case_id}"
+
+    # Refresh/navigate the main Superadmin page directly to the case view
+    page.goto(direct_case_url)
+    page.wait_for_load_state("networkidle")
+
+    # Target the select dropdown wrapper explicitly
+    case_status_dropdown = page.locator("select#caseStatus")
+    case_status_dropdown.wait_for(state="visible", timeout=15000)
+    page.wait_for_timeout(2000)
+
+    # Robustly target the active checked option inner text value
+    selected_option = case_status_dropdown.locator("option:checked, option[selected]")
+    selected_status = selected_option.inner_text().strip() if selected_option.count() > 0 else ""
+    logger.info(f"Dropdown Extraction Value Snapshot: '{selected_status}'")
+
+    # If the value hasn't updated yet or read empty due to lag, reload once
+    if "Resolved" not in selected_status:
+        logger.warning("⚠️ Dropdown value is stale. Triggering full page reload to sync database state...")
+        page.reload()
+        page.wait_for_load_state("networkidle")
+        case_status_dropdown.wait_for(state="visible", timeout=10000)
+        page.wait_for_timeout(2000)
+
+        selected_option = case_status_dropdown.locator("option:checked, option[selected]")
+        selected_status = selected_option.inner_text().strip() if selected_option.count() > 0 else ""
+        logger.info(f"Post-Reload Dropdown Extraction Value Snapshot: '{selected_status}'")
+
+    # Assertion checks if 'Resolved' text pattern exists anywhere inside the active option text string
+    assert "Resolved" in selected_status, f"❌ Validation Fail: Expected status to contain 'Resolved', but found '{selected_status}'"
+    logger.info(f"✅ Step 6 Success: Case {SharedData.case_id} verified as fully 'Resolved' inside drop-down context.")
+
+    yield captured_id
+
+
+def test_onboard_then_create_case_flow(onboarded_account_id):
+    """
+    This test function simply consumes the 'onboarded_account_id' fixture.
+    This test will pass if the fixture setup passes.
+    """
+    logger.info(f"✅ Full Onboarding and Case Creation Flow Passed for account: {onboarded_account_id}")
+
+
+def test_refund_auto_flow(shared_setup, onboarded_account_id):
+    """
+    Scenario 2: Refund Flow (Steps 7-10)
+    """
     page = shared_setup["page"]
-    logger.info("Step 3: Triggering Refund Flow scenario...")
+    target_account_id = onboarded_account_id
+    SharedData.account_id = target_account_id
+
+    logger.info(f"Step 7: Triggering Refund Flow scenario for account: {target_account_id}...")
     assert execute_full_refund_automation(page), "The Refund Automation flow failed."
-    logger.info("✅ Refund Flow Complete.")

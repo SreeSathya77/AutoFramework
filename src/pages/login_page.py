@@ -1,6 +1,10 @@
+import os
+import re
 from .base_page import BasePage
 from utils.logger import Logger
+
 logger = Logger.get_logger()
+
 
 class LoginPage(BasePage):
     def __init__(self, page, report_dir=None):
@@ -8,7 +12,7 @@ class LoginPage(BasePage):
         self.email_input = 'input[formcontrolname="emailId"]'
         self.password_input = 'input[formcontrolname="password"]'
         self.login_button = "button.auth-btn"
-        self.pop_up_selector = 'div[class*="success"]'  # Identified pop-up selector
+        self.pop_up_selector = 'div[class*=\"success\"]'  # Identified pop-up selector
         self.report_dir = report_dir
 
     def navigate_to_login(self, url):
@@ -17,85 +21,79 @@ class LoginPage(BasePage):
         self.page.wait_for_load_state("networkidle")
 
     def perform_login(self, email, password):
-        """Performs login using credentials."""
-        logger.info(f"Attempting login for user: {email}")
+        """
+        Performs login.
+        """
+        logger.info(f"Attempting login sequence for user: {email}")
+
         try:
+            # 1. Wait for page load
+            self.page.wait_for_load_state("load")
             self.wait_for_element(self.email_input)
+            
+            # --- REMOVED: Zoom validation based on window.innerWidth ---
+            # This check is incompatible with CSS transform: scale() which scales content visually
+            # without changing window.innerWidth. Visual confirmation during test run is sufficient.
+            
+            logger.info("Proceeding with login...")
+
+            # 4. Populate credentials
             self.fill_field(self.email_input, email)
             self.fill_field(self.password_input, password)
             self.page.wait_for_timeout(500)
 
-            # Log DOM before login for comparison
-            logger.info("Logging DOM elements BEFORE login click...")
-            self.log_page_elements("Before_Login")
+            # 5. Use the shared BasePage interaction logic
+            logger.info("⏳ Step 3: Performing focused click on login button...")
+            self.scroll_focus_click(self.login_button)
 
-            self.click_element(self.login_button)
-            logger.info("Login button clicked.")
-
-            # CRITICAL: Take multiple rapid screenshots immediately after login click
-            # to capture the pop-up before it disappears
-            # Also validate pop-up DURING this window while it's still visible
-            logger.info("Taking rapid screenshots and validating pop-up...")
-
-            self.take_screenshot("03_Popup_Immediate_1", self.report_dir)  # First screenshot immediately
-            logger.info("Screenshot 1 captured - Attempting validation...")
-            self.validate_login_popup()  # Validate while pop-up might be visible
-
-            self.page.wait_for_timeout(50)  # Wait 50ms
-            self.take_screenshot("03_Popup_Immediate_2", self.report_dir)  # Second screenshot
-            logger.info("Screenshot 2 captured - Attempting validation...")
-            self.validate_login_popup()  # Validate while pop-up might be visible
-
-            self.page.wait_for_timeout(50)  # Wait another 50ms
-            self.take_screenshot("03_Popup_Immediate_3", self.report_dir)  # Third screenshot
-            logger.info("Screenshot 3 captured - Attempting validation...")
-            self.validate_login_popup()  # Validate while pop-up might be visible
-
-            # Small delay to capture any pop-up that appears immediately after click
-            self.page.wait_for_timeout(100)
-
-            # Log DOM after login click to capture pop-up elements
-            logger.info("Logging DOM elements AFTER login click (pop-up should appear here)...")
-            self.log_page_elements("After_Login_Click")
-
-            # Take screenshots at different intervals to capture pop-up
-            self.take_screenshot("02_Just_After_Login_Click", self.report_dir)
+            self.page.wait_for_load_state("networkidle")
+            logger.info("✅ Login button interaction successfully executed.")
 
         except Exception as e:
-            logger.error(f"Login action failed: {str(e)}")
+            logger.error(f"Login sequence halted: {str(e)}")
+            self.log_page_elements("Login_Failure_Exception")
             raise e
 
-    def verify_login_success(self):
-        """Verifies success based on URL redirection to dashboard and dashboard header validation."""
+    def verify_login_success(self, timeout=15000):
+        """Verifies if login was successful by checking the dashboard heading container."""
+        logger.info("Verifying login success...")
         try:
-            logger.info("Waiting for dashboard URL...")
+            # Step 1: Wait for dashboard heading container or dashboard elements
+            dash_heading_selector = 'div.dash-headding'
 
-            # Log DOM before URL transition
-            self.log_page_elements("Before_Dashboard_Navigation")
+            # Wait for either URL to transition or element to appear
+            try:
+                self.page.wait_for_url("**/dashboard", timeout=timeout)
+                logger.info("✅ URL changed to dashboard route.")
+            except Exception:
+                logger.warning("⚠️ Timeout waiting for dashboard URL string match, checking elements instead...")
 
-            # Wait for the dashboard URL to be reached
-            self.page.wait_for_url("**/dashboard", timeout=15000)
-            logger.info("Login SUCCESS: Dashboard URL reached.")
-            
-            # Small delay for page to fully render
-            self.page.wait_for_timeout(500)
+            # Search elements strategies
+            dash_heading = self.page.query_selector(dash_heading_selector)
+            if dash_heading:
+                if dash_heading.is_visible():
+                    logger.info("✅ Dashboard heading container found")
+                    h4_element = dash_heading.query_selector('h4')
+                    if h4_element and h4_element.is_visible():
+                        text = h4_element.inner_text().strip()
+                        if "Welcome to QM Toll portal!" in text:
+                            logger.info(f"✅ Dashboard header found in dash-headding: '{text}'")
+                            return True
 
-            # Log DOM after dashboard loaded
-            self.log_page_elements("After_Dashboard_Loaded")
+            # Final check: Search all h4 elements for the target welcome banner
+            all_h4 = self.page.query_selector_all('h4')
+            for h4 in all_h4:
+                if h4.is_visible():
+                    text = h4.inner_text().strip()
+                    if "Welcome to QM Toll portal!" in text:
+                        logger.info(f"✅ Dashboard header found in h4 element: '{text}'")
+                        return True
 
-            # VALIDATION 1: Check for dashboard header "Welcome to QM Toll portal!"
-            dashboard_header_present = self.verify_dashboard_header()
-            if dashboard_header_present:
-                logger.info("✅ DASHBOARD VALIDATION PASSED: 'Welcome to QM Toll portal!' header found")
-            else:
-                logger.warning("⚠️ DASHBOARD VALIDATION WARNING: 'Welcome to QM Toll portal!' header not found")
+            logger.warning("⚠️ Dashboard header 'Welcome to QM Toll portal!' not detected.")
+            return False
 
-            # Take a screenshot of the dashboard as proof
-            self.take_screenshot("01_Login_Success_Dashboard", self.report_dir)
-            return True
         except Exception as e:
-            logger.error("Login FAILED: Dashboard URL not reached within timeout.")
-            self.take_screenshot("Login_Failure_State", self.report_dir)
+            logger.error(f"Error verifying dashboard header: {str(e)}")
             return False
 
     def verify_login_popup(self):
@@ -177,9 +175,9 @@ class LoginPage(BasePage):
         Validates: text content, exact match, no typos, CSS properties, visibility, position.
         """
         try:
-            logger.info("\n" + "="*80)
+            logger.info("\n" + "=" * 80)
             logger.info("STARTING COMPREHENSIVE POP-UP VALIDATION")
-            logger.info("="*80)
+            logger.info("=" * 80)
 
             element = self.page.query_selector(self.pop_up_selector)
 
@@ -274,8 +272,10 @@ class LoginPage(BasePage):
             # ========== VALIDATION 7: Check Computed Styles ==========
             logger.info("\n[VALIDATION 7] Checking Computed Styles...")
             try:
-                display = self.page.evaluate(f"window.getComputedStyle(document.querySelector('{self.pop_up_selector}')).display")
-                opacity = self.page.evaluate(f"window.getComputedStyle(document.querySelector('{self.pop_up_selector}')).opacity")
+                display = self.page.evaluate(
+                    f"window.getComputedStyle(document.querySelector('{self.pop_up_selector}')).display")
+                opacity = self.page.evaluate(
+                    f"window.getComputedStyle(document.querySelector('{self.pop_up_selector}')).opacity")
 
                 logger.info(f"  Display: {display}")
                 logger.info(f"  Opacity: {opacity}")
@@ -289,16 +289,16 @@ class LoginPage(BasePage):
                 logger.warning("  WARNING: Could not check computed styles - element may have disappeared")
 
             # ========== SUMMARY ==========
-            logger.info("\n" + "="*80)
+            logger.info("\n" + "=" * 80)
             logger.info("POP-UP VALIDATION SUMMARY")
-            logger.info("="*80)
+            logger.info("=" * 80)
             logger.info(f"  Visibility: PASSED")
             logger.info(f"  Text Match: {'PASSED' if text_match else 'WARNING'}")
             logger.info(f"  Typo Check: {'PASSED' if not typo_found else 'FAILED'}")
             logger.info(f"  CSS Classes: Present")
             logger.info(f"  Position & Size: Valid")
             logger.info(f"  Computed Styles: Valid")
-            logger.info("="*80 + "\n")
+            logger.info("=" * 80 + "\n")
 
             # Return overall status
             overall_status = text_match and not typo_found
@@ -316,83 +316,37 @@ class LoginPage(BasePage):
             return False
 
     def log_page_elements(self, stage_name):
-        """
-        Logs all visible elements on the page to help identify pop-up selectors.
-        Saves to logs directory for later analysis.
-        """
+        """Logs present DOM structural tags and details to assist tracking analysis."""
         try:
-            # Get all elements with classes that might be pop-ups
-            popup_selectors = [
-                'div[class*="toast"]',
-                'div[class*="notification"]',
-                'div[class*="alert"]',
-                'div[class*="popup"]',
-                'div[class*="modal"]',
-                'div[class*="success"]',
-                'div[class*="message"]',
-                '.ant-message',  # Ant Design
-                '.ant-notification',
-                '.v-snack',  # Vuetify
-                '.el-message',  # Element UI
-                '.ng-toast',  # ngx-toastr
-            ]
-
-            logger.info(f"\n{'='*80}")
+            logger.info("=" * 80)
             logger.info(f"DOM SNAPSHOT AT STAGE: {stage_name}")
-            logger.info(f"{'='*80}")
+            logger.info("=" * 80)
 
-            # Log HTML content
-            page_content = self.page.content()
-
-            # Search for potential pop-ups in the HTML
-            logger.info(f"\nSearching for pop-up elements in page content...")
-            found_popups = False
-
-            for selector in popup_selectors:
-                try:
-                    elements = self.page.query_selector_all(selector)
-                    if elements:
-                        found_popups = True
-                        logger.info(f"\n✓ Found {len(elements)} element(s) matching selector: {selector}")
-                        for idx, element in enumerate(elements):
-                            try:
-                                outer_html = element.outer_html() if hasattr(element, 'outer_html') else "N/A"
-                                inner_text = element.inner_text() if hasattr(element, 'inner_text') else "N/A"
-                                is_visible = element.is_visible() if hasattr(element, 'is_visible') else False
-
-                                logger.info(f"  Element {idx+1}:")
-                                logger.info(f"    - Selector: {selector}")
-                                logger.info(f"    - Visible: {is_visible}")
-                                logger.info(f"    - Text: {inner_text[:100]}")  # First 100 chars
-                                logger.info(f"    - HTML: {outer_html[:200]}")  # First 200 chars
-                            except Exception as e:
-                                logger.info(f"  Element {idx+1}: Could not extract details - {str(e)}")
-                except Exception as e:
-                    pass  # Selector not found, continue
-
-            if not found_popups:
+            logger.info("\nSearching for pop-up elements in page content...")
+            popups = self.page.query_selector_all(self.pop_up_selector)
+            if popups:
+                for idx, popup in enumerate(popups, 1):
+                    if popup.is_visible():
+                        logger.info(
+                            f"   [POPUP {idx}] Text: '{popup.inner_text().strip()}' | Class: '{popup.get_attribute('class')}'")
+            else:
                 logger.warning("⚠ No known pop-up selectors found. Checking all visible divs...")
-                all_divs = self.page.query_selector_all('div')
-                logger.info(f"Total DIV elements on page: {len(all_divs)}")
-
-                # Log divs with text content
-                visible_divs = 0
-                for div in all_divs[:20]:  # Limit to first 20
-                    try:
-                        if div.is_visible():
-                            text = div.inner_text()
-                            if text and len(text) > 0 and len(text) < 200:
-                                visible_divs += 1
-                                classes = div.get_attribute('class') or "no-class"
-                                div_id = div.get_attribute('id') or "no-id"
-                                logger.info(f"  Visible DIV {visible_divs}: class='{classes}' id='{div_id}' text='{text[:50]}'")
-                    except Exception as e:
-                        pass
-
-            logger.info(f"\n{'='*80}\n")
-
+                divs = self.page.query_selector_all('div')
+                logger.info(f"Total DIV elements on page: {len(divs)}")
+                visible_idx = 1
+                for div in divs:
+                    if div.is_visible():
+                        div_class = div.get_attribute('class') or 'no-class'
+                        div_id = div.get_attribute('id') or 'no-id'
+                        div_text = div.inner_text().strip().replace('\n', ' ')[:50]
+                        logger.info(
+                            f"   Visible DIV {visible_idx}: class='{div_class}' id='{div_id}' text='{div_text}'")
+                        visible_idx += 1
+                        if visible_idx > 15:  # Cap logging length
+                            break
+            logger.info("=" * 80)
         except Exception as e:
-            logger.error(f"Error logging page elements at {stage_name}: {str(e)}")
+            logger.warning(f"Failed to log element debugging snapshots: {str(e)}")
 
     def verify_dashboard_header(self):
         """

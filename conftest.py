@@ -35,7 +35,7 @@ def browser_context_args(run_folder: str):
     video_dir = Path(run_folder) / "videos"
     video_dir.mkdir(parents=True, exist_ok=True)
     return {
-        "viewport": {"width": 1500, "height": 725},
+        "viewport": {"width": 1600, "height": 850},
         "device_scale_factor": 1.0,
         "ignore_https_errors": True,
         "record_video_dir": str(video_dir),
@@ -51,8 +51,6 @@ def browser_type_launch_args():
     }
 
 
-# --- MODULE SCOPED FIXTURE: This is the fix for session persistence ---
-
 @pytest.fixture(scope="module")
 def shared_setup(browser, browser_context_args, run_folder, base_url, request):
     """
@@ -61,11 +59,19 @@ def shared_setup(browser, browser_context_args, run_folder, base_url, request):
     """
     logger.info("🚀 Starting Shared Visible Session...")
 
-    # Initialize browser context and page
+    # Initialize browser context
     context = browser.new_context(**browser_context_args)
+
+    # 🎯 INSTANT ANCHOR GLOBAL 75% ZOOM INJECTION RULES FOR PRIMARY CONTEXT
+    context.add_init_script("""() => {
+        const style = document.createElement('style');
+        style.innerHTML = 'body { zoom: 75% !important; }';
+        document.head.appendChild(style);
+    }""")
+
     page = context.new_page()
 
-    # Perform Login
+    # Perform Login normally under globally enforced 75% layout
     creds = config_loader.get_credentials()
     login_page = LoginPage(page, report_dir=run_folder)
     login_page.navigate_to_login(base_url)
@@ -76,6 +82,7 @@ def shared_setup(browser, browser_context_args, run_folder, base_url, request):
     from src.pages.case_page import CaseManagementPage
     objs = {
         "page": page,
+        "browser": browser,
         "onboard": OnboardCustomerPage(page, report_dir=run_folder),
         "case": CaseManagementPage(page, report_dir=run_folder),
         "workbench": WorkbenchPage(page, report_dir=run_folder)
@@ -94,23 +101,54 @@ def shared_setup(browser, browser_context_args, run_folder, base_url, request):
         except EOFError:
             pass
 
-    context.close()
+    # Ensure context is closed safely even if tests crashed beforehand
+    try:
+        if not page.is_closed():
+            context.close()
+    except Exception:
+        pass
 
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Ensures screenshots are captured even in shared sessions."""
+    """
+    Captures failure screenshots safely, accounting for shared dictionary
+    fixtures and dynamic context switches during multi-user simulation steps.
+    """
     outcome = yield
     report = outcome.get_result()
-    report_extras = getattr(report, "extras", [])
 
     if report.when == "call" and report.failed:
-        # Try to retrieve page from shared_setup
-        setup = item.funcargs.get("shared_setup")
-        page = setup["page"] if setup else item.funcargs.get("page")
+        page = None
 
+        # 1. Try to extract direct standalone page fixture
+        if "page" in item.funcargs:
+            page = item.funcargs["page"]
+
+        # 2. Extract embedded page instance from your shared session dictionary map
+        elif "shared_setup" in item.funcargs:
+            shared_data = item.funcargs["shared_setup"]
+            if isinstance(shared_data, dict) and "page" in shared_data:
+                page = shared_data["page"]
+
+        # 3. Double-check viability state & secure screenshot payload stream
         if page:
-            screenshot = page.screenshot(type="png")
-            base64_img = base64.b64encode(screenshot).decode("utf-8")
-            report_extras.append(extras.image(base64_img))
-            report.extras = report_extras
+            try:
+                if not page.is_closed():
+                    screenshot_bytes = page.screenshot(type="png")
+
+                    # Attach screenshot safely to pytest-html report if plugin is active
+                    pytest_html = item.config.pluginmanager.getplugin("html")
+                    if pytest_html is not None:
+                        extra = getattr(report, "extra", [])
+                        screenshot_base64 = base64.b64encode(screenshot_bytes).decode("utf-8")
+                        html_img = f'<div style="padding:10px;"><img src="data:image/png;base64,{screenshot_base64}" style="width:800px;border:1px solid #ccc;" /></div>'
+                        extra.append(extras.html(html_img))
+                        report.extra = extra
+
+                    logger.info("📸 Failure visual trace screenshot successfully linked to test report execution maps.")
+                else:
+                    logger.warning(
+                        "⚠️ Skipping screenshot step: Target execution page context instance is already closed.")
+            except Exception as e:
+                logger.error(f"❌ Failed to extract failure screenshot asset: {str(e)}")

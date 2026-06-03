@@ -1,17 +1,26 @@
+# utils/shared_data.py
+
 class SharedData:
     """
-    A simple singleton-like class to hold data that needs to be shared
-    between different test files during a single pytest session.
+    A class-level data store to hold details shared between 
+    different test files during a single pytest session execution.
     """
-    def __init__(self):
-        self.account_number = None
-        self.customer_name = None
-        self.email = None
-        self.case_id = None
-        self.case_type = None
-        self.case_subtype = None
-        self.reason_code = None
-        self.case_priority = None
-        self.case_description = None
-        self.case_comment = None
-        # Add any other data you need to share here
+    # Global Identifiers
+    account_id = None
+    account_number = None
+    customer_name = None
+    email = None
+
+    # Case Management details
+    case_id = None
+    case_type = None
+    case_subtype = None
+    reason_code = None
+    case_priority = None
+    case_description = None
+    case_comment = None
+
+    # Extracted Payment Gateways Tokens (Captured from Phase 6.7 Modal)
+    last_transaction_id = None
+    last_payment_status = None
+    last_reference_number = None
