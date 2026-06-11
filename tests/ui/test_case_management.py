@@ -5,7 +5,11 @@ from src.pages.onboard_customer_page import OnboardCustomerPage
 from src.pages.case_page import CaseManagementPage
 from utils.shared_data import SharedData
 from utils.logger import Logger
+
+# Import both specialized phase engines for the Refund automation flow
 from src.pages.refund_auto_case_creation import execute_full_refund_automation
+from src.pages.refund_case_resolution import execute_refund_case_resolution
+
 from utils.config import LOGIN_CREDENTIALS
 
 logger = Logger.get_logger()
@@ -105,11 +109,24 @@ def test_onboard_then_create_case_flow(onboarded_account_id):
 
 def test_refund_auto_flow(shared_setup, onboarded_account_id):
     """
-    Scenario 2: Refund Flow (Steps 7-10)
+    Scenario 2: Complete End-to-End Automated Refund Processing & Resolution Flow
     """
     page = shared_setup["page"]
+    browser = shared_setup["browser"]  # Safely extracting the active browser engine context to handle multiple sessions
+
     target_account_id = onboarded_account_id
     SharedData.account_id = target_account_id
 
-    logger.info(f"Step 7: Triggering Refund Flow scenario for account: {target_account_id}...")
-    assert execute_full_refund_automation(page), "The Refund Automation flow failed."
+    # --- PHASE 1: Process Reversal Payment, Capture Dynamic Success Popups, Search & Scrape Card Metadata ---
+    logger.info(f"Step 7: Triggering full automated refund case creation for account: {target_account_id}...")
+    assert execute_full_refund_automation(page), "❌ Phase 1 Error: The Refund Automation case creation flow failed."
+    logger.info("✅ Phase 1 Complete: Case generated, logged, and targets cached successfully into SharedData memory.")
+
+    # --- PHASE 2: Multi-Context Re-assignments, Sequential Activity Row Approvals & Terminal Resolution Checks ---
+    logger.info(
+        f"Step 8: Spawning multi-context tracks to drive Case ID #{SharedData.case_id} to complete verification...")
+    assert execute_refund_case_resolution(page,
+                                          browser), "❌ Phase 2 Error: Multi-Context Approvals or terminal resolution checks failed."
+
+    logger.info(
+        f"🎉 Success! Milestone Met: Refund Case #{SharedData.case_id} processed through all nodes to full resolution!")

@@ -3,6 +3,8 @@ from datetime import datetime
 from playwright.sync_api import Page
 from utils.shared_data import SharedData
 from utils.logger import Logger
+from utils.session_manager import SessionManager
+from src.pages.login_page import LoginPage
 
 logger = Logger.get_logger()
 
@@ -201,7 +203,7 @@ def execute_full_refund_automation(page: Page):
         logger.info("📁 'Payments' navigation header dropdown toggled open.")
 
         history_link = page.locator('a.dropdown-item[href*="payment-history"]').first
-        history_link.wait_for(state="visible", timeout=10000)
+        history_link.wait_for(state="visible", timeout=30000)
         logger.info("🎯 Clicking 'Payment History' routing option link...")
         history_link.click()
 
@@ -337,8 +339,14 @@ def execute_full_refund_automation(page: Page):
         base_url = page.url.split('/operation-workbench')[0]
         logger.info(f"🧭 Directing browser to Search Case routing matrix terminal page...")
 
+        target_url = f"{base_url}/operation-workbench/case-management/search-case?caseId={target_case}"
+        page.goto(target_url)
+        
+        # Validate session immediately after navigation
+        login_page = LoginPage(page)
+        SessionManager.ensure_active_session(page, login_page)
+
         # Explicit navigation match extracted from case_page.py standard context
-        page.goto(f"{base_url}/operation-workbench/case-management/search-case")
         page.wait_for_load_state("networkidle")
 
         # Click the "Search Cases" expansion option container button

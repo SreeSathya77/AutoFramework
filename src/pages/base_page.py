@@ -5,6 +5,7 @@ from src.utils.logger import Logger
 
 logger = Logger.get_logger()
 
+
 class BasePage:
     def __init__(self, page: Page, report_dir: str = None):
         self.page = page
@@ -34,7 +35,7 @@ class BasePage:
     def take_screenshot(self, name: str, report_dir: str = None):
         """Takes a screenshot and saves it to the RUN specific folder."""
         timestamp = datetime.now().strftime("%H%M%S")
-        
+
         # Determine the directory to save screenshots
         # Use provided report_dir parameter, fallback to instance report_dir, then default to global screenshots folder
         target_dir = report_dir or self.report_dir
@@ -42,10 +43,10 @@ class BasePage:
             screenshot_dir = os.path.join(target_dir, "screenshots")
         else:
             screenshot_dir = os.path.join(os.getcwd(), "screenshots")
-            
+
         if not os.path.exists(screenshot_dir):
             os.makedirs(screenshot_dir)
-        
+
         path = os.path.join(screenshot_dir, f"{name}_{timestamp}.png")
         self.page.screenshot(path=path)
         logger.info(f"Screenshot captured: {path}")
@@ -53,7 +54,7 @@ class BasePage:
 
     def scroll_focus_click(self, selector_or_locator, timeout: int = 5000, target_page: Page = None):
         """
-        A robust interaction method that ensures an element is scrolled into view, 
+        A robust interaction method that ensures an element is scrolled into view,
         visually highlighted, focused, and clicked.
         """
         # Determine the target page context
@@ -61,18 +62,18 @@ class BasePage:
 
         # Determine if we are dealing with a selector string or an existing Locator bound to a page
         element = selector_or_locator if isinstance(selector_or_locator, Locator) else p.locator(selector_or_locator)
-        
+
         # 1. Wait for visibility
         element.wait_for(state="visible", timeout=timeout)
-        
+
         # 2. Force scroll to document bottom to ensure layout is triggered
         p.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         p.wait_for_timeout(300)
-        
+
         # 3. Smoothly center the element in the viewport
         element.evaluate("el => el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})")
         p.wait_for_timeout(800)
-        
+
         # 4. Visual Highlight and Focus
         # We use orange to make it very obvious during the test run
         element.evaluate("""el => {
@@ -82,7 +83,7 @@ class BasePage:
         }""")
         element.hover()
         p.wait_for_timeout(400)
-        
+
         # 5. Interaction with fallback
         try:
             logger.info(f"Performing focused click on element...")
