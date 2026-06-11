@@ -8,6 +8,7 @@ class SessionManager:
     @staticmethod
     def ensure_active_session(page: Page, login_page_obj) -> bool:
         """
+
         Detects if the session has expired and re-logs if necessary.
         """
         page.wait_for_load_state("networkidle")
