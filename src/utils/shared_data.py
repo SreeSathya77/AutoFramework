@@ -10,6 +10,7 @@ class SharedData:
     account_number = None
     customer_name = None
     email = None
+    tagged_plate_number = None
 
     # Case Management details
     case_id = None

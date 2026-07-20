@@ -12,6 +12,7 @@ from src.pages.workbench_page import WorkbenchPage
 from src.pages.onboard_customer_page import OnboardCustomerPage
 
 logger = Logger.get_logger()
+VIEWPORT_SIZE = {"width": 1500, "height": 750}
 
 
 def pytest_addoption(parser):
@@ -35,7 +36,7 @@ def browser_context_args(run_folder: str):
     video_dir = Path(run_folder) / "videos"
     video_dir.mkdir(parents=True, exist_ok=True)
     return {
-        "viewport": {"width": 1600, "height": 850},
+        "viewport": VIEWPORT_SIZE,
         "device_scale_factor": 1.0,
         "ignore_https_errors": True,
         "record_video_dir": str(video_dir),
@@ -89,6 +90,16 @@ def shared_setup(browser, browser_context_args, run_folder, base_url, request):
     }
 
     yield objs
+    
+    # Close any cached multi-context browsers
+    if "contexts" in objs:
+        for email, (ctx, ctx_page, _) in objs["contexts"].items():
+            try:
+                ctx_page.close()
+                ctx.close()
+                logger.info(f"🧹 Cleaned up cached context for {email}")
+            except Exception as e:
+                logger.warning(f"Failed to clean up context for {email}: {e}")
 
     # Use the custom --hold flag at the very end of the module
     if request.config.getoption("--hold"):
@@ -100,6 +111,8 @@ def shared_setup(browser, browser_context_args, run_folder, base_url, request):
             input()
         except EOFError:
             pass
+            
+    context.close()
 
     # Ensure context is closed safely even if tests crashed beforehand
     try:

@@ -217,7 +217,7 @@ class OnboardCustomerPage(BasePage):
         self.country_dropdown.select_option(country_data["value"])
         logger.info(f"Selected Country: {country_name} ({country_data['value']})")
         
-        self.page.wait_for_timeout(1000)
+        self.page.wait_for_timeout(500)
         self.state_dropdown.select_option(index=1)
         self.page.wait_for_timeout(500)
         self.city_dropdown.select_option(index=1)

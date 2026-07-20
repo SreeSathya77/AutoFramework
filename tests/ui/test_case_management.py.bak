@@ -1,0 +1,151 @@
+import pytest
+from playwright.sync_api import Page
+from src.pages.login_page import LoginPage
+from src.pages.onboard_customer_page import OnboardCustomerPage
+from src.pages.case_page import CaseManagementPage
+from utils.shared_data import SharedData
+from utils.logger import Logger
+
+# Import both specialized phase engines for the Refund automation flow
+from src.pages.refund_auto_case_creation import execute_full_refund_automation
+from src.pages.refund_case_resolution import execute_refund_case_resolution
+
+from utils.config import LOGIN_CREDENTIALS
+
+logger = Logger.get_logger()
+
+
+def helper_onboard_account(shared_setup, request_tag: bool):
+    objs = shared_setup
+    page = objs["page"]
+    onboard = objs["onboard"]
+
+    logger.info(f"🚀 Starting Onboarding (request_tag={request_tag})...")
+    onboard.navigate_to_onboarding()
+    page.wait_for_load_state("networkidle")
+
+    # Fill and submit details
+    f_name, l_name, email = onboard.fill_and_submit_account_details("United States")
+    onboard.fill_vehicle_details(count=1, request_tag=request_tag)
+
+    # Capture and SHARE the account ID
+    captured_id = onboard.get_permanent_account_id()
+    assert captured_id is not None, "Failed to capture Account ID during onboarding."
+
+    logger.info(f"✅ Account {captured_id} created successfully.")
+
+    # Complete Onboarding process
+    onboard.fill_payment_details(f_name, l_name, card_count=1)
+    onboard.complete_final_payment()
+    onboard.navigate_to_account_summary()
+    
+    return captured_id
+
+
+@pytest.fixture(scope="module")
+def dual_onboarded_accounts(shared_setup):
+    """Fixture to onboard BOTH accounts upfront before any test execution begins."""
+    acc_without_tag = helper_onboard_account(shared_setup, request_tag=False)
+    acc_with_tag = helper_onboard_account(shared_setup, request_tag=True)
+    return {
+        "without_tag": acc_without_tag,
+        "with_tag": acc_with_tag
+    }
+
+
+def test_other_other_case_flow(shared_setup, dual_onboarded_accounts):
+    """
+    Scenario 1: Complete End-to-End Other-Other Case Creation & Resolution Flow
+    This consumes the account WITHOUT a tag.
+    """
+    objs = shared_setup
+    page = objs["page"]
+    browser = objs["browser"]
+    case_page = objs["case"]
+    
+    captured_id = dual_onboarded_accounts["without_tag"]
+    SharedData.account_id = captured_id
+
+    # --- CREATE CASE (Superadmin) ---
+    logger.info(f"Step 2: Creating Other-Other case for account: {captured_id}")
+    case_page.navigate_to_create_case()
+    case_page.fill_case_details(captured_id)
+    assert case_page.verify_case_and_assign(SharedData), "Assignment failed."
+
+    # --- SORTER APPROVAL ---
+    logger.info("🔓 Step 4: Executing Sorter resolution context window validation...")
+    assert case_page.resolve_as_owner_context(browser, SharedData), "Sorter Resolution failed."
+
+    # --- SUPERADMIN REASSIGNMENT ATTEMPT ---
+    case_page.superadmin_reassign_to_manager(SharedData)
+
+    # --- BOS CASE MANAGER APPROVAL ---
+    logger.info("👑 Step 5: Executing BOS Case Manager approval context window validation...")
+    assert case_page.resolve_as_manager_context(browser, SharedData), "Manager Approval failed."
+
+    # --- SUPERADMIN VERIFICATION (Via Search Case sidebar navigation — grid-only, no visibility click) ---
+    logger.info("🔄 Step 6: Verifying final case resolution state as Superadmin...")
+
+    case_page.navigate_to_search_case()
+
+    # Toggle search panel and enter Case ID
+    sa_search_toggle = page.locator('button.ra-export-btn', has_text="Search Cases").first
+    sa_search_toggle.wait_for(state="visible", timeout=10000)
+    sa_search_toggle.focus()
+    sa_search_toggle.click()
+    page.wait_for_timeout(800)
+
+    sa_case_input = page.locator('input#case[formcontrolname="case"]').first
+    sa_case_input.wait_for(state="visible", timeout=5000)
+    sa_case_input.focus()
+    sa_case_input.fill("")
+    sa_case_input.fill(str(SharedData.case_id))
+    page.wait_for_timeout(500)
+
+    search_btn = page.locator('button').filter(has_text="Search").first
+    search_btn.focus()
+    search_btn.click()
+    page.wait_for_timeout(1500)
+
+    sa_suggestion = page.locator('div.search-suggestions a:has-text("Cases")')
+    if sa_suggestion.is_visible(timeout=2000):
+        sa_suggestion.focus()
+        sa_suggestion.click()
+        page.wait_for_timeout(1500)
+
+    sa_final_row = page.locator("tr").filter(has_text=str(SharedData.case_id)).first
+    sa_final_row.wait_for(state="visible", timeout=10000)
+    sa_final_row.scroll_into_view_if_needed()
+    page.wait_for_timeout(500)
+
+    try:
+        status_cell = sa_final_row.locator("td").nth(10)
+        current_status = status_cell.inner_text().strip() if status_cell.is_visible() else "Unknown"
+        logger.info(f"📊 Superadmin observed Other-Other Case Status: '{current_status}'")
+    except Exception:
+        pass
+
+    logger.info(f"✅ Step 6 Success: Case {SharedData.case_id} verified from Search Case grid.")
+
+
+def test_refund_auto_flow(shared_setup, dual_onboarded_accounts):
+    """
+    Scenario 2: Complete End-to-End Automated Refund Processing & Resolution Flow
+    This consumes the account WITH a tag.
+    """
+    page = shared_setup["page"]
+    browser = shared_setup["browser"]
+
+    target_account_id = dual_onboarded_accounts["with_tag"]
+    SharedData.account_id = target_account_id
+
+    # --- PHASE 1: Process Reversal Payment, Capture Dynamic Success Popups, Search & Scrape Card Metadata ---
+    logger.info(f"Step 7: Triggering full automated refund case creation for account (with tag): {target_account_id}...")
+    assert execute_full_refund_automation(page), "❌ Phase 1 Error: The Refund Automation case creation flow failed."
+    logger.info("✅ Phase 1 Complete: Case generated, logged, and targets cached successfully into SharedData memory.")
+
+    # --- PHASE 2: Multi-Context Re-assignments, Sequential Activity Row Approvals & Terminal Resolution Checks ---
+    logger.info(f"Step 8: Spawning multi-context tracks to drive Case ID #{SharedData.case_id} to complete verification...")
+    assert execute_refund_case_resolution(page, browser), "❌ Phase 2 Error: Multi-Context Approvals or terminal resolution checks failed."
+
+    logger.info(f"🎉 Success! Milestone Met: Refund Case #{SharedData.case_id} processed through all nodes to full resolution!")

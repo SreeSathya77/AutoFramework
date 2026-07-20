@@ -16,15 +16,17 @@ class Logger:
 
         # Avoid adding duplicate handlers if get_logger is called multiple times
         if not logger.handlers:
-            # 1. Console Handler (INFO and above)
-            console_handler = logging.StreamHandler(sys.stdout)
-            console_handler.setLevel(logging.INFO)
-            console_formatter = logging.Formatter(
-                '%(asctime)s [%(levelname)s] %(message)s',
-                datefmt='%H:%M:%S'
-            )
-            console_handler.setFormatter(console_formatter)
-            logger.addHandler(console_handler)
+            # 1. Console Handler (INFO and above) - Only add if not running under Pytest
+            # Pytest handles console logging automatically via --log-cli-level=INFO
+            if "pytest" not in sys.modules:
+                console_handler = logging.StreamHandler(sys.stdout)
+                console_handler.setLevel(logging.INFO)
+                console_formatter = logging.Formatter(
+                    '%(asctime)s [%(levelname)s] %(message)s',
+                    datefmt='%H:%M:%S'
+                )
+                console_handler.setFormatter(console_formatter)
+                logger.addHandler(console_handler)
 
             # 2. File Handler (DEBUG and above) - Only if log_file is provided
             if log_file:

@@ -52,45 +52,119 @@ class BasePage:
         logger.info(f"Screenshot captured: {path}")
         return path
 
-    def scroll_focus_click(self, selector_or_locator, timeout: int = 5000, target_page: Page = None):
-        """
-        A robust interaction method that ensures an element is scrolled into view,
-        visually highlighted, focused, and clicked.
-        """
-        # Determine the target page context
+    def get_element(self, selector_or_locator, target_page=None):
         p = target_page or self.page
+        return selector_or_locator if isinstance(selector_or_locator, Locator) else p.locator(selector_or_locator)
 
-        # Determine if we are dealing with a selector string or an existing Locator bound to a page
-        element = selector_or_locator if isinstance(selector_or_locator, Locator) else p.locator(selector_or_locator)
-
-        # 1. Wait for visibility
+    def scroll_focus_click(self, selector_or_locator, timeout: int = 15000, target_page: Page = None, highlight_delay: int = 150):
+        p = target_page or self.page
+        element = self.get_element(selector_or_locator, target_page)
         element.wait_for(state="visible", timeout=timeout)
-
-        # 2. Force scroll to document bottom to ensure layout is triggered
-        p.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        p.wait_for_timeout(300)
-
-        # 3. Smoothly center the element in the viewport
         element.evaluate("el => el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})")
-        p.wait_for_timeout(800)
+        p.wait_for_timeout(150)
+        
+        element.evaluate("""el => {
+            el.style.setProperty('border', '3px solid orange', 'important');
+            el.style.setProperty('box-shadow', '0 0 10px orange', 'important');
+            el.style.setProperty('outline', 'none', 'important');
+            el.focus();
+        }""")
+        p.wait_for_timeout(highlight_delay)
 
-        # 4. Visual Highlight and Focus
-        # We use orange to make it very obvious during the test run
+        try:
+            element.click(timeout=3000)
+        except Exception:
+            try:
+                element.click(timeout=2000, force=True)
+            except Exception:
+                element.evaluate("el => el.click()")
+        p.wait_for_timeout(20)
+        try:
+            if element.is_visible(timeout=50):
+                element.evaluate("el => { el.style.border = 'none'; el.style.boxShadow = 'none'; el.style.outline = 'none'; }")
+        except Exception:
+            pass
+
+    def scroll_focus_fill(self, selector_or_locator, text: str, timeout: int = 15000, target_page: Page = None):
+        p = target_page or self.page
+        element = self.get_element(selector_or_locator, target_page)
+        element.wait_for(state="visible", timeout=timeout)
+        element.evaluate("el => el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})")
+        p.wait_for_timeout(20)
+
         element.evaluate("""el => {
             el.style.border = '3px solid orange';
             el.style.boxShadow = '0 0 10px orange';
             el.focus();
         }""")
-        element.hover()
-        p.wait_for_timeout(400)
-
-        # 5. Interaction with fallback
+        p.wait_for_timeout(20)
+        
+        element.fill(text)
+        
+        p.wait_for_timeout(20)
         try:
-            logger.info(f"Performing focused click on element...")
-            element.click(timeout=3000, force=True)
-        except Exception as e:
-            logger.warning(f"Standard click failed, attempting JS click. Error: {str(e)}")
+            if element.is_visible(timeout=50):
+                element.evaluate("el => { el.blur(); el.style.border = 'none'; el.style.boxShadow = 'none'; }")
+        except Exception:
+            pass
+
+    def scroll_focus_check(self, selector_or_locator, timeout: int = 15000, target_page: Page = None):
+        p = target_page or self.page
+        element = self.get_element(selector_or_locator, target_page)
+        element.wait_for(state="attached", timeout=timeout)
+        element.evaluate("el => el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})")
+        p.wait_for_timeout(20)
+
+        element.evaluate("""el => {
+            el.style.outline = '3px solid orange';
+            el.style.boxShadow = '0 0 10px orange';
+        }""")
+        p.wait_for_timeout(20)
+        
+        try:
+            element.check(timeout=3000, force=True)
+        except Exception:
             element.evaluate("el => el.click()")
+        
+        p.wait_for_timeout(20)
+        try:
+            if element.is_visible(timeout=50):
+                element.evaluate("el => { el.style.outline = 'none'; el.style.boxShadow = 'none'; }")
+        except Exception:
+            pass
+
+    def scroll_focus_select(self, selector_or_locator, value=None, label=None, index=None, timeout: int = 5000, target_page: Page = None):
+        p = target_page or self.page
+        element = self.get_element(selector_or_locator, target_page)
+        element.wait_for(state="visible", timeout=timeout)
+        element.evaluate("el => el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})")
+        p.wait_for_timeout(20)
+
+        element.evaluate("""el => {
+            el.style.border = '3px solid orange';
+            el.style.boxShadow = '0 0 10px orange';
+            el.focus();
+        }""")
+        p.wait_for_timeout(20)
+        
+        if label is not None:
+            element.select_option(label=label)
+        elif index is not None:
+            element.select_option(index=index)
+        else:
+            element.select_option(value=value)
+            
+        try:
+            element.dispatch_event("change")
+        except Exception:
+            pass
+            
+        p.wait_for_timeout(20)
+        try:
+            if element.count() > 0:
+                element.evaluate("el => { el.blur(); el.style.border = 'none'; el.style.boxShadow = 'none'; }")
+        except Exception:
+            pass
 
     def scroll_to_bottom(self):
         """Utility to force scroll to the bottom of the page."""

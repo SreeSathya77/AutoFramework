@@ -162,7 +162,7 @@ class AccountPage:
         # Country (default to United States)
         self._apply_focus(self.country_dropdown)
         self.country_dropdown.select_option("United States")
-        self.page.wait_for_timeout(1000)  # Wait for state dropdown to populate
+        self.page.wait_for_timeout(500)  # Wait for state dropdown to populate
 
         # State (select first available option)
         self._apply_focus(self.state_dropdown)
@@ -264,7 +264,7 @@ class AccountPage:
             # Search functionality - update selector based on actual search field
             search_field = self.page.locator("input[placeholder*='Search']")  # Placeholder
             search_field.fill(account_email)
-            self.page.wait_for_timeout(1000)  # Wait for search results
+            self.page.wait_for_timeout(500)  # Wait for search results
 
             # Check if account appears in results
             account_locator = self.page.locator(f"text={account_email}")

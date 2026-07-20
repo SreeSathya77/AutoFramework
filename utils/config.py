@@ -9,6 +9,10 @@ LOGIN_CREDENTIALS = {
         "email": "superadmin_qm@yopmail.com",
         "password": "Superadmin@1234",
     },
+    "casesorter01": {
+        "email": "casesorter01@yopmail.com",
+        "password": "Casesorter01@"
+    },
     "caseexecutive6": {
         "email": "caseexecutive6@yopmail.com",
         "password": "Caseexecutive6@"

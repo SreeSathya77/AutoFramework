@@ -4,9 +4,7 @@ from collections import Counter
 from src.pages.case_page import CaseManagementPage
 from src.utils.logger import Logger
 from src.utils.db_validator import get_all_cases_from_db
-# Re-using the authenticated browser fixture session from your test_case_management.py file
-from tests.ui.test_case_management import shared_setup
-
+# (Removed explicit import of shared_setup fixture, Pytest automatically injects it)
 logger = Logger.get_logger()
 
 

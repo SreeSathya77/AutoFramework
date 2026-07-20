@@ -11,7 +11,7 @@ class SessionManager:
 
         Detects if the session has expired and re-logs if necessary.
         """
-        page.wait_for_load_state("networkidle")
+        page.wait_for_load_state("networkidle", timeout=10000)
         if "/login" in page.url or page.locator('input[formcontrolname="emailId"]').is_visible(timeout=2000):
             logger.warning("🔐 Session expiry or logout detected. Re-authenticating...")
             
@@ -44,12 +44,13 @@ class SessionManager:
         Sends a non-destructive network request to reset the server's idle timer.
         """
         try:
-            # 1. Trigger a network request to a safe endpoint
-            page.evaluate("fetch('/api/v1/user/profile').catch(() => {})")
+            # 1. Trigger non-intrusive network activity if needed (removed fetch to prevent interceptor loaders)
             
-            # 2. Perform a safe UI interaction (clicking the body or an empty area)
-            page.mouse.click(0, 0)
+            # 2. Perform safe UI interaction to reset client-side idle tracking
+            # Clicking (1,1) avoids UI elements while simulating user activity
+            page.mouse.move(1, 1)
+            page.mouse.click(1, 1)
             
-            logger.info("💓 Heartbeat sent (Network + UI) to keep session alive.")
+            logger.info("💓 Heartbeat Pulse (Network + UI) sent to keep session alive.")
         except Exception:
             pass

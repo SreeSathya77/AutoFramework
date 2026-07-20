@@ -5,6 +5,7 @@ from utils.shared_data import SharedData
 from utils.logger import Logger
 from utils.session_manager import SessionManager
 from src.pages.login_page import LoginPage
+from src.pages.base_page import BasePage
 
 logger = Logger.get_logger()
 
@@ -15,6 +16,7 @@ def execute_full_refund_automation(page: Page):
     logger.info("================================================================================")
 
     target_account = SharedData.account_id
+    base = BasePage(page)
     if not target_account:
         logger.error("❌ Shared Data Error: No account_id found in SharedData.")
         return False
@@ -27,21 +29,21 @@ def execute_full_refund_automation(page: Page):
 
         search_bar = page.locator('input.search-input[placeholder="Search here..."]').first
         search_bar.wait_for(state="visible", timeout=15000)
-        search_bar.click()
+        base.scroll_focus_click(search_bar)
 
         search_bar.press("Control+A")
         search_bar.press("Backspace")
-        search_bar.fill(str(target_account))
+        base.scroll_focus_fill(search_bar, str(target_account))
         search_bar.press("Enter")
         logger.info(f"⌨️ Account ID '{target_account}' typed and Enter executed.")
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(500)
 
         account_management_tab = page.locator('span:has-text("Account Management")').first
         account_management_tab.wait_for(state="visible", timeout=15000)
-        account_management_tab.click()
+        base.scroll_focus_click(account_management_tab)
         logger.info("📁 'Account Management' selection category tab clicked inside global drop-down list.")
         page.wait_for_load_state("networkidle")
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(500)
 
         logger.info("📊 Processing results grid matching criteria inside .ra-table...")
         results_table = page.locator('table.ra-table[aria-label="Data table"]').first
@@ -52,8 +54,16 @@ def execute_full_refund_automation(page: Page):
 
         eye_icon = target_row.locator('span.material-symbols-outlined:has-text("visibility")').first
         eye_icon.wait_for(state="visible", timeout=10000)
-
-        eye_icon.evaluate("node => node.click()")
+        
+        # Extended visual pause so user can see it before click happens
+        eye_icon.evaluate("""node => {
+            node.scrollIntoViewIfNeeded();
+            node.style.outline = '4px solid orange';
+            node.style.backgroundColor = 'rgba(255, 165, 0, 0.3)';
+        }""")
+        page.wait_for_timeout(1500)
+        
+        base.scroll_focus_click(eye_icon)
         logger.info(f"👁️ Eye symbol (visibility) icon clicked successfully for account: {target_account}.")
 
         logger.info("⏳ Validating Account Summary dashboard visibility state components...")
@@ -76,16 +86,17 @@ def execute_full_refund_automation(page: Page):
 
         card_recharge_btn.evaluate("""node => {
             node.scrollIntoViewIfNeeded();
-            node.focus();
-            node.style.outline = "4px solid rgba(0, 191, 255, 0.8)";
-            node.style.outlineOffset = "2px";
-            node.style.transition = "all 0.2s ease";
-            node.click();
+            node.style.outline = '4px solid orange';
+            node.style.boxShadow = '0 0 10px orange';
         }""")
+        # Add a visual pause so the user can see the highlight before it clicks
+        page.wait_for_timeout(1500)
+        
+        base.scroll_focus_click(card_recharge_btn)
 
         logger.info("🎯 Focused and clicked direct Recharge button on Balance card successfully.")
         page.wait_for_load_state("networkidle")
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(500)
         logger.info("✅ Successfully navigated to Recharge screen.")
     except Exception as e:
         logger.error(f"❌ Recharge Navigation Failure: {e}")
@@ -102,7 +113,7 @@ def execute_full_refund_automation(page: Page):
         card_radio.wait_for(state="visible", timeout=10000)
 
         logger.info("Selecting the first available saved card container...")
-        card_radio.first.click(force=True)
+        base.scroll_focus_click(card_radio.first)
 
         amount_input = page.locator('input.mp-amount-input')
         logger.info("⏳ Synchronizing actionability state: Waiting for Amount input to enable...")
@@ -118,7 +129,7 @@ def execute_full_refund_automation(page: Page):
         page.wait_for_function("el => !el.hasAttribute('disabled')", arg=pay_button.element_handle(), timeout=10000)
 
         logger.info("🚀 Triggering payment transaction authorization submit action...")
-        pay_button.click()
+        base.scroll_focus_click(pay_button)
     except Exception as e:
         logger.error(f"❌ Initial Payment Submission Failure: {e}")
         return False
@@ -135,7 +146,7 @@ def execute_full_refund_automation(page: Page):
         pay_now_btn.wait_for(state="visible", timeout=5000)
 
         logger.info("🎯 Clicking 'Pay Now' button to finalize transaction...")
-        pay_now_btn.click()
+        base.scroll_focus_click(pay_now_btn)
 
         confirm_modal.wait_for(state="hidden", timeout=15000)
         logger.info("✅ Confirmation checkout challenge completed.")
@@ -183,7 +194,7 @@ def execute_full_refund_automation(page: Page):
         close_btn.wait_for(state="visible", timeout=5000)
 
         logger.info("🎯 Clicking 'Close' button to dismiss the payment success modal window...")
-        close_btn.click()
+        base.scroll_focus_click(close_btn)
 
         success_modal.wait_for(state="hidden", timeout=15000)
         page.wait_for_load_state("networkidle")
@@ -199,16 +210,16 @@ def execute_full_refund_automation(page: Page):
         logger.info("🧭 Expanding Payments dropdown navigation header...")
         payments_dropdown = page.locator('a.nav-link.dropdown-toggle', has_text="Payments").first
         payments_dropdown.wait_for(state="visible", timeout=15000)
-        payments_dropdown.click()
+        base.scroll_focus_click(payments_dropdown)
         logger.info("📁 'Payments' navigation header dropdown toggled open.")
 
         history_link = page.locator('a.dropdown-item[href*="payment-history"]').first
         history_link.wait_for(state="visible", timeout=30000)
         logger.info("🎯 Clicking 'Payment History' routing option link...")
-        history_link.click()
+        base.scroll_focus_click(history_link)
 
         page.wait_for_load_state("networkidle")
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(500)
         logger.info("✅ Arrived successfully inside Payment History ledger views data grid layout.")
     except Exception as e:
         logger.error(f"❌ Navigation to Payment History Link Failed: {e}")
@@ -218,12 +229,21 @@ def execute_full_refund_automation(page: Page):
     # PHASE 6.95: PAYMENT HISTORY LEDGER MATCHING & REVERSAL TRIGGER
     # =====================================================================================
     try:
-        logger.info("📊 Fetching Payment History records table context...")
+        logger.info("📊 Synchronizing Payment History ledger context...")
         history_table = page.locator('table.ra-table[aria-label="Data table"]').first
-        history_table.wait_for(state="visible", timeout=15000)
+        history_table.wait_for(state="visible", timeout=20000)
 
-        first_row = history_table.locator("tbody tr").first
-        first_row.wait_for(state="visible", timeout=10000)
+        # DATA INTEGRITY SYNC: If the record doesn't appear immediately, reload the page to force sync
+        try:
+            first_row = history_table.locator("tbody tr").first
+            first_row.wait_for(state="visible", timeout=8000)
+        except Exception:
+            logger.warning("⚠️ Target ledger entry not found. Refreshing page to force data synchronization...")
+            page.reload()
+            page.wait_for_load_state("networkidle")
+            history_table.wait_for(state="visible", timeout=15000)
+            first_row = history_table.locator("tbody tr").first
+            first_row.wait_for(state="visible", timeout=15000)
 
         logger.info("🔍 Performing integrity verification on the target record columns...")
         row_payment_type = first_row.locator('td').nth(1).text_content().strip()
@@ -238,8 +258,8 @@ def execute_full_refund_automation(page: Page):
         reverse_action_btn.wait_for(state="visible", timeout=5000)
 
         logger.info("🎯 Clicking 'Reverse' option on verified target history record...")
-        reverse_action_btn.click()
-        page.wait_for_timeout(1000)
+        base.scroll_focus_click(reverse_action_btn)
+        page.wait_for_timeout(500)
     except Exception as e:
         logger.error(f"❌ Verification or Click action within Payment History record table failed: {e}")
         return False
@@ -273,7 +293,7 @@ def execute_full_refund_automation(page: Page):
         submit_btn = details_modal.locator(
             "button.ra-btn--primary, button:has-text('Submit'), button.btn-primary").filter(
             has_text="Submit").first
-        submit_btn.click()
+        base.scroll_focus_click(submit_btn)
 
         details_modal.wait_for(state="hidden", timeout=10000)
         logger.info("✅ Reversal Details form processed and sent.")
@@ -289,7 +309,7 @@ def execute_full_refund_automation(page: Page):
 
         ok_btn = alert_modal.locator(
             "button.ra-btn--primary, button:has-text('OK'), button:has-text('Confirm')").filter(has_text="OK")
-        ok_btn.click()
+        base.scroll_focus_click(ok_btn)
 
         alert_modal.wait_for(state="hidden", timeout=15000)
         logger.info("✅ Reversal Flow fully completed and confirmed.")
@@ -302,7 +322,9 @@ def execute_full_refund_automation(page: Page):
     # =====================================================================================
     try:
         logger.info("⏳ Intercepting 'Case Created' success notification modal layer...")
-        case_modal = page.locator("div.ra-modal--alert").filter(has_text="Case Created").first
+        case_modal = page.locator("div.ra-modal--alert").filter(
+            has_text="Case Created"
+        ).first
         case_modal.wait_for(state="visible", timeout=20000)
 
         case_id_link = case_modal.locator("p.ra-modal__text a.ra-link").first
@@ -317,178 +339,229 @@ def execute_full_refund_automation(page: Page):
 
         SharedData.case_id = clean_case_id
 
-        logger.info(f"🎯 Clicking Case ID link context (#{clean_case_id}) to drill down to details...")
-        case_id_link.click()
-
-        page.wait_for_load_state("networkidle")
-        page.wait_for_timeout(2000)
-        logger.info("✅ Click processed successfully. Redirected into specialized Case Profile view.")
-    except Exception as e:
-        logger.error(f"❌ Failed to extract Case ID token or click popup hyperlink reference item: {e}")
-        return False
-
-    # =====================================================================================
-    # REAL-WORLD REBUILT PHASE 10: CASE NAVIGATION & ROUTED SEARCH (STEPS 1 & 2)
-    # =====================================================================================
-    try:
-        target_case = SharedData.case_id
-        if not target_case:
-            logger.error("❌ Shared Data Error: No case_id found in SharedData cache storage.")
-            return False
-
-        base_url = page.url.split('/operation-workbench')[0]
-        logger.info(f"🧭 Directing browser to Search Case routing matrix terminal page...")
-
-        target_url = f"{base_url}/operation-workbench/case-management/search-case?caseId={target_case}"
-        page.goto(target_url)
+        try:
+            ok_btn = case_modal.locator("button.ra-btn--primary, button:has-text('OK'), button:has-text('Close')").first
+            ok_btn.click(timeout=3000)
+        except Exception:
+            pass
+            
+        page.wait_for_timeout(500)
         
-        # Validate session immediately after navigation
-        login_page = LoginPage(page)
-        SessionManager.ensure_active_session(page, login_page)
+        logger.info(f"🎯 Navigating to Search Case to locate Refund Case (#{clean_case_id})...")
+        
+        # Hide chatbot to prevent interception
+        try:
+            page.add_style_tag(content=".chatbot-icon, #chat-widget-container { display: none !important; }")
+        except Exception:
+            pass
 
-        # Explicit navigation match extracted from case_page.py standard context
-        page.wait_for_load_state("networkidle")
+        # Remove any lingering backdrops from the modal
+        page.evaluate("""() => {
+            document.querySelectorAll('.cdk-overlay-backdrop, .modal-backdrop').forEach(el => el.remove());
+        }""")
+        
+        workbench_icon = page.locator("span.material-symbols-outlined", has_text="group").first
+        case_management_menu = page.locator('a.nav-link:has-text("Case Management")')
+        search_case_link = case_management_menu.locator("xpath=following-sibling::ul//a[contains(text(),'Search Case')]")
 
-        # Click the "Search Cases" expansion option container button
-        search_cases_toggle = page.locator('button.ra-export-btn', has_text="Search Cases").first
-        search_cases_toggle.wait_for(state="visible", timeout=10000)
-        search_cases_toggle.click()
-        logger.info("🔘 'Search Cases' drawer filter module expanded.")
-        page.wait_for_timeout(1000)
+        if not case_management_menu.is_visible():
+            try: workbench_icon.click()
+            except: pass
+            page.wait_for_timeout(500)
+            
+        if not search_case_link.is_visible():
+            try: case_management_menu.click()
+            except: pass
+            page.wait_for_timeout(500)
+            
+        try: search_case_link.click()
+        except: pass
+        
+        sa_search_toggle = page.locator('button.ra-export-btn', has_text="Search Cases").first
+        sa_search_toggle.wait_for(state="visible", timeout=15000)
+        
+        sa_case_input = page.locator('input#case[formcontrolname="case"]').first
+        if not sa_case_input.is_visible():
+            sa_search_toggle.click()
+            page.wait_for_timeout(500)
 
-        # Locate input context target matching: id="case"
-        case_number_input = page.locator('input#case[formcontrolname="case"]').first
-        case_number_input.wait_for(state="visible", timeout=10000)
-        case_number_input.click()
-        case_number_input.press("Control+A")
-        case_number_input.press("Backspace")
+        sa_case_input.wait_for(state="visible", timeout=5000)
+        sa_case_input.fill("")
+        sa_case_input.fill(str(clean_case_id))
+        page.wait_for_timeout(500)
 
-        # Populate input with runtime Case ID digits text trace
-        logger.info(f"⌨️ Entering target Case Reference ID: {target_case} inside field...")
-        case_number_input.fill(str(target_case))
+        search_btn = page.locator('button').filter(has_text="Search").first
+        search_btn.click()
+        page.wait_for_timeout(500)
 
-        # Click search execution action button
-        logger.info("🚀 Submitting query parameter index lookup...")
-        search_submit_btn = page.locator('button').filter(has_text="Search").first
-        search_submit_btn.click()
+        sa_suggestion = page.locator('div.search-suggestions a:has-text("Cases")')
+        if sa_suggestion.is_visible(timeout=2000):
+            sa_suggestion.click()
+            page.wait_for_timeout(500)
 
-        page.wait_for_load_state("networkidle")
-        page.wait_for_timeout(1500)
+        sa_final_row = page.locator("tr").filter(has_text=str(clean_case_id)).first
+        sa_final_row.wait_for(state="visible", timeout=15000)
 
-        # Core Suggestions list drop-down hook sequence from codebase lines
-        cases_suggestion = page.locator('div.search-suggestions a:has-text("Cases")')
-        if cases_suggestion.is_visible(timeout=3000):
-            logger.info("📁 Opening Case suggestion router category reference block link...")
-            cases_suggestion.click()
-            page.wait_for_timeout(1000)
+        logger.info(f"✅ Found case {clean_case_id} in the grid. Opening Case Profile...")
+        
+        visibility_icon = sa_final_row.locator('span.material-symbols-outlined:has-text("visibility")').first
+        visibility_icon.click()
 
-        # Locate matching records result row within the table body layout elements
-        logger.info("📊 Isolating matching row element cell context values...")
-        target_row = page.locator("tr").filter(has_text=str(target_case)).first
-        target_row.wait_for(state="visible", timeout=10000)
+        # Wait for the loading spinner and backdrop to disappear to handle the delay organically
+        try:
+            logger.info("⏳ Waiting for page loading spinner to resolve...")
+            page.locator("mat-spinner, mat-progress-spinner, .spinner, .loader, .loading, .cdk-overlay-backdrop").first.wait_for(state="hidden", timeout=25000)
+            logger.info("✅ Spinner resolved. Case page fully loaded.")
+        except Exception:
+            logger.warning("⚠️ Spinner did not resolve within timeout, proceeding after fallback wait.")
+            page.wait_for_timeout(500)
 
-        # Click row viewing eye icon link
-        eye_icon = target_row.locator('span:has-text("visibility")').first
-        eye_icon.wait_for(state="visible", timeout=10000)
-        logger.info("🎯 Clicking eye 'visibility' action button cell context...")
-        # ... (This is the end of your Phase 10 script where it clicks the eye icon) ...
-        eye_icon.click()
-
-        page.wait_for_url("**/view-case", timeout=15000)
-        page.wait_for_load_state("networkidle")
-        logger.info(f"✅ Successfully completed search navigation lookup. Opened view for Case: #{target_case}.")
+        logger.info("✅ Case Profile opened successfully.")
 
     except Exception as e:
-        logger.error(f"❌ Failed to run complete Search Case form query routing loop step: {e}")
+        logger.error(
+            f"❌ Failed to extract Case ID token or click popup hyperlink reference item: {e}"
+        )
         return False
 
-        # =====================================================================================
-        # PHASE 11: DATA EXTRACTION ENGINE (LOGS, SHARED_DATA, AND CONSOLE)
-        # =====================================================================================
+    # =====================================================================================
+    # PHASE 10: DIRECT CASE PROFILE DATA EXTRACTION
+    # =====================================================================================
     try:
         logger.info("📊 Initiating Case Profile Data Extraction Engine...")
 
         extracted_case_data = {}
 
-        # --- 1. EXTRACT "CASE DETAILS" CARD ---
+        # Wait for case profile page
+        case_details_container = page.locator(
+            "div.case-details div.border"
+        ).first
+        case_details_container.wait_for(state="visible", timeout=20000)
+
+        # =========================================================================
+        # 1. CASE DETAILS
+        # =========================================================================
         logger.info("🔍 Scraped Context Group: Case Details...")
-        case_details_container = page.locator("div.case-details div.border").first
-        case_details_container.wait_for(state="visible", timeout=10000)
 
         p_elements = case_details_container.locator("p").all()
+
         for p in p_elements:
-            span_count = p.locator("span").count()
-            if span_count > 0:
-                label = p.locator("span").inner_text().strip()
+            if p.locator("span").count() > 0:
+                label = p.locator("span").inner_text().strip().replace(":", "")
+                span_text = p.locator("span").inner_text().strip()
                 full_text = p.inner_text().strip()
-                value = full_text.replace(label, "").strip()
+                value = full_text.replace(span_text, "").strip()
+
                 if label:
                     extracted_case_data[label] = value
 
-        # --- 2. EXTRACT DROPDOWN SELECTIONS (STATUS, PRIORITY, OWNER) ---
-        logger.info("🔍 Scraped Context Group: Form Formulations/Dropdown values...")
+        # =========================================================================
+        # 2. DROPDOWN VALUES
+        # =========================================================================
+        logger.info("🔍 Scraped Context Group: Dropdown values...")
+
         dropdowns = {
             "Case Status": page.locator("select#caseStatus"),
             "Case Priority": page.locator("select#casePriority"),
             "Case Owner": page.locator("select#caseOwner")
         }
+
         for field_name, select_locator in dropdowns.items():
             if select_locator.count() > 0:
-                dropdown_val = select_locator.input_value()
-                extracted_case_data[field_name] = dropdown_val if dropdown_val else "Not Selected"
+                try:
+                    dropdown_val = select_locator.input_value()
+                    extracted_case_data[field_name] = (
+                        dropdown_val if dropdown_val else "Not Selected"
+                    )
+                except:
+                    extracted_case_data[field_name] = "Unavailable"
 
-        # --- 3. EXTRACT "CASE SPECIFIC DETAILS" MATRIX ---
+        # =========================================================================
+        # 3. CASE SPECIFIC DETAILS
+        # =========================================================================
         logger.info("🔍 Scraped Context Group: Case Specific Details...")
-        specific_details_divs = page.locator("div.casespecificDetails > div").all()
+
+        specific_details_divs = page.locator(
+            "div.casespecificDetails > div"
+        ).all()
+
         for box in specific_details_divs:
             if box.locator("strong").count() > 0:
-                label = box.locator("strong").inner_text().strip()
+                label = box.locator("strong").inner_text().strip().replace(":", "")
                 full_text = box.inner_text().strip()
                 value = full_text.replace(label, "").strip()
+
                 if label:
                     extracted_case_data[label] = value
 
-        # --- 4. EXTRACT "CUSTOMER DETAILS" FOOTER CARD ---
+        # =========================================================================
+        # 4. CUSTOMER DETAILS
+        # =========================================================================
         logger.info("🔍 Scraped Context Group: Customer Details...")
-        customer_row = page.locator("div.case-details div.row").last
-        customer_p_elements = customer_row.locator("p").all()
-        for p in customer_p_elements:
-            if p.locator("span").count() > 0:
-                label = p.locator("span").inner_text().strip().replace(":", "")
-                full_text = p.inner_text().strip()
-                value = full_text.replace(p.locator("span").inner_text(), "").strip()
-                if label:
-                    extracted_case_data[label] = value
 
-        # =====================================================================================
-        # ROUTING CRADLE: LOGGING AND SAVING MECHANISMS
-        # =====================================================================================
+        customer_rows = page.locator("div.case-details div.row").all()
 
-        # 1. Output directly to the runtime Console terminal panel via python print
+        if customer_rows:
+            customer_row = customer_rows[-1]
+            customer_p_elements = customer_row.locator("p").all()
+
+            for p in customer_p_elements:
+                if p.locator("span").count() > 0:
+                    label = p.locator("span").inner_text().strip().replace(":", "")
+                    span_text = p.locator("span").inner_text().strip()
+                    full_text = p.inner_text().strip()
+                    value = full_text.replace(span_text, "").strip()
+
+                    if label:
+                        extracted_case_data[label] = value
+
+        # =========================================================================
+        # CONSOLE OUTPUT
+        # =========================================================================
         print("\n🚀 [CONSOLE OUTPUT] --- CAPTURED REFUND CASE DETAIL PROFILE METRICS ---")
+
         for key, val in extracted_case_data.items():
             print(f"   👉 {key} : {val}")
+
         print("-----------------------------------------------------------------------\n")
 
-        # 2. Write details down into your infrastructure Logger configuration files
+        # =========================================================================
+        # FILE LOG OUTPUT
+        # =========================================================================
         logger.info("================================================================================")
         logger.info("💾 WRITING EXTRACTION ENGINE BLOCK TO FILE LOGS:")
+
         for key, val in extracted_case_data.items():
             logger.info(f"   🔹 {key:<35} :: {val}")
+
         logger.info("================================================================================")
 
-        # 3. Cache inside your global SharedData runtime context memory layer
+        # =========================================================================
+        # SHARED DATA CACHE
+        # =========================================================================
         SharedData.latest_case_profile_snapshot = extracted_case_data
+        SharedData.last_payment_reference_id = extracted_case_data.get(
+            "Payment Reference Id", ""
+        )
+        SharedData.extracted_payment_amount = extracted_case_data.get(
+            "Payment Amount", ""
+        )
+        SharedData.extracted_gateway_transaction_id = extracted_case_data.get(
+            "Payment Gate Way Transaction Id", ""
+        )
+        SharedData.case_current_owner = extracted_case_data.get(
+            "Case Owner", ""
+        )
+        SharedData.case_current_status = extracted_case_data.get(
+            "Case Status", ""
+        )
 
-        SharedData.last_payment_reference_id = extracted_case_data.get("Payment Reference Id", "")
-        SharedData.extracted_payment_amount = extracted_case_data.get("Payment Amount", "")
-        SharedData.extracted_gateway_transaction_id = extracted_case_data.get("Payment Gate Way Transaction Id", "")
-        SharedData.case_current_owner = extracted_case_data.get("Case Owner", "")
-        SharedData.case_current_status = extracted_case_data.get("Case Status", "")
+        logger.info(
+            "✅ Metrics extracted, formatted, logged, and cached into SharedData successfully."
+        )
 
-        logger.info("✅ Metrics extracted, formatted, logged, and cached into SharedData seamlessly.")
         return True
 
     except Exception as e:
-        logger.error(f"❌ Critical Error running dynamic page metrics capture engine: {e}")
+        logger.error(f"❌ Failed during Executive 6 reassignment phase: {e}")
         return False

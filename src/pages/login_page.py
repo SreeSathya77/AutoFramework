@@ -38,8 +38,8 @@ class LoginPage(BasePage):
             logger.info("Proceeding with login...")
 
             # 4. Populate credentials
-            self.fill_field(self.email_input, email)
-            self.fill_field(self.password_input, password)
+            self.scroll_focus_fill(self.email_input, email)
+            self.scroll_focus_fill(self.password_input, password)
             self.page.wait_for_timeout(500)
 
             # 5. Use the shared BasePage interaction logic

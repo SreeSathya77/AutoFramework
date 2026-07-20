@@ -40,5 +40,8 @@ class Logger:
                     pass
 
             logger.addHandler(file_handler)
-            logger.addHandler(console_handler)
+            
+            # Prevent double-logging in console when running under pytest
+            if "pytest" not in sys.modules:
+                logger.addHandler(console_handler)
         return logger

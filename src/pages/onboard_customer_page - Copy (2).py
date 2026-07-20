@@ -269,7 +269,7 @@ class OnboardCustomerPage(BasePage):
         try:
             self.workbench_icon.wait_for(state="visible", timeout=10000)
             self.workbench_icon.click()
-            self.page.wait_for_timeout(1000)
+            self.page.wait_for_timeout(500)
             self.manage_accounts_toggle.wait_for(state="visible", timeout=5000)
             self.manage_accounts_toggle.click()
             self.onboard_customer_link.wait_for(state="visible", timeout=5000)
@@ -304,7 +304,7 @@ class OnboardCustomerPage(BasePage):
 
         country_data = self.country_map.get(country_name)
         self.page.locator('select[formcontrolname="country"]').select_option(country_data["value"])
-        self.page.wait_for_timeout(1000)
+        self.page.wait_for_timeout(500)
         self.page.locator('select[formcontrolname="state"]').select_option(index=1)
         self.page.locator('select[formcontrolname="city"]').select_option(index=1)
 
@@ -371,10 +371,10 @@ class OnboardCustomerPage(BasePage):
             self.plate_start_date_input.dispatch_event("blur")
 
             self.request_tag_radio.click(force=True)
-            self.page.wait_for_timeout(1000)
+            self.page.wait_for_timeout(500)
             self.tag_mode_dropdown.select_option("BUY")
             self.tag_mode_dropdown.dispatch_event("change")
-            self.page.wait_for_timeout(1000)
+            self.page.wait_for_timeout(500)
 
             tag_selections = {
                 'itemType': "QBOS_Class_Three",
@@ -399,11 +399,11 @@ class OnboardCustomerPage(BasePage):
             self.add_vehicle_button.evaluate("el => el.click()")
             
             # GAP FOR VISUAL FEEDBACK: Wait for vehicle list to update
-            self.page.wait_for_timeout(2500)
+            self.page.wait_for_timeout(500)
             logger.info(f"Vehicle {i + 1} added successfully.")
 
         # GAP FOR VISUAL FEEDBACK: Before moving to Next page
-        self.page.wait_for_timeout(1500)
+        self.page.wait_for_timeout(500)
         next_btn = self.page.get_by_role("button", name="Next")
         
         # HIGHLIGHT AND CLICK NEXT
@@ -446,7 +446,7 @@ class OnboardCustomerPage(BasePage):
             self.hide_chatbot()
 
             self.save_and_pay_tab.click(force=True)
-            self.page.wait_for_timeout(1000)
+            self.page.wait_for_timeout(500)
             self.payment_method_dropdown.select_option(label="Credit Card")
             self.payment_method_dropdown.dispatch_event("change")
 
@@ -462,7 +462,7 @@ class OnboardCustomerPage(BasePage):
                 self.page.wait_for_selector('.modal-content', state="hidden", timeout=15000)
 
             self.credit_card_radio_button.first.check(force=True)
-            self.page.wait_for_timeout(1000) # Small delay for selection to settle
+            self.page.wait_for_timeout(500) # Small delay for selection to settle
 
             # ROBUST PREVIEW & PAY CLICK
             logger.info("Clicking 'Preview and Pay'...")

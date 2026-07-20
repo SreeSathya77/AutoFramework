@@ -95,7 +95,7 @@ class DashboardPage:
         try:
             # Search for the case
             self.page.fill(self.search_input, case_description)
-            self.page.wait_for_timeout(1000)  # Wait for search results
+            self.page.wait_for_timeout(500)  # Wait for search results
 
             case_locator = self.page.locator(f"{self.case_rows}:has-text('{case_description}')")
             return case_locator.is_visible()
